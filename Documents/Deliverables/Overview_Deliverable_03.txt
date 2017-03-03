@@ -1,0 +1,23 @@
+Project Final Deliverable
+
+Submit the final version of your game. This version should satisfy all the requirements of previous prototypes, in addition to the following requirements:
+
+- Pathfinding: used for moving player's and enemy units through the terrain. This also requires to add a few obstacles to the terrain.
+
+- Semi-automatic actions: at least one of the player's dynamic units performs an independent action, e.g., collecting a resource by moving to resource patches near the last location of the unit. This can be encoded as a sense-think-act behaviour model with a simple set of rules.
+
+- Enemy AI: enemies encoded as autonomous characters with the sense-think-act paradigm and a rule-based system. Encode a minimum of three rules for each dynamic enemy unit.
+
+- Full game mechanics that enable meaningful play, according to your game's design. E.g., if one of the goals of the game is to collect a certain resource, then the game should keep track of the resource collected or money gained, and perhaps let the player use that to create new units, etc.
+
+- You can add any additional features, which can count up to a +10% bonus points depending on the difficulty of implementation.
+
+Include with your submission:
+
+- The source code (scenes, scripts, etc.) for your game.
+
+- An updated proposal. First, update any parts of the game that were modified during the development, such as the game design, goals, architecture, etc. Second, explain how the technical requirements of all milestones were incorporated into the game and mention any missing requirements. Include any other necessary information into the report, such as whether any additional feature was added to the game.
+
+- A single screenshot (png image file) with your submission, designated as the "hall of fame" image. You can choose the image that you think best represents your game.
+
+Submit a group evaluation form separately.

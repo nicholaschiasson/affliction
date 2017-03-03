@@ -1,0 +1,15 @@
+Project Advanced Prototype
+
+Submit a second version of a software prototype for your game, including the following technical requirements:
+
+- Physics: one interaction between units should include the use of rigid-body physics and collision detection. For example, a weapon like a rocket that is launched from a unit based on applying an initial force, or a unit that is destroyed into pieces based on enabling gravity acceleration.
+
+- Animation: the movement of each type of dynamic unit should combine an animation created with animation curves in an animation clip with a programmed motion of the unit. For example, if asking a unit to move from point A to B in the world, the movement from A to B would be programmed in a script, while the model would also be animated according to a clip while performing the motion from A to B. The animation clip would stylize the motion. Create a different animation clip for each type of dynamic unit.
+
+- Character animation: animate the human-like unit with human motion such as walking and running, and apply it in the relevant context of actions. You can use any freely available data for this part, such as a rigged character with animation clips for different types of motion, e.g., Unity provides example characters with animations. Make sure to cite the source of these resources. Then, program your own state machine and scripts to activate the animation.
+
+- Particle systems: add at least three particle systems to the game, possibly connected to the unit's actions and interactions.
+
+- Bonus (+10%): program an instance of inverse kinematics for the human character. For example, a minimal example would involve the character grabbing and holding an object in its hands. The grabbing can be assumed to be instantaneous, but we should be able to see the character holding the object while in a proper pose.
+
+For your submission, include the source code (scenes, scripts, etc.) for your game and a readme.txt detailing how each technical requirement is activated in the game.
