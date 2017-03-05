@@ -83,6 +83,6 @@ public class GameController : MonoBehaviour {
         float xAxisValue = Input.GetAxis("Horizontal");
         float zAxisValue = Input.GetAxis("Vertical");
         camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
-        Debug.Log("Camera Coords: " + camera.transform.position.ToString());
+        //Debug.Log("Camera Coords: " + camera.transform.position.ToString());
     }
 }

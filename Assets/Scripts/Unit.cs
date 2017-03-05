@@ -3,9 +3,9 @@
 public abstract class Unit : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	protected virtual void Start () {
+
+    }
 
     // Override this in the implementation, the Game calls this when an action is requested at a specific location
     public abstract void doAction(Vector3 loc);
@@ -17,4 +17,56 @@ public abstract class Unit : MonoBehaviour {
     void Update () {
 		
 	}
+
+
+    //Mouse Handling
+    protected virtual void handleLeftPress()
+    {
+        Debug.Log("Left Press");
+    }
+
+    protected virtual void handleRightPress()
+    {
+        Debug.Log("Right Press");
+    }
+
+    protected virtual void handleMiddlePress()
+    {
+        Debug.Log("Middle Press");
+    }
+
+    protected virtual void handleHover()
+    {
+
+    }
+
+
+    protected virtual void handleExit()
+    {
+
+    }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0)) { // Left
+            handleLeftPress();
+
+        }
+        else if (Input.GetMouseButtonDown(1)) { // Right
+            handleRightPress();
+
+        }
+        else if (Input.GetMouseButtonDown(2)) { // Middle
+            handleMiddlePress();
+        }
+        else{ // just hovering
+            handleHover();
+        }
+             
+    }
+
+    private void OnMouseExit()
+    {
+        handleExit();
+    }
 }
