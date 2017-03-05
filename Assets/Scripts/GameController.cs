@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
     {
         float xAxisValue = Input.GetAxis("Horizontal");
         float zAxisValue = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue));
+        transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
         Debug.Log("Camera Coords: " +transform.position.ToString());
     }
 }
