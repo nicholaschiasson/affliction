@@ -1,4 +1,8 @@
-﻿public class Organ : Building {
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Infection : Building {
 
 	// Use this for initialization
 	void Start () {
