@@ -51,9 +51,25 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    // Sending the action command to the selected lists and the location to which the action needs to be executed
+    private void doAction(Unit unit)
+    {
+        if (selectedOrgan)
+        {
+            selectedOrgan.doAction(unit);
+        }
+        else
+        {
+            foreach (Microorganism unit in selectedUnits)
+            {
+                unit.doAction(unit);
+            }
+        }
+    }
 
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         //todo implement raycasting to determine where a user clicked
          
