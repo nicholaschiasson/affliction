@@ -60,9 +60,9 @@ public class GameController : MonoBehaviour {
         }
         else
         {
-            foreach (Microorganism unit in selectedUnits)
+            foreach (Microorganism u in selectedUnits)
             {
-                unit.doAction(unit);
+                u.doAction(unit);
             }
         }
     }
