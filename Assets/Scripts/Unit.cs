@@ -1,72 +1,83 @@
 ﻿using UnityEngine;
 
-public abstract class Unit : MonoBehaviour {
+public abstract class Unit : MonoBehaviour
+{
+	public int Health;
 
 	// Use this for initialization
-	protected virtual void Start () {
+	protected virtual void Start()
+	{
 
-    }
-
-    // Override this in the implementation, the Game calls this when an action is requested at a specific location
-    public abstract void doAction(Vector3 loc);
-    
-    // Override this implementaion, the game calls this when an action is requested at a specific unit
-    public abstract void doAction(Unit unit);
-
-    // Update is called once per frame
-    void Update () {
-		
 	}
 
+	// Override this in the implementation, the Game calls this when an action is requested at a specific location
+	public abstract void doAction(Vector3 loc);
 
-    //Mouse Handling
-    protected virtual void handleLeftPress()
-    {
-        Debug.Log("Left Press");
-    }
+	// Override this implementaion, the game calls this when an action is requested at a specific unit
+	public abstract void doAction(Unit unit);
 
-    protected virtual void handleRightPress()
-    {
-        Debug.Log("Right Press");
-    }
+	// Update is called once per frame
+	void Update()
+	{
 
-    protected virtual void handleMiddlePress()
-    {
-        Debug.Log("Middle Press");
-    }
+	}
 
-    protected virtual void handleHover()
-    {
+	//Mouse Handling
+	protected virtual void handleLeftPress()
+	{
+		Debug.Log("Left Press");
+	}
 
-    }
+	protected virtual void handleRightPress()
+	{
+		Debug.Log("Right Press");
+	}
 
+	protected virtual void handleMiddlePress()
+	{
+		Debug.Log("Middle Press");
+	}
 
-    protected virtual void handleExit()
-    {
+	protected virtual void handleHover()
+	{
 
-    }
+	}
 
-    void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(0)) { // Left
-            handleLeftPress();
+	protected virtual void handleExit()
+	{
 
-        }
-        else if (Input.GetMouseButtonDown(1)) { // Right
-            handleRightPress();
+	}
 
-        }
-        else if (Input.GetMouseButtonDown(2)) { // Middle
-            handleMiddlePress();
-        }
-        else{ // just hovering
-            handleHover();
-        }
-             
-    }
+	void OnMouseOver()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{ // Left
+			handleLeftPress();
 
-    private void OnMouseExit()
-    {
-        handleExit();
-    }
+		}
+		else if (Input.GetMouseButtonDown(1))
+		{ // Right
+			handleRightPress();
+
+		}
+		else if (Input.GetMouseButtonDown(2))
+		{ // Middle
+			handleMiddlePress();
+		}
+		else
+		{ // just hovering
+			handleHover();
+		}
+
+	}
+
+	void OnMouseExit()
+	{
+		handleExit();
+	}
+
+	protected virtual void OnAttacked(UnitAttackedEventArgs e)
+	{
+		Health -= (int)e.Damage;
+	}
 }
