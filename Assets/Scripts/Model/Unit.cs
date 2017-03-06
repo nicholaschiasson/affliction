@@ -34,7 +34,7 @@ public abstract class Unit : MonoBehaviour
 		}
 		else
 		{
-			if (leftMouse)
+			if (Input.GetMouseButtonUp(0) && leftMouse)
 				OnLeftMouseClick();
 			leftMouse = false;
 		}
@@ -52,7 +52,7 @@ public abstract class Unit : MonoBehaviour
 		}
 		else
 		{
-			if (rightMouse)
+			if (Input.GetMouseButtonUp(1) && rightMouse)
 				OnRightMouseClick();
 			rightMouse = false;
 		}
@@ -70,7 +70,7 @@ public abstract class Unit : MonoBehaviour
 		}
 		else
 		{
-			if (middleMouse)
+			if (Input.GetMouseButtonUp(2) && middleMouse)
 				OnMiddleMouseClick();
 			middleMouse = false;
 		}
@@ -89,9 +89,6 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnMouseExit()
 	{
 		Debug.Log(this + ": Mouse exit");
-		leftMouse = false;
-		rightMouse = false;
-		middleMouse = false;
 	}
 
 	protected virtual void OnLeftMouseDown()
