@@ -2,15 +2,24 @@
 
 public class SelectionBox : MonoBehaviour
 {
+	Transform mainCamera = null;
 	Vector2 p1 = Vector2.zero;
 	Vector2 p2 = Vector2.zero;
+	Vector2 c = Vector2.zero;
 
+	void Awake()
+	{
+		mainCamera = Camera.main.transform;
+	}
+
+	// TODO: Have selection box size appropriately update with camera movement
 	void Update()
 	{
 		Vector3 mousePos = Input.mousePosition;
 		if (Input.GetMouseButtonDown(0))
 		{
 			p1 = new Vector2(mousePos.x, Screen.height - mousePos.y);
+			c = new Vector2(mainCamera.position.x, mainCamera.position.z);
 		}
 		if (Input.GetMouseButton(0))
 		{
@@ -20,6 +29,7 @@ public class SelectionBox : MonoBehaviour
 		{
 			p1 = Vector2.zero;
 			p2 = Vector2.zero;
+			c = Vector2.zero;
 		}
 	}
 
