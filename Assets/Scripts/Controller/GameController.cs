@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour
 
 		}
 		selectedUnits.Add(e.Microorganism);
-		Debug.Log("Selected Microorganism!");
 	}
 
     // We can only select One Building so we are always resetting the list
@@ -35,7 +34,6 @@ public class GameController : MonoBehaviour
     {
         selectedUnits = new List<Microorganism>();
 		selectedOrgan = e.Building;
-		Debug.Log("Selected Building!");
     }
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
