@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Infection : Building {
+public class Infection {
 
     // Use this for initialization
-    protected override void Start () {
-        base.Start();
+    void Start () {
+		
     }
 	
 	// Update is called once per frame

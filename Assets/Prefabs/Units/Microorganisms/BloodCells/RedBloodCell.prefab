@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4785809955328972}
   - component: {fileID: 33107571040377410}
-  - component: {fileID: 135976708991572830}
   - component: {fileID: 23042593609371780}
   m_Layer: 0
   m_Name: RedBloodCellModel
@@ -38,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4559499835686348}
   - component: {fileID: 114499189882608804}
+  - component: {fileID: 135147323180389184}
   m_Layer: 0
   m_Name: RedBloodCell
   m_TagString: Untagged
@@ -121,12 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac633dd6de74cb2877732c1a9375f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135976708991572830
+  Health: 100
+--- !u!135 &135147323180389184
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244652781213960}
+  m_GameObject: {fileID: 1569579906175206}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
