@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4680670803377536}
   - component: {fileID: 33939103784192670}
-  - component: {fileID: 135994034015312656}
   - component: {fileID: 23553369369764762}
   m_Layer: 0
   m_Name: WhiteBloodCellModel
@@ -38,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4480971711417454}
   - component: {fileID: 114497051398923438}
+  - component: {fileID: 135579195000784742}
   m_Layer: 0
   m_Name: WhiteBloodCell
   m_TagString: Untagged
@@ -122,12 +122,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
---- !u!135 &135994034015312656
+--- !u!135 &135579195000784742
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1279847774557954}
+  m_GameObject: {fileID: 1581605045193478}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

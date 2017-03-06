@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4128304669380462}
   - component: {fileID: 33559327069051698}
-  - component: {fileID: 135934904582167914}
   - component: {fileID: 23263303936054464}
   m_Layer: 0
   m_Name: Spore
@@ -37,6 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4988479933979960}
+  - component: {fileID: 135709195719042790}
   m_Layer: 0
   m_Name: Spore
   m_TagString: Untagged
@@ -109,12 +109,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315213570158072}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &135934904582167914
+--- !u!135 &135709195719042790
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315213570158072}
+  m_GameObject: {fileID: 1491029659344476}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
