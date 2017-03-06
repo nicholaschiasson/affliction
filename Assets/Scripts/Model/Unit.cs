@@ -6,7 +6,14 @@ public abstract class Unit : MonoBehaviour
 	bool rightMouse = false;
 	bool middleMouse = false;
 
+	protected Transform mainCamera = null;
+
 	public int Health;
+
+	void Awake()
+	{
+		mainCamera = Camera.main.transform;
+	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
 	public abstract void doAction(Vector3 loc);
@@ -14,12 +21,31 @@ public abstract class Unit : MonoBehaviour
 	// Override this implementaion, the game calls this when an action is requested at a specific unit
 	public abstract void doAction(Unit unit);
 
-	protected virtual void Start()
+	// Override this with selection functionality, called when the unit is clicked
+	public abstract void select();
+
+	// Called when unit is attacked by another unit
+	protected virtual void OnAttacked(UnitAttackedEventArgs e)
 	{
+		Health -= (int)e.Damage;
 	}
 
 	//Mouse Handling
-	private void OnMouseOver()
+	protected virtual void OnMouseEnter() { }
+	protected virtual void OnMouseExit() { }
+	protected virtual void OnLeftMouseDown() { }
+	protected virtual void OnRightMouseDown() { }
+	protected virtual void OnMiddleMouseDown() { }
+	protected virtual void OnLeftMouseHold() { }
+	protected virtual void OnRightMouseHold() { }
+	protected virtual void OnMiddleMouseHold() { }
+	protected virtual void OnLeftMouseClick() { select(); }
+	protected virtual void OnRightMouseClick() { }
+	protected virtual void OnMiddleMouseClick() { }
+	protected virtual void OnMouseHover() { }
+
+	// Do not override: this method delegates the specific mouse events defined above
+	void OnMouseOver()
 	{
 		// Left Mouse Button
 		if (Input.GetMouseButton(0))
@@ -78,71 +104,5 @@ public abstract class Unit : MonoBehaviour
 		// Mouse Hover
 		if (!leftMouse && !rightMouse && !middleMouse)
 			OnMouseHover();
-	}
-
-	protected virtual void OnMouseEnter()
-	{
-		Debug.Log(this + ": Mouse enter");
-	}
-
-
-	protected virtual void OnMouseExit()
-	{
-		Debug.Log(this + ": Mouse exit");
-	}
-
-	protected virtual void OnLeftMouseDown()
-	{
-		Debug.Log(this + ": Left mouse down");
-	}
-
-	protected virtual void OnRightMouseDown()
-	{
-		Debug.Log(this + ": Right mouse down");
-	}
-
-	protected virtual void OnMiddleMouseDown()
-	{
-		Debug.Log(this + ": Middle mouse down");
-	}
-
-	protected virtual void OnLeftMouseHold()
-	{
-		//Debug.Log(this + ": Left mouse hold");
-	}
-
-	protected virtual void OnRightMouseHold()
-	{
-		//Debug.Log(this + ": Right mouse hold");
-	}
-
-	protected virtual void OnMiddleMouseHold()
-	{
-		//Debug.Log(this + ": Middle mouse hold");
-	}
-
-	protected virtual void OnLeftMouseClick()
-	{
-		Debug.Log(this + ": Left mouse click");
-	}
-
-	protected virtual void OnRightMouseClick()
-	{
-		Debug.Log(this + ": Right mouse click");
-	}
-
-	protected virtual void OnMiddleMouseClick()
-	{
-		Debug.Log(this + ": Middle mouse click");
-	}
-
-	protected virtual void OnMouseHover()
-	{
-		//Debug.Log(this + ": Mouse hover");
-	}
-
-	protected virtual void OnAttacked(UnitAttackedEventArgs e)
-	{
-		Health -= (int)e.Damage;
 	}
 }

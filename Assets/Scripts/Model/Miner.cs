@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Miner : Building
+﻿public class Miner : Building
 {
     public Resource resource;
     // Use this for initialization

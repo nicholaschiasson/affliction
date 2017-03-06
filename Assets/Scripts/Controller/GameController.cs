@@ -16,24 +16,26 @@ public class GameController : MonoBehaviour
 	}
 
 	// Add an organism to the selected list. We can have multiple organisms selected for batch commands
-	public void selectOrganism(Microorganism unit, bool resetList)
+	public void selectOrganism(SelectMicroorganismEventArgs e)
 	{
 		//deselect a building if we have it selected
 		selectedOrgan = null;
 
-		if (resetList)
+		if (e.Reset)
 		{
 			selectedUnits = new List<Microorganism>();
 
 		}
-		selectedUnits.Add(unit);
+		selectedUnits.Add(e.Microorganism);
+		Debug.Log("Selected Microorganism!");
 	}
 
     // We can only select One Building so we are always resetting the list
-    public void selectOrgan(Building organ)
+    public void selectOrgan(SelectBuildingEventArgs e)
     {
         selectedUnits = new List<Microorganism>();
-        selectedOrgan = organ;
+		selectedOrgan = e.Building;
+		Debug.Log("Selected Building!");
     }
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
