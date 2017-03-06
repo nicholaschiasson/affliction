@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a3b271ff7874481830ed4df633e9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Affiliation: 2
   Health: 100
 --- !u!135 &135709195719042790
 SphereCollider:

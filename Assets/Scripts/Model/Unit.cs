@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
 
+public enum UnitAffiliation
+{
+	None,
+	Ally,
+	Opponent
+}
+
 public abstract class Unit : MonoBehaviour
 {
 	bool leftMouse = false;
@@ -7,12 +14,25 @@ public abstract class Unit : MonoBehaviour
 	bool middleMouse = false;
 
 	protected Transform mainCamera = null;
+	protected GameObject selectionCircle = null;
 
+	public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
 	void Awake()
 	{
 		mainCamera = Camera.main.transform;
+		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
+		selectionCircle.transform.parent = transform;
+		selectionCircle.transform.position = transform.position;
+		selectionCircle.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+		if (Affiliation == UnitAffiliation.Ally)
+			selectionCircle.SendMessage("SetColor", Color.green);
+		else if (Affiliation == UnitAffiliation.Opponent)
+			selectionCircle.SendMessage("SetColor", Color.red);
+		else
+			selectionCircle.SendMessage("SetColor", Color.gray);
+		selectionCircle.SetActive(false);
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
@@ -22,12 +42,27 @@ public abstract class Unit : MonoBehaviour
 	public abstract void doAction(Unit unit);
 
 	// Override this with selection functionality, called when the unit is clicked
-	public abstract void select();
+	public virtual void requestSelect(bool appendSelection)
+	{
+		mainCamera.SendMessage("selectUnit", new SelectUnitEventArgs(gameObject, appendSelection));
+	}
 
 	// Called when unit is attacked by another unit
 	protected virtual void OnAttacked(UnitAttackedEventArgs e)
 	{
 		Health -= (int)e.Damage;
+	}
+
+	// Called when the controller registers the unit as selected
+	public virtual void Select()
+	{
+		selectionCircle.SetActive(true);
+	}
+
+	// Called when the controller registers the unit as deselected
+	public virtual void Deselect()
+	{
+		selectionCircle.SetActive(false);
 	}
 
 	//Mouse Handling
@@ -39,7 +74,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
-	protected virtual void OnLeftMouseClick() { select(); }
+	protected virtual void OnLeftMouseClick() { requestSelect(Input.GetKey(KeyCode.LeftShift)); }
 	protected virtual void OnRightMouseClick() { }
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }

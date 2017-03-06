@@ -134,10 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e00b18d406aae3408c76564296ea0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftMouse: 0
-  rightMouse: 0
-  middleMouse: 0
-  Health: 100
 --- !u!114 &114893344290173136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bb277f30793e749bd272c911a7c40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Affiliation: 2
   Health: 100
   spawnables:
   - {fileID: 1491029659344476, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}

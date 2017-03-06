@@ -24,10 +24,4 @@ public class Microorganism : Unit
 	{
 
 	}
-
-	// The game calls this when the unit is clicked
-	public override void select()
-	{
-		mainCamera.SendMessage("selectOrganism", new SelectMicroorganismEventArgs(this, true));
-	}
 }

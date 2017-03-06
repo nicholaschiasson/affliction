@@ -24,9 +24,4 @@ public abstract class Building : Unit
 	{
 
 	}
-
-	public override void select()
-	{
-		mainCamera.SendMessage("selectOrgan", new SelectBuildingEventArgs(this, true));
-	}
 }

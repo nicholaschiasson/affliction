@@ -4,75 +4,46 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	new Camera camera;
-	List<Microorganism> selectedUnits;
-    Building selectedOrgan;
+	HashSet<GameObject> selectedUnits;
 	// Use this for initialization
 	void Start()
 	{
 		camera = this.GetComponent<Camera>();
-		selectedUnits = new List<Microorganism>();
-		selectedOrgan = null;
+		selectedUnits = new HashSet<GameObject>();
 
 	}
 
 	// Add an organism to the selected list. We can have multiple organisms selected for batch commands
-	public void selectOrganism(SelectMicroorganismEventArgs e)
+	public void selectUnit(SelectUnitEventArgs e)
 	{
-		//deselect a building if we have it selected
-		selectedOrgan = null;
-
-		if (e.Reset)
+		if (!e.Append)
 		{
-			selectedUnits = new List<Microorganism>();
-
+			foreach (GameObject u in selectedUnits)
+				u.SendMessage("Deselect");
+			selectedUnits = new HashSet<GameObject>();
 		}
-		selectedUnits.Add(e.Microorganism);
+		e.Unit.SendMessage("Select");
+		selectedUnits.Add(e.Unit);
 	}
-
-    // We can only select One Building so we are always resetting the list
-    public void selectOrgan(SelectBuildingEventArgs e)
-    {
-        selectedUnits = new List<Microorganism>();
-		selectedOrgan = e.Building;
-    }
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
 	private void doAction(Vector3 loc)
 	{
-		if (selectedOrgan)
-		{
-			selectedOrgan.doAction(loc);
-		}
-		else
-		{
-			foreach (Microorganism unit in selectedUnits)
-			{
-				unit.doAction(loc);
-			}
-		}
+		foreach (GameObject u in selectedUnits)
+			u.SendMessage("doAction", loc);
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
 	private void doAction(Unit unit)
 	{
-		if (selectedOrgan)
-		{
-			selectedOrgan.doAction(unit);
-		}
-		else
-		{
-			foreach (Microorganism u in selectedUnits)
-			{
-				u.doAction(unit);
-			}
-		}
+		foreach (GameObject u in selectedUnits)
+			u.SendMessage("doAction", unit);
 	}
-
 
 	// Update is called once per frame
 	void Update()
 	{
-
+		
 		//todo implement raycasting to determine where a user clicked
 
 		// var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
