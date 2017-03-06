@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     Camera camera;
     List<Microorganism> selectedUnits;
-    Organ selectedOrgan;
+    Building selectedOrgan;
 	// Use this for initialization
 	void Start () {
         camera = this.GetComponent<Camera>();
@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
     }
 
     // We can only select One Building so we are always resetting the list
-    public void selectOrgan(Organ organ)
+    public void selectOrgan(Building organ)
     {
         selectedUnits = new List<Microorganism>();
         selectedOrgan = organ;

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : Unit {
-
+public abstract class Building : Unit {
     // Use this for initialization
     protected override void Start () {
         base.Start();        
