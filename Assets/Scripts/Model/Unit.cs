@@ -10,6 +10,7 @@ public enum UnitAffiliation
 
 public abstract class Unit : MonoBehaviour
 {
+	GameController gameController = null;
 	bool leftMouse = false;
 	bool rightMouse = false;
 	bool middleMouse = false;
@@ -21,6 +22,7 @@ public abstract class Unit : MonoBehaviour
 
 	void Awake()
 	{
+		gameController = Camera.main.GetComponent<GameController>();
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
@@ -49,6 +51,11 @@ public abstract class Unit : MonoBehaviour
 
 	// Override this implementaion, the game calls this when an action is requested at a specific unit
 	public virtual void doAction(Unit unit) { }
+
+	protected virtual void requestSelect()
+	{
+		gameController.selectUnit(new SelectUnitEventArgs(this, Input.GetKey(KeyCode.LeftShift)));
+	}
 
 	// Called when unit is attacked by another unit
 	protected virtual void OnAttacked(UnitAttackedEventArgs e)
@@ -84,7 +91,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
-	protected virtual void OnLeftMouseClick() { }
+	protected virtual void OnLeftMouseClick() { requestSelect(); }
 	protected virtual void OnRightMouseClick() { }
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }
