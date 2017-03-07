@@ -54,14 +54,14 @@ public class GameController : MonoBehaviour
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
-	private void doAction(Vector3 loc)
+	public void doAction(Vector3 loc)
 	{
 		foreach (Unit u in selectedUnits)
 			u.doAction(loc);
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
-	private void doAction(Unit unit)
+	public void doAction(Unit unit)
 	{
 		foreach (Unit u in selectedUnits)
 			u.doAction(unit);

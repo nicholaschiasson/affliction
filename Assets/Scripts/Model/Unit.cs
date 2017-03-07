@@ -45,10 +45,10 @@ public abstract class Unit : MonoBehaviour
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
-	public abstract void doAction(Vector3 loc);
+	public virtual void doAction(Vector3 loc) { }
 
 	// Override this implementaion, the game calls this when an action is requested at a specific unit
-	public abstract void doAction(Unit unit);
+	public virtual void doAction(Unit unit) { }
 
 	// Called when unit is attacked by another unit
 	protected virtual void OnAttacked(UnitAttackedEventArgs e)
@@ -58,8 +58,7 @@ public abstract class Unit : MonoBehaviour
 
 	// Called when the controller registers the unit as selected
 	public virtual void Select()
-{
-        Debug.Log("Selected!");
+    {
 		selectionCircle.SetActive(true);
 	}
 
@@ -80,7 +79,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnMouseEnter() { }
 	protected virtual void OnMouseExit() { }
 	protected virtual void OnLeftMouseDown() { }
-	protected virtual void OnRightMouseDown() { Debug.Log("RightClick"); }
+	protected virtual void OnRightMouseDown() { }
 	protected virtual void OnMiddleMouseDown() { }
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }

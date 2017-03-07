@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - RedBloodCell
+  - WhiteBloodCell
+  - Pathogen
+  - Spore
+  - Spawner
+  - Miner
   layers:
   - Default
   - TransparentFX

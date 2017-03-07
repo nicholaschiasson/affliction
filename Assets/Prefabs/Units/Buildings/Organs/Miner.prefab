@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114262816915572598}
   m_Layer: 0
   m_Name: Miner
-  m_TagString: Untagged
+  m_TagString: Miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

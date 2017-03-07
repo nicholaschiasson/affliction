@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 135505363281953666}
   m_Layer: 0
   m_Name: WhiteBloodCell
-  m_TagString: Untagged
+  m_TagString: WhiteBloodCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581605045193478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1900975, y: 0.5, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4680670803377536}
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Affiliation: 1
   Health: 100
+  speed: 0.25
 --- !u!135 &135505363281953666
 SphereCollider:
   m_ObjectHideFlags: 1
