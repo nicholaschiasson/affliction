@@ -2,17 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorScript : Unit {
-
-    public override void  doAction(Vector3 loc)
-    {
-
-    }
-
-    public override void doAction(Unit unit)
-    {
-
-    }
+public class FloorScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
