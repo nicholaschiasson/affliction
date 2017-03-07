@@ -5,15 +5,15 @@ public class GameController : MonoBehaviour
 {
 	new Camera camera;
 	HashSet<GameObject> selectedUnits;
+
 	// Use this for initialization
 	void Start()
 	{
 		camera = this.GetComponent<Camera>();
 		selectedUnits = new HashSet<GameObject>();
-
 	}
 
-	// Add an organism to the selected list. We can have multiple organisms selected for batch commands
+	// Add a unit to the selected list. We can have multiple units selected for batch commands
 	public void selectUnit(SelectUnitEventArgs e)
 	{
 		if (!e.Append)
@@ -24,6 +24,22 @@ public class GameController : MonoBehaviour
 		}
 		e.Unit.SendMessage("Select");
 		selectedUnits.Add(e.Unit);
+	}
+
+	// Add several units with a selection box to selected list
+	public void selectUnits(SelectUnitsEventArgs e)
+	{
+		if (!e.Append)
+		{
+			foreach (GameObject u in selectedUnits)
+				u.SendMessage("Deselect");
+			selectedUnits = new HashSet<GameObject>();
+		}
+		// It is at this point that we can filter the units list before performing the actual selection
+		// For example, if our selection box caught a few ally units and a few buildings:
+		// In that case, we probably only want to actually select the units
+		foreach (GameObject u in e.Units)
+			selectUnit(new SelectUnitEventArgs(u, true));
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed

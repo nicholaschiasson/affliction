@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum UnitAffiliation
 {
@@ -22,6 +23,7 @@ public abstract class Unit : MonoBehaviour
 	void Awake()
 	{
 		mainCamera = Camera.main.transform;
+		SelectionBox.OnSelectionBoundsCheck += SelectionBoundsCheck;
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
@@ -41,12 +43,6 @@ public abstract class Unit : MonoBehaviour
 	// Override this implementaion, the game calls this when an action is requested at a specific unit
 	public abstract void doAction(Unit unit);
 
-	// Override this with selection functionality, called when the unit is clicked
-	public virtual void requestSelect(bool appendSelection)
-	{
-		mainCamera.SendMessage("selectUnit", new SelectUnitEventArgs(gameObject, appendSelection));
-	}
-
 	// Called when unit is attacked by another unit
 	protected virtual void OnAttacked(UnitAttackedEventArgs e)
 	{
@@ -65,6 +61,14 @@ public abstract class Unit : MonoBehaviour
 		selectionCircle.SetActive(false);
 	}
 
+	protected virtual void SelectionBoundsCheck(Bounds bounds, List<GameObject> boundedUnits)
+	{
+		Collider c = GetComponent<Collider>();
+		Debug.Log(transform.position + ", " + c.bounds.center);
+		if (c && bounds.Intersects(c.bounds))
+			boundedUnits.Add(gameObject);
+	}
+
 	//Mouse Handling
 	protected virtual void OnMouseEnter() { }
 	protected virtual void OnMouseExit() { }
@@ -74,7 +78,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
-	protected virtual void OnLeftMouseClick() { requestSelect(Input.GetKey(KeyCode.LeftShift)); }
+	protected virtual void OnLeftMouseClick() { }
 	protected virtual void OnRightMouseClick() { }
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }
