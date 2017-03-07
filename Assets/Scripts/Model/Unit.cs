@@ -21,7 +21,6 @@ public abstract class Unit : MonoBehaviour
 
 	void Awake()
 	{
-		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
@@ -33,6 +32,16 @@ public abstract class Unit : MonoBehaviour
 		else
 			selectionCircle.SendMessage("SetColor", Color.gray);
 		selectionCircle.SetActive(false);
+	}
+
+	void OnEnable()
+	{
+		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
+	}
+
+	void OnDisable()
+	{
+		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
