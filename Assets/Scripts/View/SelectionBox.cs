@@ -31,7 +31,6 @@ public class SelectionBox : MonoBehaviour
 			Vector3 p = ScreenToWorldPoint(mousePos);
 			Vector3 size = p - p1;
 			Rect boundsRect = new Rect(Mathf.Min(p1.x, p.x), Mathf.Min(p1.z, p.z), Mathf.Abs(size.x), Mathf.Abs(size.z));
-			Debug.Log(boundsRect.center.y);
 			Bounds bounds = new Bounds(new Vector3(boundsRect.center.x, 0, boundsRect.center.y), new Vector3(boundsRect.width, float.PositiveInfinity, boundsRect.height));
 			List<GameObject> boundedUnits = new List<GameObject>();
 			if (OnSelectionBoundsCheck != null)

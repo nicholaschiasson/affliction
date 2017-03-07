@@ -64,7 +64,6 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void SelectionBoundsCheck(Bounds bounds, List<GameObject> boundedUnits)
 	{
 		Collider c = GetComponent<Collider>();
-		Debug.Log(transform.position + ", " + c.bounds.center);
 		if (c && bounds.Intersects(c.bounds))
 			boundedUnits.Add(gameObject);
 	}
