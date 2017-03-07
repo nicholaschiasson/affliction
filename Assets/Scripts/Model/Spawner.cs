@@ -16,4 +16,12 @@ public class Spawner : Building
     {
 
     }
+
+    protected override void  OnRightMouseDown()
+    {
+        if (spawnables.Length > 0)
+        {
+            Instantiate(spawnables[0], this.transform.position + this.transform.localScale, this.transform.rotation);
+        }
+    }
 }

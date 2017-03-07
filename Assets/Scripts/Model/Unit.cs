@@ -58,7 +58,8 @@ public abstract class Unit : MonoBehaviour
 
 	// Called when the controller registers the unit as selected
 	public virtual void Select()
-	{
+{
+        Debug.Log("Selected!");
 		selectionCircle.SetActive(true);
 	}
 
@@ -79,7 +80,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnMouseEnter() { }
 	protected virtual void OnMouseExit() { }
 	protected virtual void OnLeftMouseDown() { }
-	protected virtual void OnRightMouseDown() { }
+	protected virtual void OnRightMouseDown() { Debug.Log("RightClick"); }
 	protected virtual void OnMiddleMouseDown() { }
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
