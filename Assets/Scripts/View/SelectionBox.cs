@@ -6,13 +6,12 @@ public class SelectionBox : MonoBehaviour
 	Vector3 p1 = Vector3.zero;
 	Vector2 p2 = Vector2.zero;
 	Camera mainCamera = null;
-
-	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<GameObject> boundedUnits);
-	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
+	GameController gameController = null;
 
 	void Awake()
 	{
 		mainCamera = Camera.main;
+		gameController = mainCamera.GetComponent<GameController>();
 	}
 
 	void Update()
@@ -32,10 +31,7 @@ public class SelectionBox : MonoBehaviour
 			Vector3 size = p - p1;
 			Rect boundsRect = new Rect(Mathf.Min(p1.x, p.x), Mathf.Min(p1.z, p.z), Mathf.Abs(size.x), Mathf.Abs(size.z));
 			Bounds bounds = new Bounds(new Vector3(boundsRect.center.x, 0, boundsRect.center.y), new Vector3(boundsRect.width, float.PositiveInfinity, boundsRect.height));
-			List<GameObject> boundedUnits = new List<GameObject>();
-			if (OnSelectionBoundsCheck != null)
-				OnSelectionBoundsCheck(bounds, boundedUnits);
-			mainCamera.SendMessage("selectUnits", new SelectUnitsEventArgs(boundedUnits, Input.GetKey(KeyCode.LeftShift)));
+			gameController.handleSelectionBox(bounds);
 			p1 = Vector3.zero;
 			p2 = Vector2.zero;
 		}

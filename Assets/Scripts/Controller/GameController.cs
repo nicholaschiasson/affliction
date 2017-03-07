@@ -4,13 +4,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	new Camera camera;
-	HashSet<GameObject> selectedUnits;
+	HashSet<Unit> selectedUnits;
+
+	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<Unit> boundedUnits);
+	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
 
 	// Use this for initialization
 	void Start()
 	{
 		camera = this.GetComponent<Camera>();
-		selectedUnits = new HashSet<GameObject>();
+		selectedUnits = new HashSet<Unit>();
 	}
 
 	// Add a unit to the selected list. We can have multiple units selected for batch commands
@@ -18,11 +21,11 @@ public class GameController : MonoBehaviour
 	{
 		if (!e.Append)
 		{
-			foreach (GameObject u in selectedUnits)
-				u.SendMessage("Deselect");
-			selectedUnits = new HashSet<GameObject>();
+			foreach (Unit u in selectedUnits)
+				u.Deselect();
+			selectedUnits = new HashSet<Unit>();
 		}
-		e.Unit.SendMessage("Select");
+		e.Unit.Select();
 		selectedUnits.Add(e.Unit);
 	}
 
@@ -31,29 +34,37 @@ public class GameController : MonoBehaviour
 	{
 		if (!e.Append)
 		{
-			foreach (GameObject u in selectedUnits)
-				u.SendMessage("Deselect");
-			selectedUnits = new HashSet<GameObject>();
+			foreach (Unit u in selectedUnits)
+				u.Deselect();
+			selectedUnits = new HashSet<Unit>();
 		}
 		// It is at this point that we can filter the units list before performing the actual selection
 		// For example, if our selection box caught a few ally units and a few buildings:
 		// In that case, we probably only want to actually select the units
-		foreach (GameObject u in e.Units)
+		foreach (Unit u in e.Units)
 			selectUnit(new SelectUnitEventArgs(u, true));
+	}
+
+	public void handleSelectionBox(Bounds bounds)
+	{
+		List<Unit> boundedUnits = new List<Unit>();
+		if (OnSelectionBoundsCheck != null)
+			OnSelectionBoundsCheck(bounds, boundedUnits);
+		selectUnits(new SelectUnitsEventArgs(boundedUnits, Input.GetKey(KeyCode.LeftShift)));
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
 	private void doAction(Vector3 loc)
 	{
-		foreach (GameObject u in selectedUnits)
-			u.SendMessage("doAction", loc);
+		foreach (Unit u in selectedUnits)
+			u.doAction(loc);
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
 	private void doAction(Unit unit)
 	{
-		foreach (GameObject u in selectedUnits)
-			u.SendMessage("doAction", unit);
+		foreach (Unit u in selectedUnits)
+			u.doAction(unit);
 	}
 
 	// Update is called once per frame

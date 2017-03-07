@@ -14,7 +14,6 @@ public abstract class Unit : MonoBehaviour
 	bool rightMouse = false;
 	bool middleMouse = false;
 
-	protected Transform mainCamera = null;
 	protected GameObject selectionCircle = null;
 
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
@@ -22,8 +21,7 @@ public abstract class Unit : MonoBehaviour
 
 	void Awake()
 	{
-		mainCamera = Camera.main.transform;
-		SelectionBox.OnSelectionBoundsCheck += SelectionBoundsCheck;
+		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
@@ -61,11 +59,11 @@ public abstract class Unit : MonoBehaviour
 		selectionCircle.SetActive(false);
 	}
 
-	protected virtual void SelectionBoundsCheck(Bounds bounds, List<GameObject> boundedUnits)
+	protected virtual void SelectionBoundsCheck(Bounds bounds, List<Unit> boundedUnits)
 	{
 		Collider c = GetComponent<Collider>();
 		if (c && bounds.Intersects(c.bounds))
-			boundedUnits.Add(gameObject);
+			boundedUnits.Add(this);
 	}
 
 	//Mouse Handling

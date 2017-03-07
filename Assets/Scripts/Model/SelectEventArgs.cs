@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SelectUnitEventArgs
 {
-	public GameObject Unit { get; private set; }
+	public Unit Unit { get; private set; }
 	public bool Append { get; private set; }
 
-	public SelectUnitEventArgs(GameObject unit, bool append)
+	public SelectUnitEventArgs(Unit unit, bool append)
 	{
 		Unit = unit;
 		Append = append;
@@ -15,10 +15,10 @@ public class SelectUnitEventArgs
 
 public class SelectUnitsEventArgs
 {
-	public List<GameObject> Units { get; private set; }
+	public List<Unit> Units { get; private set; }
 	public bool Append { get; private set; }
 
-	public SelectUnitsEventArgs(List<GameObject> units, bool append)
+	public SelectUnitsEventArgs(List<Unit> units, bool append)
 	{
 		Units = units;
 		Append = append;
