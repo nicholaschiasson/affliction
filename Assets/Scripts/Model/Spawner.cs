@@ -17,11 +17,27 @@ public class Spawner : Building
 
     }
 
-    protected override void  OnRightMouseDown()
+    void spawn(GameObject obj)
+    {
+        Vector3 newPos = new Vector3(this.transform.position.x + this.transform.position.x * this.transform.localScale.x,
+                                            this.transform.position.y,
+                                            this.transform.position.z + this.transform.position.z * this.transform.localScale.z);
+        Instantiate(obj, newPos, this.transform.rotation);
+    }
+
+    //Temporary spawning mechanisms
+    protected override void OnLeftMouseDown()
     {
         if (spawnables.Length > 0)
         {
-            Instantiate(spawnables[0], this.transform.position + this.transform.localScale, this.transform.rotation);
+            spawn(spawnables[0]);
+        }
+    }
+    protected override void  OnRightMouseDown()
+    {
+        if (spawnables.Length > 1)
+        {
+            spawn(spawnables[1]);
         }
     }
 }
