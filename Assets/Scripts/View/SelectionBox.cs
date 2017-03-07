@@ -53,14 +53,19 @@ public class SelectionBox : MonoBehaviour
 
 	Vector3 ScreenToWorldPoint(Vector3 screenPoint)
 	{
+		// Default output point to Vector3.Zero
+		// Get point at intersection with XZ 0 plane
+		// Try to get point at intersection with any real object in scene
+		// Return point
 		Plane plane = new Plane(Vector3.up, Vector3.zero);
 		Ray ray = mainCamera.ScreenPointToRay(screenPoint);
 		Vector3 point = Vector3.zero;
 		float distance;
+		RaycastHit hit;
 		if (plane.Raycast(ray, out distance))
-		{
 			point = ray.GetPoint(distance);
-		}
+		if (Physics.Raycast(ray, out hit))
+			point = hit.point;
 		return point;
 	}
 
