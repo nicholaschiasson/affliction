@@ -1,4 +1,4 @@
-﻿public class Miner : Building
+﻿public class Miner : Organ
 {
     public Resource resource;
     // Use this for initialization

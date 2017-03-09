@@ -20,7 +20,7 @@ public abstract class Unit : MonoBehaviour
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
-	void Awake()
+	protected virtual void Awake()
 	{
 		gameController = Camera.main.GetComponent<GameController>();
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
