@@ -6,12 +6,14 @@ using UnityEngine;
 public class Microorganism : Unit
 {
     public float speed;
-    Queue<Command> commandQueue;
+    protected Queue<Command> commandQueue;
+
     // Use this for initialization
     protected override void Awake()
     {
         base.Awake();
         commandQueue = new Queue<Command>();
+
     }
     protected virtual void Start()
 	{
@@ -25,15 +27,23 @@ public class Microorganism : Unit
             Vector3 currentPos = transform.position;
             Command command = commandQueue.Peek();
             Vector3 target = command.moveToLocation(currentPos);
-            if(currentPos != target)
+            float dist = Vector3.Distance(target, currentPos);
+            if(dist > Command.MARGIN_OF_ERROR)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, speed);
+                //todo move using addForce???
+                rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.ResetInertiaTensor();
             }
         }
     }
 
 	// Update is called once per frame
-	void Update()
+	protected override void Update()
 	{
         // Checking if our command needs to be removed
         if(commandQueue.Count > 0)
@@ -50,6 +60,6 @@ public class Microorganism : Unit
     {
         commandQueue.Clear();
         commandQueue.Enqueue(new MoveCommand(new Vector3(pos.x, transform.position.y, pos.z)));
-        
+        return;
     }
 }

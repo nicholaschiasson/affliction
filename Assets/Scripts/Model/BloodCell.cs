@@ -8,8 +8,9 @@ public class BloodCell : Microorganism {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	protected override void Update ()
+    {
+        base.Update();	
 	}
 
     // The Game calls this when an action is requested at a specific location

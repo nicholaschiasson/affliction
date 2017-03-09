@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Command
 {
+    public const float MARGIN_OF_ERROR = 0.05f;
     public abstract class Action
     {
         protected Unit target;
@@ -54,7 +55,7 @@ public abstract class Command
                 goalPosition = target.transform.position;
             }
 
-            complete = goalPosition == currentLocation;
+            complete = Vector3.Distance(goalPosition, currentLocation) < MARGIN_OF_ERROR;
             return goalPosition;
         }
     }
@@ -73,6 +74,7 @@ public abstract class Command
         }
     }
 
+    //todo attack action
     public class AttackAction : Action
     {
         AttackAction(Unit u) : base(u)
@@ -188,15 +190,16 @@ public class MoveCommand: Command
     }
 }
 
+public class WorkCommand: Command
+{
+
+}
+
+//todo attack command
 public class AttackCommand : Command
 {
     public override bool collidedWithTarget(GameObject target)
     {
         return false;
     }
-}
-
-public class WorkCommand: Command
-{
-
 }

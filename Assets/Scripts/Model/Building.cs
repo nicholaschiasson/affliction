@@ -7,9 +7,9 @@ public abstract class Building : Unit
 	{
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+    }
 }

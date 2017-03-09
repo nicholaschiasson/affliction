@@ -5,6 +5,14 @@ using UnityEngine;
 public class Spawner : Organ
 {
     public GameObject[] spawnables;
+    ResourceStore erythStore;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        erythStore = new ResourceStore(Resource.Erythropoietin);
+    }
+
     // Use this for initialization
     protected override void Start()
     {
@@ -12,9 +20,9 @@ public class Spawner : Organ
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-
+        base.Update();
     }
 
     void spawn(GameObject obj)
@@ -38,6 +46,15 @@ public class Spawner : Organ
         if (spawnables.Length > 1)
         {
             spawn(spawnables[1]);
+        }
+    }
+
+    public override void deliver(ResourceStore deposit)
+    {
+        base.deliver(deposit);
+        if(deposit.getType() == Resource.Erythropoietin)
+        {
+            erythStore += deposit;
         }
     }
 }

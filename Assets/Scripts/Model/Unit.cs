@@ -15,6 +15,8 @@ public abstract class Unit : MonoBehaviour
 	bool rightMouse = false;
 	bool middleMouse = false;
 
+    protected Rigidbody rb;
+
 	protected GameObject selectionCircle = null;
 
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
@@ -22,6 +24,7 @@ public abstract class Unit : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+        rb = GetComponent<Rigidbody>();
 		gameController = Camera.main.GetComponent<GameController>();
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
@@ -35,6 +38,11 @@ public abstract class Unit : MonoBehaviour
 			selectionCircle.SendMessage("SetColor", Color.gray);
 		selectionCircle.SetActive(false);
 	}
+
+    protected virtual void Update()
+    {
+
+    }
 
 	void OnEnable()
 	{
