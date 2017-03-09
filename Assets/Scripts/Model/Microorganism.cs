@@ -56,6 +56,17 @@ public class Microorganism : Unit
         }
 	}
 
+    //Called on CollisionEnter
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (commandQueue.Count > 0)
+        {
+            Command command = commandQueue.Peek();
+            command.onCollision((collision.gameObject.GetComponent<Unit>()));
+        }
+    }
+
     protected void MoveTo(Vector3 pos)
     {
         commandQueue.Clear();

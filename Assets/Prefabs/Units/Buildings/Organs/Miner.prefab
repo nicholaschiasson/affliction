@@ -152,4 +152,4 @@ MonoBehaviour:
   Affiliation: 1
   Health: 100
   resource: 0
-  yield: 0
+  yield: 5

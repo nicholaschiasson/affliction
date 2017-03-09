@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -35,6 +36,14 @@ public abstract class Command
             return currentLocation;
         }
 
+        public void resetAction()
+        {
+            complete = false;
+        }
+
+        //collision handler for an action, by default does nothing
+        public virtual bool OnCollision(Unit t){ return false; }
+
     }
 
     public class MoveAction : Action
@@ -58,19 +67,60 @@ public abstract class Command
             complete = Vector3.Distance(goalPosition, currentLocation) < MARGIN_OF_ERROR;
             return goalPosition;
         }
+
+        public override bool OnCollision(Unit t)
+        {
+            //we have collided with the object we are looking for
+            if(target != null && t.GetInstanceID() == target.GetInstanceID())
+            {
+                complete = true;
+                return true;
+            }
+            return false;
+        }
     }
 
     public class ExtractAction : Action
     {
-        public ExtractAction(Miner m) : base(m)
+        ResourceStoreContainer workerResourceContainer;
+        public ExtractAction(Miner m, ResourceStoreContainer rsc) : base(m)
         {
+            workerResourceContainer = rsc;
+        }
+
+        public override bool OnCollision(Unit t)
+        {   //we have found our target
+            if (target != null && t.GetInstanceID() == target.GetInstanceID())
+            {
+                workerResourceContainer.containResource(((Miner)target).extract());
+                complete = true;
+                return true;
+            }
+
+            return false;
         }
     }
 
     public class DeliverAction : Action
     {
-        DeliverAction(Organ o) : base(o)
+        ResourceStoreContainer workerResourceContainer;
+        public DeliverAction(Organ o, ResourceStoreContainer rsc) : base(o)
         {
+            workerResourceContainer = rsc;
+        }
+
+        public override bool OnCollision(Unit t)
+        {   //we have found our target
+            if(target != null && t.GetInstanceID() == target.GetInstanceID())
+            {
+                if(workerResourceContainer.getResourceStore() != null)
+                {
+                    ((Organ)target).deliver(workerResourceContainer.getResourceStore());
+                    complete = true;                    
+                }
+                return true;
+            }
+            return false;
         }
     }
 
@@ -102,6 +152,12 @@ public abstract class Command
         return actions.Count <= 0;
     }
 
+    // Add a new target or return target, default does nothing
+    public virtual void setTarget(Unit t){ }
+    public virtual void setTarget(Vector3 t){ }
+    public virtual void setReturn(Unit r) { }
+    public virtual void setReturn(Vector3 r) { }
+
     public virtual Vector3 moveToLocation(Vector3 currentLocation)
     {
         Action currentAction;
@@ -117,17 +173,9 @@ public abstract class Command
         if(currentAction != null)
         {
             Vector3 targetLocation = currentAction.moveToLocation(currentLocation);
-
-            //if we have completed the action
-            if (currentAction.isComplete())
-            {
-                actions.Dequeue(); //remove it from the queue
-                if (loop) //if we are looping this action add it on the end of the queue
-                {
-                    actions.Enqueue(currentAction);
-                }
-            }
-
+            
+            //check our Queue
+            updateActionQueue();
             return targetLocation;
         }
         else
@@ -137,9 +185,34 @@ public abstract class Command
         
     }
 
-    public virtual bool collidedWithTarget(GameObject target)
+    public virtual void onCollision(Unit t)
     {
-        return false;
+        bool keepGoing;
+        // todo fix this. work around. 1 collision event happens when objects collide but multiple consecutive actions might depend on collision
+        // we keep going until an action is not listening for this collision, that way we don't accidently trigger a collison for an action later
+        foreach(Action action in actions.ToList())
+        {
+            keepGoing = action.OnCollision(t);
+            // Check our Queue
+            updateActionQueue();
+            if (!keepGoing)
+            {
+                break;
+            }
+        }
+    }
+
+    void updateActionQueue()
+    {
+        if (actions.Peek().isComplete())
+        {
+            Action popped = actions.Dequeue(); //remove it from the queue
+            if (loop) //if we are looping this action add it on the end of the queue
+            {
+                popped.resetAction();
+                actions.Enqueue(popped);
+            }
+        }
     }
 }
 
@@ -192,14 +265,32 @@ public class MoveCommand: Command
 
 public class WorkCommand: Command
 {
+    public WorkCommand(Miner m, ResourceStoreContainer wrorkerRSC, bool l) : base(l)
+    {
+        actions.Enqueue(new MoveAction(m));
+        actions.Enqueue(new ExtractAction(m, wrorkerRSC));
+    }
 
+    public WorkCommand(Miner m, ResourceStoreContainer wrorkerRSC, Vector3 r, bool l): base(l)
+    {
+        actions.Enqueue(new MoveAction(m));
+        actions.Enqueue(new ExtractAction(m, wrorkerRSC));
+        actions.Enqueue(new MoveAction(r));
+    }
+
+    public void setMine(Miner m, ResourceStoreContainer wrorkerRSC) {
+        
+    }
+    public void setDepot(Organ r, ResourceStoreContainer wrorkerRSC) {
+        actions.Enqueue(new MoveAction(r));
+        actions.Enqueue(new DeliverAction(r, wrorkerRSC));
+    }
+    public override void setReturn(Vector3 r) {
+        actions.Enqueue(new MoveAction(r));
+    }
 }
 
 //todo attack command
 public class AttackCommand : Command
 {
-    public override bool collidedWithTarget(GameObject target)
-    {
-        return false;
-    }
 }

@@ -17,6 +17,7 @@ public abstract class Organ : Building {
 
     public virtual void deliver(ResourceStore deposit)
     {
+        Debug.Log("Delivery of "+deposit.getValue());
         switch (deposit.getType())
         {
             case Resource.Oxygen:
@@ -26,5 +27,10 @@ public abstract class Organ : Building {
                 proteinStore += deposit;
                 break;
         }
+    }
+
+    //Notifying that this organ has been right clicked.
+    protected override void OnRightMouseClick() {
+        gameController.doAction(this);
     }
 }

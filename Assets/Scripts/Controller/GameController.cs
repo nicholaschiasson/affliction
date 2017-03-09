@@ -71,12 +71,18 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
-		//todo implement raycasting to determine where a user clicked
+        //todo implement proper UI selection options instead of keybinds
+        if (Input.GetKeyDown("1")) {
+            foreach (Unit u in selectedUnits)
+                u.OnOnePressed();
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            foreach (Unit u in selectedUnits)
+                u.OnTwoPressed();
+        }
 
-		// var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		// Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-	}
+    }
 
 	// Update called once per frame after every update
 	void LateUpdate()

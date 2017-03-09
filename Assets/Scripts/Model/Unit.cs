@@ -10,7 +10,7 @@ public enum UnitAffiliation
 
 public abstract class Unit : MonoBehaviour
 {
-	GameController gameController = null;
+	protected GameController gameController = null;
 	bool leftMouse = false;
 	bool rightMouse = false;
 	bool middleMouse = false;
@@ -43,6 +43,12 @@ public abstract class Unit : MonoBehaviour
     {
 
     }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
 
 	void OnEnable()
 	{
@@ -104,8 +110,12 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }
 
-	// Do not override: this method delegates the specific mouse events defined above
-	void OnMouseOver()
+    // todo remove these when implementing proper User interface
+    public virtual void OnOnePressed() { }
+    public virtual void OnTwoPressed() { }
+
+    // Do not override: this method delegates the specific mouse events defined above
+    void OnMouseOver()
 	{
 		// Left Mouse Button
 		if (Input.GetMouseButton(0))

@@ -34,14 +34,14 @@ public class Spawner : Organ
     }
 
     //Temporary spawning mechanisms
-    protected override void OnLeftMouseDown()
+    public override void OnOnePressed()
     {
         if (spawnables.Length > 0)
         {
             spawn(spawnables[0]);
         }
     }
-    protected override void  OnRightMouseDown()
+    public override void OnTwoPressed()
     {
         if (spawnables.Length > 1)
         {

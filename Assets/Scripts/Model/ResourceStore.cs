@@ -4,6 +4,33 @@ using UnityEngine;
 
 public enum Resource {None, Erythropoietin, Oxygen, Protein };
 
+public class ResourceStoreContainer
+{
+    ResourceStore rs;
+    public ResourceStoreContainer()
+    {
+        rs = null;
+    }
+
+    //clears the container
+    public void clear()
+    {
+        rs = null;
+    }
+
+    // Contains a resource, replaces one if currently stored
+    public void containResource(ResourceStore newRS)
+    {
+        rs = newRS;
+    }
+
+    public ResourceStore getResourceStore()
+    {
+        return rs;
+    }
+}
+
+
 public class ResourceStore
 {
     Resource type;
