@@ -18,22 +18,22 @@ public class GameController : MonoBehaviour
 	}
 
 	// Add a unit to the selected list. We can have multiple units selected for batch commands
-	public void selectUnit(SelectUnitEventArgs e)
+	public void selectUnit(Unit unit, bool append)
 	{
-		if (!e.Append)
+		if (!append)
 		{
 			foreach (Unit u in selectedUnits)
 				u.Deselect();
 			selectedUnits = new HashSet<Unit>();
 		}
-		e.Unit.Select();
-		selectedUnits.Add(e.Unit);
+		unit.Select();
+		selectedUnits.Add(unit);
 	}
 
 	// Add several units with a selection box to selected list
-	public void selectUnits(SelectUnitsEventArgs e)
+	public void selectUnits(List<Unit> units, bool append)
 	{
-		if (!e.Append)
+		if (!append)
 		{
 			foreach (Unit u in selectedUnits)
 				u.Deselect();
@@ -42,8 +42,8 @@ public class GameController : MonoBehaviour
 		// It is at this point that we can filter the units list before performing the actual selection
 		// For example, if our selection box caught a few ally units and a few buildings:
 		// In that case, we probably only want to actually select the units
-		foreach (Unit u in e.Units)
-			selectUnit(new SelectUnitEventArgs(u, true));
+		foreach (Unit u in units)
+			selectUnit(u, true);
 	}
 
 	public void handleSelectionBox(Bounds bounds)
@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
 		List<Unit> boundedUnits = new List<Unit>();
 		if (OnSelectionBoundsCheck != null)
 			OnSelectionBoundsCheck(bounds, boundedUnits);
-		selectUnits(new SelectUnitsEventArgs(boundedUnits, Input.GetKey(KeyCode.LeftShift)));
+		selectUnits(boundedUnits, Input.GetKey(KeyCode.LeftShift));
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed

@@ -30,7 +30,7 @@ public class SelectionBox : MonoBehaviour
 		{
 			// For now, selection box must be MIN_BOX_DIMENSION pixels in either width or height to register
 			Vector2 rectSize = mousePos - mainCamera.WorldToScreenPoint(p1);
-			if (rectSize.x >= MIN_BOX_DIMENSION || rectSize.y >= MIN_BOX_DIMENSION)
+			if (Mathf.Abs(rectSize.x) >= MIN_BOX_DIMENSION || Mathf.Abs(rectSize.y) >= MIN_BOX_DIMENSION)
 			{
 				Vector3 p = ScreenToWorldPoint(mousePos);
 				Vector3 size = p - p1;

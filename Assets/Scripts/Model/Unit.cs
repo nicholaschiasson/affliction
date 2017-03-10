@@ -68,7 +68,7 @@ public abstract class Unit : MonoBehaviour
 
 	protected virtual void requestSelect()
 	{
-		gameController.selectUnit(new SelectUnitEventArgs(this, Input.GetKey(KeyCode.LeftShift)));
+		gameController.selectUnit(this, Input.GetKey(KeyCode.LeftShift));
 	}
 
 	// Called when unit is attacked by another unit
