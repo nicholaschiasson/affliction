@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Affiliation: 1
   Health: 100
-  speed: 0.5
+  speed: 0.4
 --- !u!135 &135505363281953666
 SphereCollider:
   m_ObjectHideFlags: 1
