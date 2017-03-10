@@ -32,7 +32,9 @@
             newCommand = new WorkCommand((Miner)unit, rsContainer, true);
         }
         //If we clicked on an organ and have a current workCommand
-        else if (((unit.GetType()).IsSubclassOf(typeof(Organ)) || unit.GetType() == typeof(Miner)) && newCommand != null)
+        else if (((unit.GetType()).IsSubclassOf(typeof(Organ)) || unit.GetType() == typeof(Miner)) 
+            && unit.Affiliation == UnitAffiliation.Ally 
+            && newCommand != null)
         {
             newCommand.setDepot((Organ)unit, rsContainer);
             //Adding the new built command to our command list

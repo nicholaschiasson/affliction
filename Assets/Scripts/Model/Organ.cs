@@ -10,7 +10,6 @@ public abstract class Organ : Building {
     protected override void Awake()
     {
         base.Awake();
-        Affiliation = UnitAffiliation.Ally;
         oxygenStore = new ResourceStore(Resource.Oxygen, 100);
         oxygenStore = new ResourceStore(Resource.Protein);
     }
