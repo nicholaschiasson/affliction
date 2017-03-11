@@ -4,6 +4,8 @@ public class HUD : MonoBehaviour
 {
 	public GUISkin Skin = null;
 
+	GameController gameController = null;
+
 	// Screen dimensions
 	int screenWidth;
 	int screenHeight;
@@ -41,6 +43,7 @@ public class HUD : MonoBehaviour
 
 	void OnEnable()
 	{
+		gameController = Camera.main.GetComponent<GameController>();
 		RetrieveGUIDimensions();
 	}
 
@@ -118,7 +121,8 @@ public class HUD : MonoBehaviour
 		// This is to give the menu button a larger size than the rest of the buttons
 		int buttonWidth = (int)canvas.width / (nButtons + 1);
 		int buttonPadding = (int)canvas.width / 64;
-		GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y, buttonWidth * 2 - buttonPadding * 2, canvas.height), "Menu (Esc)");
+		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y, buttonWidth * 2 - buttonPadding * 2, canvas.height), "Menu (Esc)"))
+			Application.Quit();
 		GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 2, canvas.y, buttonWidth - buttonPadding * 2, canvas.height), "Event Log");
 	}
 

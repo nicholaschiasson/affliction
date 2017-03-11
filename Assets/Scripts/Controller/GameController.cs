@@ -71,6 +71,9 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKeyUp(KeyCode.Escape))
+			Application.Quit();
+
         //todo implement proper UI selection options instead of keybinds
         if (Input.GetKeyDown("1")) {
             foreach (Unit u in selectedUnits)
@@ -81,7 +84,6 @@ public class GameController : MonoBehaviour
             foreach (Unit u in selectedUnits)
                 u.OnTwoPressed();
         }
-
     }
 
 	// Update called once per frame after every update
