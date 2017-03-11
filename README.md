@@ -21,12 +21,12 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 Allied microorganisms (red/white blood cells) can be moved by selecting and then right clicking somewhere on the terrain.
 
 ### Spawning
-Allied microorganisms can be spawned by first selecting the [spawner](#Spawner) then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell.
+Allied microorganisms can be spawned by first selecting the [spawner](#spawner) then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell.
 
 **NOTE**: Currently, spawning has no cost.
 
 ### Mining resources
-To mine resources to be transferred to the spawner (and other buildings in the future), first select a [red blood cell](#Red-blood-cell), then right click a [miner building](#Miner), and then right click a spawner building. The red blood cell will continuously travel back and forth from the miner to the spawner, bringing resources that don't currently do anything.
+To mine resources to be transferred to the spawner (and other buildings in the future), first select a [red blood cell](#red-blood-cell), then right click a [miner building](#miner), and then right click a spawner building. The red blood cell will continuously travel back and forth from the miner to the spawner, bringing resources that don't currently do anything.
 
 ## Identification
 #### Red blood cell
