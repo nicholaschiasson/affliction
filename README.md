@@ -1,6 +1,10 @@
 # affliction
 COMP4501 Term Project - An immune system real-time strategy game made with Unity.
 
+## Contributors
+- [Nicholas Chiasson](https://github.com/nicholaschiasson)
+- [Luke Harper](https://github.com/Lharp5)
+
 **The following details the current functionality of the game, much of which is temporary and subject to change very soon.**
 
 ## Controls
