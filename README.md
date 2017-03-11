@@ -47,7 +47,7 @@ To mine resources to be transferred to the spawner (and other buildings in the f
 
 #### Miner
 -   Magenta cube
--   Produces resources (NOT IMPLEMENTED)
+-   Produces resources
 
 #### Spawner
 -   Brown/orange cube
@@ -62,4 +62,4 @@ To mine resources to be transferred to the spawner (and other buildings in the f
     -   The "Menu" button in the top left of the game window simply exits the game, as does the ESCAPE key (this is all ignored in the editor)
     -   The bottom right panel is meant to be an action panel, but for the time being, it only displays the spawning options for spawner buildings
     -   None of the other UI elements are functional
--   Currently, to deselect any unit(s) it is necessary to drag select an empty space or terrain
+-   Currently, to deselect any unit(s) it is necessary to **drag** select an empty space or terrain
