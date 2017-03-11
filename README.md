@@ -12,7 +12,7 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 | d            | Move camera right                           |
 | ESC          | Quit game (ignored in unity editor)         |
 | LEFT MOUSE   | Select unit (drag to multi-select)          |
-| RRIGHT MOUSE | Selected unit do action at mouse location   |
+| RIGHT MOUSE | Selected unit do action at mouse location   |
 | 1            | If spawner selected, spawn red blood cell   |
 | 2            | If spawner selected, spawn white blood cell |
 
