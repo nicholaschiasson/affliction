@@ -18,7 +18,7 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 
 ## Mechanics
 ### Movement
-Allied microorganisms (red/white blood cells) can be moved by selecting and then right clicking somewhere on the terrain.
+Allied microorganisms (red/white blood cells) can be moved by selecting them and then right clicking somewhere on the terrain.
 
 ### Spawning
 Allied microorganisms can be spawned by first selecting the [spawner](#spawner) then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell.
