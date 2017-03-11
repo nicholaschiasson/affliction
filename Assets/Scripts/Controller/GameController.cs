@@ -68,6 +68,18 @@ public class GameController : MonoBehaviour
 			u.doAction(unit);
 	}
 
+	public void OnOnePressed()
+	{
+		foreach (Unit u in selectedUnits)
+			u.OnOnePressed();
+	}
+
+	public void OnTwoPressed()
+	{
+		foreach (Unit u in selectedUnits)
+			u.OnTwoPressed();
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -75,14 +87,13 @@ public class GameController : MonoBehaviour
 			Application.Quit();
 
         //todo implement proper UI selection options instead of keybinds
-        if (Input.GetKeyDown("1")) {
-            foreach (Unit u in selectedUnits)
-                u.OnOnePressed();
+        if (Input.GetKeyDown("1"))
+		{
+			OnOnePressed();
         }
         else if (Input.GetKeyDown("2"))
         {
-            foreach (Unit u in selectedUnits)
-                u.OnTwoPressed();
+			OnTwoPressed();
         }
     }
 

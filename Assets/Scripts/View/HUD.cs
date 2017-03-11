@@ -137,6 +137,19 @@ public class HUD : MonoBehaviour
 
 	void DrawActionsPanel(Rect canvas)
 	{
+		int buttonWidth = (int)canvas.width / 3;
+		int buttonHeight = buttonWidth;
+		int buttonPadding = (int)canvas.width / 64;
+		Texture redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
+		Texture whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
+		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
+		{
+			gameController.OnOnePressed();
+		}
+		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 1, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), whiteBloodCellIcon))
+		{
+			gameController.OnTwoPressed();
+		}
 	}
 
 	void DrawUnitInfoPanel(Rect canvas)
