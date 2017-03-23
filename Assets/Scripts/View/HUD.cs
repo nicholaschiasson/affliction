@@ -2,9 +2,9 @@
 
 public class HUD : MonoBehaviour
 {
-	public GUISkin Skin = null;
+	public GUISkin Skin;
 
-	GameController gameController = null;
+	GameController gameController;
 
 	// Screen dimensions
 	int screenWidth;
@@ -49,6 +49,9 @@ public class HUD : MonoBehaviour
 
 	void OnGUI()
 	{
+		if (screenWidth != Screen.width || screenHeight != Screen.height)
+			RetrieveGUIDimensions();
+
 		GUI.skin = Skin;
 
 		// Menu buttons
@@ -105,7 +108,7 @@ public class HUD : MonoBehaviour
 
 		// Unit info panel dimensions
 		unitInfoPanelWidth = screenWidth - minimapWidth - actionsPanelWidth;
-		unitInfoPanelHeight = (int)((float)minimapHeight * 0.865f);
+		unitInfoPanelHeight = (int)(minimapHeight * 0.865f);
 		unitInfoPanelCanvas = new Rect(minimapWidth, screenHeight - unitInfoPanelHeight, unitInfoPanelWidth, unitInfoPanelHeight);
 		unitInfoPanelCanvasWithPadding = ApplyPadding(unitInfoPanelCanvas, panelPadding);
 	}
@@ -140,8 +143,8 @@ public class HUD : MonoBehaviour
 		int buttonWidth = (int)canvas.width / 3;
 		int buttonHeight = buttonWidth;
 		int buttonPadding = (int)canvas.width / 64;
-		Texture redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
-		Texture whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
+		var redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
+		var whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
 		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
 		{
 			gameController.OnOnePressed();
