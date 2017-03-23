@@ -49,6 +49,11 @@ public abstract class Unit : MonoBehaviour
 
     }
 
+    protected virtual void FixedUpdate()
+    {
+
+    }
+
     protected virtual void OnCollisionEnter(Collision collision)
     {
 

@@ -7,16 +7,47 @@ public abstract class Organ : Unit {
     ResourceStore oxygenStore;
     ResourceStore proteinStore;
 
+    public int consumeCost;
+
+    //TODO REMOVE 
+    public int oxygenLevel;
+
     protected override void Awake()
     {
         base.Awake();
-        oxygenStore = new ResourceStore(Resource.Oxygen, 100);
-        oxygenStore = new ResourceStore(Resource.Protein);
+        oxygenStore = new ResourceStore(Resource.Oxygen, 1000);
+        proteinStore = new ResourceStore(Resource.Protein);
     }
 
-    public virtual void deliver(ResourceStore deposit)
+    protected override void Update()
     {
-        Debug.Log("Delivery of "+deposit.getValue());
+        base.Update();
+
+        // Update our oxygen intake
+        ResourceStore consumed = oxygenStore.takeOut(consumeCost);
+        oxygenLevel = oxygenStore.getValue();
+        // If there is not enough oxygen left, consume health
+        if(consumed.getValue() != consumeCost)
+        {
+            Health--;
+        }
+    }
+
+    //Get the OxygenLevels
+    public int getOxygenLevels()
+    {
+        return oxygenStore.getValue();
+    }
+
+    //Get the Protein levels
+    public int getProteinLevels()
+    {
+        return proteinStore.getValue();
+    }
+
+    //Deliver a resouce to the organ
+    public virtual void deliver(ResourceStore deposit)
+    {   
         switch (deposit.getType())
         {
             case Resource.Oxygen:

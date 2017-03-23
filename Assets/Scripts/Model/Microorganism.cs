@@ -21,8 +21,10 @@ public class Microorganism : Unit
 	}
 
     //for movement and physics, called on timer instead of per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(commandQueue.Count > 0)
         {
             Vector3 currentPos = transform.position;
