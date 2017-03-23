@@ -22,6 +22,11 @@ public abstract class Unit : MonoBehaviour
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
+    protected virtual void Start()
+    {
+
+    }
+
 	protected virtual void Awake()
 	{
         rb = GetComponent<Rigidbody>();

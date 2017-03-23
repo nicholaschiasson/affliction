@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Organ : Building {
+public abstract class Organ : Unit {
     //All organs have a store of oxygen that when gets to 0, dies.
     ResourceStore oxygenStore;
     ResourceStore proteinStore;

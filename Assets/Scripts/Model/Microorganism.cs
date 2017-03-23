@@ -15,8 +15,9 @@ public class Microorganism : Unit
         commandQueue = new Queue<Command>();
 
     }
-    protected virtual void Start()
+    protected override void Start()
 	{
+        base.Start();
 	}
 
     //for movement and physics, called on timer instead of per frame
