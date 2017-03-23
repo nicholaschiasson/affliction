@@ -140,6 +140,7 @@ MonoBehaviour:
   Affiliation: 1
   Health: 100
   speed: 0.4
+  damage: 1
 --- !u!135 &135505363281953666
 SphereCollider:
   m_ObjectHideFlags: 1

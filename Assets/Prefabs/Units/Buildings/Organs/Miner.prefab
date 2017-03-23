@@ -154,4 +154,4 @@ MonoBehaviour:
   consumeCost: 1
   oxygenLevel: 0
   resource: 0
-  yield: 40
+  yield: 50

@@ -9,9 +9,6 @@ public abstract class Organ : Unit {
 
     public int consumeCost;
 
-    //TODO REMOVE 
-    public int oxygenLevel;
-
     protected override void Awake()
     {
         base.Awake();
@@ -19,18 +16,23 @@ public abstract class Organ : Unit {
         proteinStore = new ResourceStore(Resource.Protein);
     }
 
+
+    protected void consumeOxygen(int cost)
+    {
+        ResourceStore consumed = oxygenStore.takeOut(consumeCost);
+        // If there is not enough oxygen left, consume health
+        if (consumed.getValue() != consumeCost)
+        {
+            Health--;
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
 
-        // Update our oxygen intake
-        ResourceStore consumed = oxygenStore.takeOut(consumeCost);
-        oxygenLevel = oxygenStore.getValue();
-        // If there is not enough oxygen left, consume health
-        if(consumed.getValue() != consumeCost)
-        {
-            Health--;
-        }
+        // Update our oxygen intake for surviving
+        consumeOxygen(consumeCost);
     }
 
     //Get the OxygenLevels
@@ -57,10 +59,5 @@ public abstract class Organ : Unit {
                 proteinStore += deposit;
                 break;
         }
-    }
-
-    //Notifying that this organ has been right clicked.
-    protected override void OnRightMouseClick() {
-        gameController.doAction(this);
     }
 }

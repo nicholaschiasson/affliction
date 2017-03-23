@@ -127,9 +127,25 @@ public abstract class Command
     //todo attack action
     public class AttackAction : Action
     {
-        AttackAction(Unit u) : base(u)
+        int damage;
+        public AttackAction(Unit u, int d) : base(u)
         {
+            damage = d;
         }
+
+        public override bool OnCollision(Unit t) {
+            // If this is not our target, we do not want to do anything
+            if (target.GetInstanceID() != t.GetInstanceID())
+            {
+                return false;
+            }
+
+            //If this is our target attack.
+            t.takeDamage(damage);
+            complete = true;
+            return true;
+        }
+
     }
 
     protected Queue<Action> actions;
@@ -147,7 +163,8 @@ public abstract class Command
         loop = l;
     }    
 
-    public bool isComplete()
+    // returns when the command is complete, can be overriden by derived commands
+    public virtual bool isComplete()
     {
         return actions.Count <= 0;
     }
@@ -293,4 +310,30 @@ public class WorkCommand: Command
 //todo attack command
 public class AttackCommand : Command
 {
+    Unit target;
+    //standard attack unit order
+    public AttackCommand(Unit t, int damage, bool l): base(l)
+    {
+        target = t;
+        actions.Enqueue(new MoveAction(t));
+        actions.Enqueue(new AttackAction(target, damage));
+    }
+
+    //attack unit order and return to location
+    public AttackCommand(Unit target, Vector3 returnPoint, int damage, bool l): base(l)
+    {
+        //todo implement this if needed
+    }
+
+    //attack unit order and return to GameObject
+    public AttackCommand(Unit target, Unit returnObject, int damage, bool l) : base(l)
+    {
+        //todo implement this if needed
+    }
+
+    // Overriding isComplete, we monitor the health of our target, if it has died we have finished our actions
+    public override bool isComplete()
+    {
+        return base.isComplete() || target.Health <= 0;
+    }
 }

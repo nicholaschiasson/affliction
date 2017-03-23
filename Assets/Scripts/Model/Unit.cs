@@ -46,7 +46,10 @@ public abstract class Unit : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        if (Health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -59,8 +62,13 @@ public abstract class Unit : MonoBehaviour
 
     }
 
+    protected virtual void OnCollisionStay(Collision collision)
+    {
 
-	void OnEnable()
+    }
+
+
+    void OnEnable()
 	{
 		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
 	}
@@ -81,10 +89,10 @@ public abstract class Unit : MonoBehaviour
 		gameController.selectUnit(this, Input.GetKey(KeyCode.LeftShift));
 	}
 
-	// Called when unit is attacked by another unit
-	protected virtual void OnAttacked(UnitAttackedEventArgs e)
+	// Called when a unit takes damage
+	public virtual void takeDamage(int damage)
 	{
-		Health -= (int)e.Damage;
+		Health -= damage;
 	}
 
 	// Called when the controller registers the unit as selected
@@ -115,8 +123,16 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
-	protected virtual void OnLeftMouseClick() { requestSelect(); }
-	protected virtual void OnRightMouseClick() { }
+
+
+    protected virtual void OnLeftMouseClick() {
+        requestSelect();
+    }
+
+    protected virtual void OnRightMouseClick() {
+        gameController.doAction(this);
+    }
+
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }
 

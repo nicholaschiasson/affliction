@@ -22,6 +22,8 @@
 
     public ResourceStore extract()
     {
+        //consume an oxygen point to extract
+        consumeOxygen(1);
         return new ResourceStore(resource, yield);
     }
 }

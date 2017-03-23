@@ -10,6 +10,7 @@ TagManager:
   - Spore
   - Spawner
   - Miner
+  - board
   layers:
   - Default
   - TransparentFX
