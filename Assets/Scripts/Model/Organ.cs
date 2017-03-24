@@ -13,6 +13,13 @@
 		proteinStore = new ResourceStore(Resource.Protein);
 	}
 
+	public override string GetStatsInfo()
+	{
+		string stats = base.GetStatsInfo();
+		stats += "\n" + oxygenStore.getType().ToString() + " Stored: " + getOxygenLevels();
+		stats += "\n" + proteinStore.getType().ToString() + " Stored: " + getProteinLevels();
+		return stats;
+	}
 
 	protected void consumeOxygen(int cost)
 	{
