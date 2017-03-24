@@ -124,9 +124,8 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
 
-
     protected virtual void OnLeftMouseClick() {
-        requestSelect();
+        RequestSelect();
     }
 
     protected virtual void OnRightMouseClick() {
