@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 1875962570}
   - component: {fileID: 1875962569}
   - component: {fileID: 1875962573}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Board
   m_TagString: board
   m_Icon: {fileID: 0}
@@ -811,7 +811,7 @@ Camera:
   m_GameObject: {fileID: 2001453864}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2

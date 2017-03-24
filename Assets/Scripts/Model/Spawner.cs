@@ -41,9 +41,9 @@ public class Spawner : Organ
         //Consume the resources to spawn
         erythStore.takeOut(cost[index]);
 
-        Vector3 newPos = new Vector3(this.transform.position.x + this.transform.position.x * this.transform.localScale.x,
+        Vector3 newPos = new Vector3(this.transform.position.x + 2 * this.transform.localScale.x,
                                             this.transform.position.y,
-                                            this.transform.position.z + this.transform.position.z * this.transform.localScale.z);
+                                            this.transform.position.z + 2 * this.transform.localScale.z);
         Instantiate(spawnables[index], newPos, this.transform.rotation);
     }
 
