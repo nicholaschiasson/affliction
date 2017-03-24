@@ -15,13 +15,16 @@ public class Microorganism : Unit
         commandQueue = new Queue<Command>();
 
     }
-    protected virtual void Start()
+    protected override void Start()
 	{
+        base.Start();
 	}
 
     //for movement and physics, called on timer instead of per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(commandQueue.Count > 0)
         {
             Vector3 currentPos = transform.position;
@@ -45,6 +48,7 @@ public class Microorganism : Unit
 	// Update is called once per frame
 	protected override void Update()
 	{
+        base.Update();
         // Checking if our command needs to be removed
         if(commandQueue.Count > 0)
         {
@@ -60,6 +64,23 @@ public class Microorganism : Unit
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        if (commandQueue.Count > 0)
+        {
+            Command command = commandQueue.Peek();
+            command.onCollision((collision.gameObject.GetComponent<Unit>()));
+        }
+    }
+
+    //Called on every frame for every collision
+    protected override void OnCollisionStay(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        // Ignore colliding with the board....
+        if(collision.gameObject.tag == "board")
+        {
+            return;
+        }
         if (commandQueue.Count > 0)
         {
             Command command = commandQueue.Peek();

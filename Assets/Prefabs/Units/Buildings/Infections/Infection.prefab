@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 2
-  Health: 100
+  Health: 1000
+  consumeCost: 0
   spawnables:
   - {fileID: 1491029659344476, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}
+  cost: 

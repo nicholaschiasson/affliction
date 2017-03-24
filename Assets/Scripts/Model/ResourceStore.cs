@@ -77,7 +77,7 @@ public class ResourceStore
     }
 
     // Take some resources out of the store, 
-    // Returns a new ResourceStore with the value, 0 if requested greater then had
+    // Returns a new ResourceStore with the value, 0 if requested greater than had
     public ResourceStore takeOut(int val)
     {
         ResourceStore newStore = new global::ResourceStore(type);

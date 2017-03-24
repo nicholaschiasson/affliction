@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 1
-  Health: 100
+  Health: 10000
+  consumeCost: 1
+  oxygenLevel: 0
   resource: 0
-  yield: 5
+  yield: 50
