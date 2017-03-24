@@ -6,9 +6,28 @@ public class GameController : MonoBehaviour
 {
 	new Camera camera;
 	HashSet<Unit> selectedUnits;
+	public HUD hud;
 
 	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<Unit> boundedUnits);
 	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
+
+	void OnEnable()
+	{
+		if (hud)
+		{
+			hud.OnSpawnRedBloodCellActionButtonPressed += OnOnePressed;
+			hud.OnSpawnWhiteBloodCellActionButtonPressed += OnTwoPressed;
+		}
+	}
+
+	void OnDisable()
+	{
+		if (hud)
+		{
+			hud.OnSpawnRedBloodCellActionButtonPressed -= OnOnePressed;
+			hud.OnSpawnWhiteBloodCellActionButtonPressed -= OnTwoPressed;
+		}
+	}
 
 	// Use this for initialization
 	void Start()
@@ -18,7 +37,7 @@ public class GameController : MonoBehaviour
 	}
 
 	// Add a unit to the selected list. We can have multiple units selected for batch commands
-	public void selectUnit(Unit unit, bool append)
+	public void selectUnit(Unit unit, bool append, bool single)
 	{
 		if (!append)
 		{
@@ -28,6 +47,8 @@ public class GameController : MonoBehaviour
 		}
 		unit.Select();
 		selectedUnits.Add(unit);
+		if (single && hud != null)
+			hud.UpdateInfoPanel(selectedUnits);
 	}
 
 	// Add several units with a selection box to selected list
@@ -43,7 +64,9 @@ public class GameController : MonoBehaviour
 		// For example, if our selection box caught a few ally units and a few buildings:
 		// In that case, we probably only want to actually select the units
 		foreach (Unit u in units)
-			selectUnit(u, true);
+			selectUnit(u, true, false);
+		if (hud != null)
+			hud.UpdateInfoPanel(selectedUnits);
 	}
 
 	public void handleSelectionBox(Bounds bounds)

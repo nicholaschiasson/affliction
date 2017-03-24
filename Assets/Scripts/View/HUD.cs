@@ -1,10 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HUD : MonoBehaviour
 {
-	public GUISkin Skin;
+	enum UnitPriority
+	{
+		UnknownPriority = -1,
+		BloodCellPriority = 0,
+		VirusPriority,
+		OrganPriority
+	}
 
-	GameController gameController;
+	public delegate void ActionButtonPressedAction();
+	public delegate void MouseOverGUIAction();
+	public event ActionButtonPressedAction OnSpawnRedBloodCellActionButtonPressed;
+	public event ActionButtonPressedAction OnSpawnWhiteBloodCellActionButtonPressed;
+	public event MouseOverGUIAction OnMouseOverGUI;
+	public event MouseOverGUIAction OnMouseOutsideGUI;
+
+	public GUISkin Skin;
 
 	// Screen dimensions
 	int screenWidth;
@@ -17,11 +32,13 @@ public class HUD : MonoBehaviour
 	int menuButtonsWidth;
 	int menuButtonsHeight;
 	Rect menuButtonsCanvas;
+	Rect menuButtonsCanvasWithPadding;
 
 	// Resource indicators dimensions
 	int resourceIndicatorsWidth;
 	int resourceIndicatorsHeight;
 	Rect resourceIndicatorsCanvas;
+	Rect resourceIndicatorsCanvasWithPadding;
 
 	// Minimap panel dimensions
 	int minimapWidth;
@@ -40,11 +57,31 @@ public class HUD : MonoBehaviour
 	int unitInfoPanelHeight;
 	Rect unitInfoPanelCanvas;
 	Rect unitInfoPanelCanvasWithPadding;
+	Vector2 scrollPosition = Vector2.zero;
+	SortedDictionary<UnitPriority, List<Unit>> selectedUnits;
+
+	// Icons
+	Texture redBloodCellIcon;
+	Texture whiteBloodCellIcon;
 
 	void OnEnable()
 	{
-		gameController = Camera.main.GetComponent<GameController>();
 		RetrieveGUIDimensions();
+		redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
+		whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
+	}
+
+	void Update()
+	{
+		Vector2 mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+		if (menuButtonsCanvas.Contains(mousePos) ||
+			resourceIndicatorsCanvas.Contains(mousePos) ||
+			minimapCanvas.Contains(mousePos) ||
+			actionsPanelCanvas.Contains(mousePos) ||
+			unitInfoPanelCanvas.Contains(mousePos))
+			OnMouseOverGUI();
+		else
+			OnMouseOutsideGUI();
 	}
 
 	void OnGUI()
@@ -55,10 +92,12 @@ public class HUD : MonoBehaviour
 		GUI.skin = Skin;
 
 		// Menu buttons
-		DrawMenuButtons(menuButtonsCanvas);
+		GUI.Box(menuButtonsCanvas, string.Empty);
+		DrawMenuButtons(menuButtonsCanvasWithPadding);
 
 		// Resource indicators
-		DrawResourceIndicators(resourceIndicatorsCanvas);
+		GUI.Box(resourceIndicatorsCanvas, string.Empty);
+		DrawResourceIndicators(resourceIndicatorsCanvasWithPadding);
 
 		// Minimap panel
 		GUI.Box(minimapCanvas, string.Empty);
@@ -88,11 +127,13 @@ public class HUD : MonoBehaviour
 		menuButtonsWidth = screenWidth / 5;
 		menuButtonsHeight = screenHeight / 24;
 		menuButtonsCanvas = new Rect(0, 0, menuButtonsWidth, menuButtonsHeight);
+		menuButtonsCanvasWithPadding = ApplyPadding(menuButtonsCanvas, panelPadding / 2);
 
 		// Resource indicators dimensions
 		resourceIndicatorsWidth = screenWidth / 5;
 		resourceIndicatorsHeight = screenHeight / 12;
 		resourceIndicatorsCanvas = new Rect(screenWidth - resourceIndicatorsWidth, 0, resourceIndicatorsWidth, resourceIndicatorsHeight);
+		resourceIndicatorsCanvasWithPadding = ApplyPadding(resourceIndicatorsCanvas, panelPadding / 2);
 
 		// Minimap panel dimensions
 		minimapWidth = screenWidth / 6;
@@ -143,19 +184,78 @@ public class HUD : MonoBehaviour
 		int buttonWidth = (int)canvas.width / 3;
 		int buttonHeight = buttonWidth;
 		int buttonPadding = (int)canvas.width / 64;
-		var redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
-		var whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
 		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
 		{
-			gameController.OnOnePressed();
+			if (OnSpawnRedBloodCellActionButtonPressed != null)
+				OnSpawnRedBloodCellActionButtonPressed();
 		}
 		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 1, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), whiteBloodCellIcon))
 		{
-			gameController.OnTwoPressed();
+			if (OnSpawnWhiteBloodCellActionButtonPressed != null)
+				OnSpawnWhiteBloodCellActionButtonPressed();
 		}
 	}
 
 	void DrawUnitInfoPanel(Rect canvas)
 	{
+		Rect scrollArea = new Rect(0.0f, 0.0f, canvas.width - 20.0f, canvas.height);
+		int iconsPerRow = 6;
+		int iconPadding = (int)scrollArea.width / 64;
+		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
+		int iconHeight = iconWidth;
+		int scrollAreaHeight = iconPadding;
+		if (selectedUnits != null)
+		{
+			foreach (var p in selectedUnits)
+				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)p.Value.Count / iconsPerRow);
+		}
+		scrollArea.height = Mathf.Max(scrollArea.height, scrollAreaHeight);
+		scrollPosition = GUI.BeginScrollView(canvas, scrollPosition, scrollArea);
+		GUI.Box(scrollArea, string.Empty);
+		if (selectedUnits != null)
+		{
+			int j = 0;
+			foreach (var p in selectedUnits)
+			{
+				int i = 0;
+				bool newRow = false;
+				foreach (Unit u in p.Value)
+				{
+					newRow = false;
+					GUI.Button(new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding), redBloodCellIcon);
+					i++;
+					if (i % iconsPerRow == 0)
+					{
+						j++;
+						newRow = true;
+					}
+				}
+				if (!newRow && p.Value.Count > 0)
+					j++;
+			}
+		}
+		GUI.EndScrollView();
+	}
+
+	public void UpdateInfoPanel(HashSet<Unit> selected)
+	{
+		selectedUnits = new SortedDictionary<UnitPriority, List<Unit>>();
+		selectedUnits[UnitPriority.BloodCellPriority] = new List<Unit>();
+		selectedUnits[UnitPriority.VirusPriority] = new List<Unit>();
+		selectedUnits[UnitPriority.OrganPriority] = new List<Unit>();
+		foreach (Unit u in selected)
+		{
+			UnitPriority priority = GetUnitPriority(u);
+			if (selectedUnits.ContainsKey(priority))
+				selectedUnits[priority].Add(u);
+		}
+	}
+
+	UnitPriority GetUnitPriority(Unit u)
+	{
+		if (u is BloodCell) return UnitPriority.BloodCellPriority;
+		if (u is Virus) return UnitPriority.VirusPriority;
+		if (u is Organ) return UnitPriority.OrganPriority;
+		return UnitPriority.UnknownPriority;
 	}
 }

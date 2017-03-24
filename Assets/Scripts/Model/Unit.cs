@@ -57,7 +57,7 @@ public abstract class Unit : MonoBehaviour
 
 	void OnDisable()
 	{
-		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
+		GameController.OnSelectionBoundsCheck -= SelectionBoundsCheck;
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
@@ -68,7 +68,7 @@ public abstract class Unit : MonoBehaviour
 
 	protected virtual void requestSelect()
 	{
-		gameController.selectUnit(this, Input.GetKey(KeyCode.LeftShift));
+		gameController.selectUnit(this, Input.GetKey(KeyCode.LeftShift), true);
 	}
 
 	// Called when unit is attacked by another unit
