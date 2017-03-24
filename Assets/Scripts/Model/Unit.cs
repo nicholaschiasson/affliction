@@ -22,11 +22,6 @@ public abstract class Unit : MonoBehaviour
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
-    protected virtual void Start()
-    {
-
-    }
-
 	protected virtual void Awake()
 	{
         rb = GetComponent<Rigidbody>();
@@ -112,6 +107,16 @@ public abstract class Unit : MonoBehaviour
 		Collider c = GetComponent<Collider>();
 		if (c && bounds.Intersects(c.bounds))
 			boundedUnits.Add(this);
+	}
+
+	public virtual string GetTypeName()
+	{
+		return name;
+	}
+
+	public virtual string GetStatsInfo()
+	{
+		return ("HP: " + Health);
 	}
 
 	//Mouse Handling

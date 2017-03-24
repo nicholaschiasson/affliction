@@ -1,3 +1,3 @@
-﻿public class Virus : Microorganism
+﻿public abstract class Virus : Microorganism
 {
 }

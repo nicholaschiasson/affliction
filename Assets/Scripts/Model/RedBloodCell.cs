@@ -9,16 +9,9 @@
         rsContainer = new ResourceStoreContainer();
     }
 
-    // Use this for initialization
-    protected override void Start()
+	public override string GetTypeName()
 	{
-		base.Start();
-	}
-
-	// Update is called once per frame
-	protected override void Update()
-	{
-        base.Update();
+		return "Red Blood Cell";
 	}
 
     public override void doAction(Unit unit)

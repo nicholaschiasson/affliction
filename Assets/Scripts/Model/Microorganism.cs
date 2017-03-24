@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Microorganism : Unit
+public abstract class Microorganism : Unit
 {
     public float speed;
     protected Queue<Command> commandQueue;
@@ -15,10 +13,6 @@ public class Microorganism : Unit
         commandQueue = new Queue<Command>();
 
     }
-    protected override void Start()
-	{
-        base.Start();
-	}
 
     //for movement and physics, called on timer instead of per frame
     protected override void FixedUpdate()

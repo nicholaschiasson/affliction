@@ -3,17 +3,12 @@
     public Resource resource;
     public int yield;
 
-    // Use this for initialization
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
+	public override string GetStatsInfo()
+	{
+		var stats = base.GetStatsInfo();
+		stats += "\n" + resource.ToString() + ": " + yield;
+		return stats;
+	}
 
     public Resource getResource()
     {

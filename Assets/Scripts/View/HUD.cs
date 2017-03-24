@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
@@ -219,10 +220,10 @@ public class HUD : MonoBehaviour
 	{
 		var can = new Rect(canvas.x, canvas.y + Skin.font.fontSize, canvas.width, canvas.height - Skin.font.fontSize);
 		var scrollArea = new Rect(0.0f, 0.0f, can.width - 20.0f, can.height);
-		int iconsPerRow = 6;
+		int iconsPerRow = 4;
 		int iconPadding = (int)scrollArea.width / 64;
 		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
-		int iconHeight = iconWidth;
+		int iconHeight = iconWidth / 2;
 		int scrollAreaHeight = iconPadding;
 		if (selectedUnits != null)
 		{
@@ -242,35 +243,34 @@ public class HUD : MonoBehaviour
 				foreach (Unit u in p.Value)
 				{
 					newRow = false;
+					var title = u.GetTypeName();
 					Texture t = null;
-					if (u is Miner)
-					{
+					var info = u.GetStatsInfo();
+					if (title == "Heart")
+						t = spawnerIcon;
+					if (title == "Infection")
+						t = infectionIcon;
+					if (title == "Kidney")
 						t = minerIcon;
-					}
-					if (u is Pathogen)
-					{
+					if (title == "Lungs")
+						t = minerIcon;
+					if (title == "Pathogen")
 						t = pathogenIcon;
-					}
-					if (u is RedBloodCell)
-					{
+					if (title == "Red Blood Cell")
 						t = redBloodCellIcon;
-					}
-					if (u is Spawner)
-					{
-						if (u.Affiliation == UnitAffiliation.Ally)
-							t = spawnerIcon;
-						else
-							t = infectionIcon;
-					}
-					if (u is Spore)
-					{
+					if (title == "Spore")
 						t = sporeIcon;
-					}
-					if (u is WhiteBloodCell)
-					{
+					if (title == "Stomach")
+						t = minerIcon;
+					if (title == "White Blood Cell")
 						t = whiteBloodCellIcon;
-					}
-					GUI.Button(new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding), t);
+					var unitInfoCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
+					var unitTexture = new Rect(unitInfoCanvas.x + iconPadding / 2, unitInfoCanvas.y + iconPadding / 2 + Skin.font.fontSize, unitInfoCanvas.width / 2 - iconPadding, unitInfoCanvas.height - iconPadding - Skin.font.fontSize);
+					unitTexture.width = unitTexture.height = Mathf.Min(unitTexture.width, unitTexture.height);
+					var unitInfoBox = new Rect(unitTexture.xMax + iconPadding / 2, unitTexture.y, unitInfoCanvas.xMax - unitTexture.xMax - iconPadding, unitTexture.height);
+					GUI.Box(unitInfoCanvas, title);
+					GUI.DrawTexture(unitTexture, t);
+					GUI.TextArea(unitInfoBox, info.ToString());
 					i++;
 					if (i % iconsPerRow == 0)
 					{
