@@ -66,7 +66,7 @@ public abstract class Unit : MonoBehaviour
 	// Override this implementaion, the game calls this when an action is requested at a specific unit
 	public virtual void doAction(Unit unit) { }
 
-	protected virtual void requestSelect()
+	protected virtual void RequestSelect()
 	{
 		gameController.selectUnit(this, Input.GetKey(KeyCode.LeftShift), true);
 	}
@@ -105,7 +105,7 @@ public abstract class Unit : MonoBehaviour
 	protected virtual void OnLeftMouseHold() { }
 	protected virtual void OnRightMouseHold() { }
 	protected virtual void OnMiddleMouseHold() { }
-	protected virtual void OnLeftMouseClick() { requestSelect(); }
+	protected virtual void OnLeftMouseClick() { RequestSelect(); }
 	protected virtual void OnRightMouseClick() { }
 	protected virtual void OnMiddleMouseClick() { }
 	protected virtual void OnMouseHover() { }

@@ -60,13 +60,23 @@ public class HUD : MonoBehaviour
 	SortedList<UnitPriority, List<Unit>> selectedUnits;
 
 	// Icons
+	Texture infectionIcon;
+	Texture minerIcon;
+	Texture pathogenIcon;
 	Texture redBloodCellIcon;
+	Texture spawnerIcon;
+	Texture sporeIcon;
 	Texture whiteBloodCellIcon;
 
 	void OnEnable()
 	{
 		RetrieveGUIDimensions();
+		infectionIcon = Resources.Load(Util.Path.Combine("Textures", "InfectionIcon")) as Texture;
+		minerIcon = Resources.Load(Util.Path.Combine("Textures", "MinerIcon")) as Texture;
+		pathogenIcon = Resources.Load(Util.Path.Combine("Textures", "PathogenIcon")) as Texture;
 		redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
+		spawnerIcon = Resources.Load(Util.Path.Combine("Textures", "SpawnerIcon")) as Texture;
+		sporeIcon = Resources.Load(Util.Path.Combine("Textures", "SporeIcon")) as Texture;
 		whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
 	}
 
@@ -209,7 +219,7 @@ public class HUD : MonoBehaviour
 	{
 		var can = new Rect(canvas.x, canvas.y + Skin.font.fontSize, canvas.width, canvas.height - Skin.font.fontSize);
 		var scrollArea = new Rect(0.0f, 0.0f, can.width - 20.0f, can.height);
-		int iconsPerRow = 6;
+		int iconsPerRow = 7;
 		int iconPadding = (int)scrollArea.width / 64;
 		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
 		int iconHeight = iconWidth;
@@ -232,7 +242,35 @@ public class HUD : MonoBehaviour
 				foreach (Unit u in p.Value)
 				{
 					newRow = false;
-					GUI.Button(new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding), redBloodCellIcon);
+					Texture t = null;
+					if (u is Miner)
+					{
+						t = minerIcon;
+					}
+					if (u is Pathogen)
+					{
+						t = pathogenIcon;
+					}
+					if (u is RedBloodCell)
+					{
+						t = redBloodCellIcon;
+					}
+					if (u is Spawner)
+					{
+						if (u.Affiliation == UnitAffiliation.Ally)
+							t = spawnerIcon;
+						else
+							t = infectionIcon;
+					}
+					if (u is Spore)
+					{
+						t = sporeIcon;
+					}
+					if (u is WhiteBloodCell)
+					{
+						t = whiteBloodCellIcon;
+					}
+					GUI.Button(new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding), t);
 					i++;
 					if (i % iconsPerRow == 0)
 					{
