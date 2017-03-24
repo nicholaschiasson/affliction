@@ -45,6 +45,7 @@ public class HUD : MonoBehaviour
 	int minimapHeight;
 	Rect minimapCanvas;
 	Rect minimapCanvasWithPadding;
+	RenderTexture minimapRenderTexture;
 
 	// Actions panel dimensions
 	int actionsPanelWidth;
@@ -72,6 +73,7 @@ public class HUD : MonoBehaviour
 	void OnEnable()
 	{
 		RetrieveGUIDimensions();
+		minimapRenderTexture = Resources.Load(Util.Path.Combine("Textures", "MinimapRenderTexture")) as RenderTexture;
 		infectionIcon = Resources.Load(Util.Path.Combine("Textures", "InfectionIcon")) as Texture;
 		minerIcon = Resources.Load(Util.Path.Combine("Textures", "MinerIcon")) as Texture;
 		pathogenIcon = Resources.Load(Util.Path.Combine("Textures", "PathogenIcon")) as Texture;
@@ -186,7 +188,7 @@ public class HUD : MonoBehaviour
 
 	void DrawMinimap(Rect canvas)
 	{
-		GUI.Box(canvas, "MINIMAP PLACEHOLDER");
+		GUI.DrawTexture(canvas, minimapRenderTexture);
 	}
 
 	void DrawActionsPanel(Rect canvas)
