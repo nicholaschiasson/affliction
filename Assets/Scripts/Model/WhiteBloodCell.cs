@@ -7,6 +7,13 @@
 		return "White Blood Cell";
 	}
 
+	public override string GetStatsInfo()
+	{
+		string stats = base.GetStatsInfo();
+		stats += "\nDamage: " + damage;
+		return stats;
+	}
+
     public override void doAction(Unit unit)
     {
         base.doAction(unit);

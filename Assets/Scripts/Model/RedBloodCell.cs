@@ -14,6 +14,17 @@
 		return "Red Blood Cell";
 	}
 
+	public override string GetStatsInfo()
+	{
+		string stats = base.GetStatsInfo();
+		ResourceStore rs = rsContainer.getResourceStore();
+		if (rs != null)
+			stats += "\nCarry: " + rs.getValue() + " " + rs.getType().ToString();
+		else
+			stats += "\nCarry: None";
+		return stats;
+	}
+
     public override void doAction(Unit unit)
     {
         base.doAction(unit);
