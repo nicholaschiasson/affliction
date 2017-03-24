@@ -71,7 +71,7 @@ public abstract class Command
         public override bool OnCollision(Unit t)
         {
             //we have collided with the object we are looking for
-            if(target != null && t.GetInstanceID() == target.GetInstanceID())
+            if(t != null && target != null && t.GetInstanceID() == target.GetInstanceID())
             {
                 complete = true;
                 return true;

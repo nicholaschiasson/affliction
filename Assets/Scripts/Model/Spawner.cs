@@ -9,8 +9,15 @@ public class Spawner : Organ
     protected override void Awake()
     {
         base.Awake();
-        erythStore = new ResourceStore(Resource.Erythropoietin);
+        erythStore = new ResourceStore(Resource.Eryth);
     }
+
+	public override string GetStatsInfo()
+	{
+		string stats = base.GetStatsInfo();
+		stats += "\n" + erythStore.getType().ToString() + " Stored: " + getStoreValue();
+		return stats;
+	}
 
     //Spawns the gameObject at the index 
     void spawn(int index)
@@ -65,7 +72,7 @@ public class Spawner : Organ
     public override void deliver(ResourceStore deposit)
     {
         base.deliver(deposit);
-        if(deposit.getType() == Resource.Erythropoietin)
+        if(deposit.getType() == Resource.Eryth)
         {
             erythStore += deposit;
         }

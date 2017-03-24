@@ -6,7 +6,7 @@
 	public override string GetStatsInfo()
 	{
 		var stats = base.GetStatsInfo();
-		stats += "\n" + resource.ToString() + ": " + yield;
+		stats += "\n" + resource.ToString() + " Yield: " + yield;
 		return stats;
 	}
 

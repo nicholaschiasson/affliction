@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Resource {None, Erythropoietin, Oxygen, Protein };
+public enum Resource {None, Eryth, Oxygen, Protein };
 
 public class ResourceStoreContainer
 {
