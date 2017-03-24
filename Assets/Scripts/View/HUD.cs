@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class HUD : MonoBehaviour
 {
@@ -58,7 +57,7 @@ public class HUD : MonoBehaviour
 	Rect unitInfoPanelCanvas;
 	Rect unitInfoPanelCanvasWithPadding;
 	Vector2 scrollPosition = Vector2.zero;
-	SortedDictionary<UnitPriority, List<Unit>> selectedUnits;
+	SortedList<UnitPriority, List<Unit>> selectedUnits;
 
 	// Icons
 	Texture redBloodCellIcon;
@@ -73,7 +72,7 @@ public class HUD : MonoBehaviour
 
 	void Update()
 	{
-		Vector2 mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+		var mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
 		if (menuButtonsCanvas.Contains(mousePos) ||
 			resourceIndicatorsCanvas.Contains(mousePos) ||
 			minimapCanvas.Contains(mousePos) ||
@@ -104,11 +103,11 @@ public class HUD : MonoBehaviour
 		DrawMinimap(minimapCanvasWithPadding);
 
 		// Actions panel
-		GUI.Box(actionsPanelCanvas, string.Empty);
+		GUI.Box(actionsPanelCanvas, "Actions");
 		DrawActionsPanel(actionsPanelCanvasWithPadding);
 
 		// Unit info panel
-		GUI.Box(unitInfoPanelCanvas, string.Empty);
+		GUI.Box(unitInfoPanelCanvas, "Details");
 		DrawUnitInfoPanel(unitInfoPanelCanvasWithPadding);
 	}
 
@@ -181,24 +180,35 @@ public class HUD : MonoBehaviour
 
 	void DrawActionsPanel(Rect canvas)
 	{
-		int buttonWidth = (int)canvas.width / 3;
-		int buttonHeight = buttonWidth;
-		int buttonPadding = (int)canvas.width / 64;
-		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
+		var selected = new List<Unit>();
+		if (selectedUnits != null)
+			foreach (var p in selectedUnits)
+				selected.AddRange(p.Value);
+		if (selected.Count == 1)
 		{
-			if (OnSpawnRedBloodCellActionButtonPressed != null)
-				OnSpawnRedBloodCellActionButtonPressed();
-		}
-		if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 1, canvas.y + buttonPadding, buttonWidth - buttonPadding, buttonHeight - buttonPadding), whiteBloodCellIcon))
-		{
-			if (OnSpawnWhiteBloodCellActionButtonPressed != null)
-				OnSpawnWhiteBloodCellActionButtonPressed();
+			int buttonWidth = (int)canvas.width / 3;
+			int buttonHeight = buttonWidth;
+			int buttonPadding = (int)canvas.width / 64;
+			if (selected[0] is Spawner)
+			{
+				if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding + Skin.font.fontSize, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
+				{
+					if (OnSpawnRedBloodCellActionButtonPressed != null)
+						OnSpawnRedBloodCellActionButtonPressed();
+				}
+				if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 1, canvas.y + buttonPadding + Skin.font.fontSize, buttonWidth - buttonPadding, buttonHeight - buttonPadding), whiteBloodCellIcon))
+				{
+					if (OnSpawnWhiteBloodCellActionButtonPressed != null)
+						OnSpawnWhiteBloodCellActionButtonPressed();
+				}
+			}
 		}
 	}
 
 	void DrawUnitInfoPanel(Rect canvas)
 	{
-		Rect scrollArea = new Rect(0.0f, 0.0f, canvas.width - 20.0f, canvas.height);
+		var can = new Rect(canvas.x, canvas.y + Skin.font.fontSize, canvas.width, canvas.height - Skin.font.fontSize);
+		var scrollArea = new Rect(0.0f, 0.0f, can.width - 20.0f, can.height);
 		int iconsPerRow = 6;
 		int iconPadding = (int)scrollArea.width / 64;
 		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
@@ -210,7 +220,7 @@ public class HUD : MonoBehaviour
 				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)p.Value.Count / iconsPerRow);
 		}
 		scrollArea.height = Mathf.Max(scrollArea.height, scrollAreaHeight);
-		scrollPosition = GUI.BeginScrollView(canvas, scrollPosition, scrollArea);
+		scrollPosition = GUI.BeginScrollView(can, scrollPosition, scrollArea);
 		GUI.Box(scrollArea, string.Empty);
 		if (selectedUnits != null)
 		{
@@ -239,13 +249,13 @@ public class HUD : MonoBehaviour
 
 	public void UpdateInfoPanel(HashSet<Unit> selected)
 	{
-		selectedUnits = new SortedDictionary<UnitPriority, List<Unit>>();
+		selectedUnits = new SortedList<UnitPriority, List<Unit>>();
 		selectedUnits[UnitPriority.BloodCellPriority] = new List<Unit>();
 		selectedUnits[UnitPriority.VirusPriority] = new List<Unit>();
 		selectedUnits[UnitPriority.OrganPriority] = new List<Unit>();
 		foreach (Unit u in selected)
 		{
-			UnitPriority priority = GetUnitPriority(u);
+			var priority = GetUnitPriority(u);
 			if (selectedUnits.ContainsKey(priority))
 				selectedUnits[priority].Add(u);
 		}
