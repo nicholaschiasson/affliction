@@ -10,14 +10,14 @@ public enum UnitAffiliation
 
 public abstract class Unit : MonoBehaviour
 {
-	protected GameController gameController = null;
-	bool leftMouse = false;
-	bool rightMouse = false;
-	bool middleMouse = false;
+	protected GameController gameController;
+	bool leftMouse;
+	bool rightMouse;
+	bool middleMouse;
 
     protected Rigidbody rb;
 
-	protected GameObject selectionCircle = null;
+	protected GameObject selectionCircle;
 
 	public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
@@ -104,7 +104,7 @@ public abstract class Unit : MonoBehaviour
 
 	protected virtual void SelectionBoundsCheck(Bounds bounds, List<Unit> boundedUnits)
 	{
-		Collider c = GetComponent<Collider>();
+		var c = GetComponent<Collider>();
 		if (c && bounds.Intersects(c.bounds))
 			boundedUnits.Add(this);
 	}
