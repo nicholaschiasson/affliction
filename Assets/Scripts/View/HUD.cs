@@ -219,7 +219,7 @@ public class HUD : MonoBehaviour
 	{
 		var can = new Rect(canvas.x, canvas.y + Skin.font.fontSize, canvas.width, canvas.height - Skin.font.fontSize);
 		var scrollArea = new Rect(0.0f, 0.0f, can.width - 20.0f, can.height);
-		int iconsPerRow = 7;
+		int iconsPerRow = 6;
 		int iconPadding = (int)scrollArea.width / 64;
 		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
 		int iconHeight = iconWidth;
