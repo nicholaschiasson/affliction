@@ -2,6 +2,7 @@
 {
     WorkCommand newCommand;
     ResourceStoreContainer rsContainer;
+
     protected override void Awake()
     {
         base.Awake();

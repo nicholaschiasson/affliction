@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4128304669380462}
   - component: {fileID: 33559327069051698}
   - component: {fileID: 23263303936054464}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SporeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 135709195719042790}
   - component: {fileID: 114441933424381874}
   - component: {fileID: 54982904950346186}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spore
   m_TagString: Spore
   m_Icon: {fileID: 0}

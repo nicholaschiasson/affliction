@@ -5,6 +5,7 @@ public abstract class Microorganism : Unit
 {
     public float speed;
     protected Queue<Command> commandQueue;
+    ParticleSystem trail;
 
     // Use this for initialization
     protected override void Awake()
@@ -12,6 +13,23 @@ public abstract class Microorganism : Unit
         base.Awake();
         commandQueue = new Queue<Command>();
 
+        trail = null;
+        
+        foreach(ParticleSystem particle in particleSystems)
+        {
+            if (particle.tag.Equals("trail"))
+            {
+                trail = particle;
+                trail.Stop();
+            }
+        }        
+    }
+    
+    Vector3 MovingTo(Command command, Vector3 currentPos)
+    {
+        Vector3 target = command.moveToLocation(currentPos);
+        float dist = Vector3.Distance(target, currentPos);
+        return dist > Command.MARGIN_OF_ERROR ? target : currentPos;
     }
 
     //for movement and physics, called on timer instead of per frame
@@ -23,18 +41,17 @@ public abstract class Microorganism : Unit
         {
             Vector3 currentPos = transform.position;
             Command command = commandQueue.Peek();
-            Vector3 target = command.moveToLocation(currentPos);
-            float dist = Vector3.Distance(target, currentPos);
-            if(dist > Command.MARGIN_OF_ERROR)
+            Vector3 target = MovingTo(command, currentPos);
+            if(target != currentPos)
             {
                 //todo move using addForce???
                 rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
             }
-            else
+            else // stopped moving
             {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
-                rb.ResetInertiaTensor();
+                rb.ResetInertiaTensor();           
             }
         }
     }
@@ -47,6 +64,29 @@ public abstract class Microorganism : Unit
         if(commandQueue.Count > 0)
         {
             Command command = commandQueue.Peek();
+
+            //Updating the trail particle
+            if (trail)
+            {
+                Vector3 currentPos = transform.position;
+                Vector3 target = MovingTo(command, currentPos);
+                if (target != currentPos)
+                {
+                    Transform trailTransform = trail.GetComponentInParent<Transform>();
+                    trailTransform.LookAt(2 * transform.position - target);
+
+                    if (!trail.isPlaying)
+                    {
+                        trail.Clear();
+                        trail.Play();
+                    }
+                }
+                else if (trail.isPlaying)
+                {                    
+                    trail.Stop();
+                }        
+            }
+
             if (command.isComplete())
             {
                 commandQueue.Dequeue();
@@ -61,7 +101,7 @@ public abstract class Microorganism : Unit
         if (commandQueue.Count > 0)
         {
             Command command = commandQueue.Peek();
-            command.onCollision((collision.gameObject.GetComponent<Unit>()));
+            command.onCollision((collision.gameObject.GetComponent<Unit>()));            
         }
     }
 

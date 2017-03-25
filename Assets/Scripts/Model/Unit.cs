@@ -18,14 +18,22 @@ public abstract class Unit : MonoBehaviour
     protected Rigidbody rb;
 
 	protected GameObject selectionCircle;
+    protected ParticleSystem[] particleSystems;
 
-	public UnitAffiliation Affiliation = UnitAffiliation.None;
+    public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
 	protected virtual void Awake()
 	{
+        // Getting our particle systems.
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
+
+        // Getting our rigidbody
         rb = GetComponent<Rigidbody>();
+
+        // Getting a reference to our controller
 		gameController = Camera.main.GetComponent<GameController>();
+
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
