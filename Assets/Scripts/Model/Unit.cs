@@ -20,6 +20,8 @@ public abstract class Unit : MonoBehaviour
 	protected GameObject selectionCircle;
     protected ParticleSystem[] particleSystems;
 
+    ParticleSystem damageExplosion;
+
     public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
@@ -28,6 +30,15 @@ public abstract class Unit : MonoBehaviour
         // Getting our particle systems.
         particleSystems = GetComponentsInChildren<ParticleSystem>();
 
+        damageExplosion = null;
+        foreach(ParticleSystem particle in particleSystems)
+        {
+            if (particle.tag.Equals("DamageExplosion"))
+            {
+                damageExplosion = particle;
+                damageExplosion.Stop();
+            }
+        }
         // Getting our rigidbody
         rb = GetComponent<Rigidbody>();
 
@@ -96,6 +107,12 @@ public abstract class Unit : MonoBehaviour
 	public virtual void takeDamage(int damage)
 	{
 		Health -= damage;
+
+        //Playing damage animation
+        if(damageExplosion && !damageExplosion.isPlaying)
+        {
+            damageExplosion.Play();
+        }
 	}
 
 	// Called when the controller registers the unit as selected
