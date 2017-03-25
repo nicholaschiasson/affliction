@@ -29,54 +29,61 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 Allied microorganisms (red/white blood cells) can be moved by selecting them and then right clicking somewhere on the terrain. A trail particle effect will appear behind the unit as they move.
 
 ### Spawning
-Allied microorganisms can be spawned by first selecting the [spawner](#spawner) then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell. A spawning animation particle effect will appear.
+Allied microorganisms can be spawned by first selecting the [spawner](#spawners) then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell. A spawning animation particle effect will appear.
 
 ### Mining resources
-To mine resources to be transferred to the spawner, first select a [red blood cell](#red-blood-cell), then right click a [miner building](#miner), and then right click a spawner building. The red blood cell will continuously travel back and forth from the miner to the spawner, bringing resources.
+To mine resources to be transferred to the spawner, first select a [red blood cell](#red-blood-cell), then right click a [miner building](#miners), and then right click a spawner building. The red blood cell will continuously travel back and forth from the miner to the spawner, bringing resources.
 
 ### Attacking Enemies
 To Attack an enemy select a [white blood cell](#white-blood-cell), then right click on an enemy [pathogen](#pathogen) or [spore](#spore) or enemy Infection. When two units collide, the units use RigidBody physics to push the enemy units while dealing damage. A damage particle effect will sparkle around the enemy unit. When a unit dies it is removed from the game.
 
 ## Identification
+### Microorganisms
 #### Red blood cell
 -   Red blood cell model
+-   Ally affiliation
 -   Collects resources from a miner and delivers to a spawner
 
 #### White blood cell
 -   White blood cell model
+-   Ally affiliation
 -   Attacks enemy units
 
 #### Spore
 -   Blue model identical to white blood cell model
+-   Enemy affiliation
 -   Builds infection buildings (NOT IMPLEMENTED)
 
 #### Pathogen
 -   Skeletal animated model 
+-   Enemy affiliation
 -   Attacks allied units (NOT IMPLEMENTED)
 
-#### Heart
--   Heart model
--   Spawner
--   Spawns red and white blood cells
-
+### Miners
 #### Lungs
 -   Lungs model
--   Miner
+-   Ally affiliation
 -   Produces oxygen
 
 #### Stomach
 -   Stomach (actually liver) model
--   Miner
+-   Ally affiliation
 -   Produces protein
 
 #### Kidney
 -   Kidney model
--   Miner
+-   Ally affiliation
 -   Produces erythropoietin
+
+### Spawners
+#### Heart
+-   Heart model
+-   Ally affiliation
+-   Spawns red and white blood cells
 
 #### Infection
 -   Black cube
--   Spawner
+-   Enemy affiliation
 -   Spawns spores and pathogens (NOT IMPLEMENTED)
 
 ## Notes
