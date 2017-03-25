@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4810192294158244}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114441933424381874}
   - component: {fileID: 54982904950346186}
   - component: {fileID: 95421207356984754}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spore
   m_TagString: Spore
   m_Icon: {fileID: 0}

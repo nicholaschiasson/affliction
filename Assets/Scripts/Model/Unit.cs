@@ -18,14 +18,33 @@ public abstract class Unit : MonoBehaviour
     protected Rigidbody rb;
 
 	protected GameObject selectionCircle;
+    protected ParticleSystem[] particleSystems;
 
-	public UnitAffiliation Affiliation = UnitAffiliation.None;
+    ParticleSystem damageExplosion;
+
+    public UnitAffiliation Affiliation = UnitAffiliation.None;
 	public int Health;
 
 	protected virtual void Awake()
 	{
+        // Getting our particle systems.
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
+
+        damageExplosion = null;
+        foreach(ParticleSystem particle in particleSystems)
+        {
+            if (particle.tag.Equals("DamageExplosion"))
+            {
+                damageExplosion = particle;
+                damageExplosion.Stop();
+            }
+        }
+        // Getting our rigidbody
         rb = GetComponent<Rigidbody>();
+
+        // Getting a reference to our controller
 		gameController = Camera.main.GetComponent<GameController>();
+
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
 		selectionCircle.transform.position = transform.position;
@@ -88,6 +107,12 @@ public abstract class Unit : MonoBehaviour
 	public virtual void takeDamage(int damage)
 	{
 		Health -= damage;
+
+        //Playing damage animation
+        if(damageExplosion && !damageExplosion.isPlaying)
+        {
+            damageExplosion.Play();
+        }
 	}
 
 	// Called when the controller registers the unit as selected

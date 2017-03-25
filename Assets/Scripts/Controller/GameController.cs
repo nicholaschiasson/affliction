@@ -41,7 +41,17 @@ public class GameController : MonoBehaviour
 	{
 		camera = this.GetComponent<Camera>();
 		selectedUnits = new HashSet<Unit>();
-	}
+
+        //Ingoring All Colliisons with objects of the same layer.
+        int redBloodCellLayer = 10;
+        int whiteBloodCellLayer = 11;
+        int sporeLayer = 12;
+        int pathogenLayer = 13;
+        Physics.IgnoreLayerCollision(redBloodCellLayer, redBloodCellLayer);
+        Physics.IgnoreLayerCollision(whiteBloodCellLayer, whiteBloodCellLayer);
+        Physics.IgnoreLayerCollision(sporeLayer, sporeLayer);
+        Physics.IgnoreLayerCollision(pathogenLayer, pathogenLayer);
+    }
 
 	// Add a unit to the selected list. We can have multiple units selected for batch commands
 	public void selectUnit(Unit unit, bool append, bool single)

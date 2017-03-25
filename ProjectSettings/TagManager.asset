@@ -11,6 +11,10 @@ TagManager:
   - Spawner
   - Miner
   - board
+  - Fire
+  - trail
+  - DamageExplosion
+  - Spawn
   layers:
   - Default
   - TransparentFX
@@ -22,10 +26,10 @@ TagManager:
   - 
   - Minimap Camera
   - Main Camera
-  - 
-  - 
-  - 
-  - 
+  - redcell
+  - whitecell
+  - spore
+  - pathogen
   - 
   - 
   - 

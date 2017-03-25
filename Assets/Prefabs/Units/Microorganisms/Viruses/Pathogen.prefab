@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 135781739232385958}
   - component: {fileID: 114509574442829396}
   - component: {fileID: 54860051493115000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Pathogen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4305055290417400}
   - component: {fileID: 95235768155157180}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Pathogen_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
