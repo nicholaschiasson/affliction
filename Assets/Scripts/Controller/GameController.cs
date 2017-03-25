@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	new Camera camera;
-	HashSet<Unit> selectedUnits;
-	public HUD hud;
-
 	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<Unit> boundedUnits);
 	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
+
+	new Camera camera;
+	HashSet<Unit> selectedUnits;
+	Dictionary<string, Vector3> cameraWarpLocations;
+
+	public HUD hud;
+
+	void Awake()
+	{
+		cameraWarpLocations = new Dictionary<string, Vector3>();
+	}
 
 	void OnEnable()
 	{
@@ -119,15 +126,34 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.Escape))
 			Application.Quit();
 
-        //todo implement proper UI selection options instead of keybinds
-        if (Input.GetKeyDown("1"))
+		//todo implement proper UI selection options instead of keybinds
+		if (Input.GetKey(KeyCode.Space))
 		{
-			OnOnePressed();
-        }
-        else if (Input.GetKeyDown("2"))
-        {
-			OnTwoPressed();
-        }
+			string warpTo = "";
+			if (Input.GetKeyUp("1"))
+				warpTo = "Heart";
+			if (Input.GetKeyUp("2"))
+				warpTo = "Lungs";
+			if (Input.GetKeyUp("3"))
+				warpTo = "Stomach";
+			if (Input.GetKeyUp("4"))
+				warpTo = "Left Kidney";
+			if (Input.GetKeyUp("5"))
+				warpTo = "Right Kidney";
+			if (cameraWarpLocations != null && cameraWarpLocations.ContainsKey(warpTo))
+				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z);
+		}
+		else
+		{
+			if (Input.GetKeyUp("1"))
+			{
+				OnOnePressed();
+			}
+			else if (Input.GetKeyUp("2"))
+			{
+				OnTwoPressed();
+			}
+		}
     }
 
 	// Update called once per frame after every update
@@ -137,5 +163,11 @@ public class GameController : MonoBehaviour
 		float zAxisValue = Input.GetAxis("Vertical");
 		camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
 		//Debug.Log("Camera Coords: " + camera.transform.position.ToString());
+	}
+
+	public void RegisterCameraWarpLocation(string locationName, Vector3 location)
+	{
+		if (cameraWarpLocations != null)
+			cameraWarpLocations[locationName] = location;
 	}
 }

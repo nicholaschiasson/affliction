@@ -13,6 +13,18 @@
 		proteinStore = new ResourceStore(Resource.Protein);
 	}
 
+	protected void Start()
+	{
+		gameController.RegisterCameraWarpLocation(GetTypeName(), transform.position);
+	}
+
+	public override string GetStatsInfo()
+	{
+		string stats = base.GetStatsInfo();
+		stats += "\n" + oxygenStore.getType().ToString() + " Stored: " + getOxygenLevels();
+		stats += "\n" + proteinStore.getType().ToString() + " Stored: " + getProteinLevels();
+		return stats;
+	}
 
 	protected void consumeOxygen(int cost)
 	{
