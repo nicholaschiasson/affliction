@@ -13,6 +13,11 @@
 		proteinStore = new ResourceStore(Resource.Protein);
 	}
 
+	protected void Start()
+	{
+		gameController.RegisterCameraWarpLocation(GetTypeName(), transform.position);
+	}
+
 	public override string GetStatsInfo()
 	{
 		string stats = base.GetStatsInfo();
