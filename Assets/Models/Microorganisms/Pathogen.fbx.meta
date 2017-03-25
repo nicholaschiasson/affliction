@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 78e8dbec07b35495eb185f582b15ed45
-timeCreated: 1490408361
+timeCreated: 1490419813
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,30 +8,27 @@ ModelImporter:
     100000: Arm.L
     100002: Arm.R
     100004: Armature
-    100006: Camera
-    100008: Core.L
-    100010: Core.R
-    100012: Hand.L
-    100014: Hand.L_end
-    100016: Hand.R
-    100018: Hand.R_end
-    100020: Lamp
-    100022: //RootNode
-    100024: Sphere
+    100006: Core.L
+    100008: Core.R
+    100010: Hand.L
+    100012: Hand.L_end
+    100014: Hand.R
+    100016: Hand.R_end
+    100018: //RootNode
+    100020: Sphere
     400000: Arm.L
     400002: Arm.R
     400004: Armature
-    400006: Camera
-    400008: Core.L
-    400010: Core.R
-    400012: Hand.L
-    400014: Hand.L_end
-    400016: Hand.R
-    400018: Hand.R_end
-    400020: Lamp
-    400022: //RootNode
-    400024: Sphere
+    400006: Core.L
+    400008: Core.R
+    400010: Hand.L
+    400012: Hand.L_end
+    400014: Hand.R
+    400016: Hand.R_end
+    400018: //RootNode
+    400020: Sphere
     4300000: Sphere
+    7400000: Armature|Armature|Armature|ArmatureAction|Armature|ArmatureAction
     9500000: //RootNode
     13700000: Sphere
   materials:
