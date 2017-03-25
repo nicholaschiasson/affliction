@@ -6,6 +6,7 @@ public abstract class Microorganism : Unit
     public float speed;
     protected Queue<Command> commandQueue;
     ParticleSystem trail;
+    ParticleSystem spawn;
 
     // Use this for initialization
     protected override void Awake()
@@ -14,13 +15,19 @@ public abstract class Microorganism : Unit
         commandQueue = new Queue<Command>();
 
         trail = null;
-        
+        spawn = null;
+
         foreach(ParticleSystem particle in particleSystems)
         {
             if (particle.tag.Equals("trail"))
             {
                 trail = particle;
                 trail.Stop();
+            }
+
+            if (particle.tag.Equals("Spawn"))
+            {
+                spawn = particle;
             }
         }        
     }
