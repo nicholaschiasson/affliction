@@ -252,7 +252,7 @@ public class HUD : MonoBehaviour
 						t = spawnerIcon;
 					if (title == "Infection")
 						t = infectionIcon;
-					if (title == "Kidney")
+					if (title == "Left Kidney" || title == "Right Kidney")
 						t = minerIcon;
 					if (title == "Lungs")
 						t = minerIcon;

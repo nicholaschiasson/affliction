@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114488761926332588}
   - component: {fileID: 135505363281953666}
   - component: {fileID: 54805227467787374}
+  - component: {fileID: 95666787192747348}
   m_Layer: 0
   m_Name: WhiteBloodCell
   m_TagString: WhiteBloodCell
@@ -126,6 +127,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &95666787192747348
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581605045193478}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0be095f29cc2740ae882f080b32c0f4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114488761926332588
 MonoBehaviour:
   m_ObjectHideFlags: 1

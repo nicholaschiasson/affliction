@@ -20,7 +20,7 @@ ModelImporter:
     4300000: default_MeshPart0
     4300002: default_MeshPart1
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
