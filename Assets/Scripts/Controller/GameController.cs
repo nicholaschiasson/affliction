@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	new Camera camera;
-	HashSet<Unit> selectedUnits;
-	HUD hud;
-	Dictionary<string, Vector3> cameraWarpLocations;
-
 	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<Unit> boundedUnits);
 	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
+
+	new Camera camera;
+	HashSet<Unit> selectedUnits;
+	Dictionary<string, Vector3> cameraWarpLocations;
+
+	public HUD hud;
 
 	void Awake()
 	{
