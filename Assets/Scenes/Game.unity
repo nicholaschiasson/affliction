@@ -824,7 +824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4267987123553852, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.737505
+      value: 31.88
       objectReference: {fileID: 0}
     - target: {fileID: 4267987123553852, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
       propertyPath: m_LocalRotation.x
@@ -850,7 +850,8 @@ Prefab:
       propertyPath: m_Name
       value: Brain
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114628925136612664, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1552772140 stripped
