@@ -9,7 +9,7 @@
 	protected override void Awake()
 	{
 		base.Awake();
-		oxygenStore = new ResourceStore(Resource.Oxygen, 1000);
+		oxygenStore = new ResourceStore(Resource.Oxygen, 10000);
 		proteinStore = new ResourceStore(Resource.Protein);
 	}
 

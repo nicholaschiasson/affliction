@@ -134,18 +134,6 @@ Prefab:
       propertyPath: m_Name
       value: Left Kidney
       objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
   m_IsPrefabParent: 0
@@ -529,18 +517,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
   m_IsPrefabParent: 0
@@ -616,48 +592,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114262816915572598, guid: 7cc4ef45cf7423941bf1997c0a096340,
         type: 2}
-      propertyPath: resource
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907350424000798, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_Name
-      value: Lungs
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4926272044057290, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
+      propertyPath: yield
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
@@ -1226,18 +1162,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
       propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
