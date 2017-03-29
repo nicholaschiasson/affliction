@@ -24,7 +24,7 @@ public class Brain : Organ
         }
     }
 
-    Organ getOrgan(int index)
+    public Organ getOrgan(int index)
     {
         if(index >= 0 && index < organs.Length)
         {
@@ -37,7 +37,7 @@ public class Brain : Organ
 
     // Upgrade the first organ in the list
     public override void OnOnePressed()
-    {        
+    {
         upgradeOrgan(0);
     }
 

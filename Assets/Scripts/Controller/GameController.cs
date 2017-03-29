@@ -22,8 +22,11 @@ public class GameController : MonoBehaviour
 	{
 		if (hud)
 		{
-			hud.OnSpawnRedBloodCellActionButtonPressed += OnOnePressed;
-			hud.OnSpawnWhiteBloodCellActionButtonPressed += OnTwoPressed;
+			hud.OnActionOneButtonPressed += OnOnePressed;
+			hud.OnActionTwoButtonPressed += OnTwoPressed;
+			hud.OnActionThreeButtonPressed += OnThreePressed;
+			hud.OnActionFourButtonPressed += OnFourPressed;
+			hud.OnActionFiveButtonPressed += OnFivePressed;
 		}
 	}
 
@@ -31,8 +34,11 @@ public class GameController : MonoBehaviour
 	{
 		if (hud)
 		{
-			hud.OnSpawnRedBloodCellActionButtonPressed -= OnOnePressed;
-			hud.OnSpawnWhiteBloodCellActionButtonPressed -= OnTwoPressed;
+			hud.OnActionOneButtonPressed -= OnOnePressed;
+			hud.OnActionTwoButtonPressed -= OnTwoPressed;
+			hud.OnActionThreeButtonPressed -= OnThreePressed;
+			hud.OnActionFourButtonPressed -= OnFourPressed;
+			hud.OnActionFiveButtonPressed -= OnFivePressed;
 		}
 	}
 

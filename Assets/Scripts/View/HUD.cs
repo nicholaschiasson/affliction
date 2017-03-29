@@ -14,8 +14,16 @@ public class HUD : MonoBehaviour
 
 	public delegate void ActionButtonPressedAction();
 	public delegate void MouseOverGUIAction();
-	public event ActionButtonPressedAction OnSpawnRedBloodCellActionButtonPressed;
-	public event ActionButtonPressedAction OnSpawnWhiteBloodCellActionButtonPressed;
+	public event ActionButtonPressedAction OnActionZeroButtonPressed;
+	public event ActionButtonPressedAction OnActionOneButtonPressed;
+	public event ActionButtonPressedAction OnActionTwoButtonPressed;
+	public event ActionButtonPressedAction OnActionThreeButtonPressed;
+	public event ActionButtonPressedAction OnActionFourButtonPressed;
+	public event ActionButtonPressedAction OnActionFiveButtonPressed;
+	public event ActionButtonPressedAction OnActionSixButtonPressed;
+	public event ActionButtonPressedAction OnActionSevenButtonPressed;
+	public event ActionButtonPressedAction OnActionEightButtonPressed;
+	public event ActionButtonPressedAction OnActionNineButtonPressed;
 	public event MouseOverGUIAction OnMouseOverGUI;
 	public event MouseOverGUIAction OnMouseOutsideGUI;
 
@@ -52,13 +60,14 @@ public class HUD : MonoBehaviour
 	int actionsPanelHeight;
 	Rect actionsPanelCanvas;
 	Rect actionsPanelCanvasWithPadding;
+	Vector2 actionsPanelScrollPosition = Vector2.zero;
 
 	// Unit info panel dimensions
 	int unitInfoPanelWidth;
 	int unitInfoPanelHeight;
 	Rect unitInfoPanelCanvas;
 	Rect unitInfoPanelCanvasWithPadding;
-	Vector2 scrollPosition = Vector2.zero;
+	Vector2 unitInfoPanelScrollPosition = Vector2.zero;
 	SortedList<UnitPriority, List<Unit>> selectedUnits;
 
 	// Camera warp panel dimensions
@@ -71,11 +80,12 @@ public class HUD : MonoBehaviour
 	Texture brainIcon;
 	Texture heartIcon;
 	Texture infectionIcon;
-	Texture kidneyIcon;
+	Texture leftKidneyIcon;
 	Texture lungsIcon;
 	Texture minerIcon;
 	Texture pathogenIcon;
 	Texture redBloodCellIcon;
+	Texture rightKidneyIcon;
 	Texture spawnerIcon;
 	Texture sporeIcon;
 	Texture stomachIcon;
@@ -87,11 +97,12 @@ public class HUD : MonoBehaviour
 		brainIcon = Resources.Load(Util.Path.Combine("Textures", "BrainIcon")) as Texture;
 		heartIcon = Resources.Load(Util.Path.Combine("Textures", "HeartIcon")) as Texture;
 		infectionIcon = Resources.Load(Util.Path.Combine("Textures", "InfectionIcon")) as Texture;
-		kidneyIcon = Resources.Load(Util.Path.Combine("Textures", "KidneyIcon")) as Texture;
+		leftKidneyIcon = Resources.Load(Util.Path.Combine("Textures", "LeftKidneyIcon")) as Texture;
 		lungsIcon = Resources.Load(Util.Path.Combine("Textures", "LungsIcon")) as Texture;
 		minerIcon = Resources.Load(Util.Path.Combine("Textures", "MinerIcon")) as Texture;
 		pathogenIcon = Resources.Load(Util.Path.Combine("Textures", "PathogenIcon")) as Texture;
 		redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
+		rightKidneyIcon = Resources.Load(Util.Path.Combine("Textures", "RightKidneyIcon")) as Texture;
 		spawnerIcon = Resources.Load(Util.Path.Combine("Textures", "SpawnerIcon")) as Texture;
 		sporeIcon = Resources.Load(Util.Path.Combine("Textures", "SporeIcon")) as Texture;
 		stomachIcon = Resources.Load(Util.Path.Combine("Textures", "StomachIcon")) as Texture;
@@ -231,25 +242,103 @@ public class HUD : MonoBehaviour
 		if (selectedUnits != null)
 			foreach (var p in selectedUnits)
 				selected.AddRange(p.Value);
+		var can = new Rect(canvas.x, canvas.y + Skin.font.fontSize, canvas.width, canvas.height - Skin.font.fontSize);
+		var scrollArea = new Rect(0.0f, 0.0f, can.width - 20.0f, can.height);
+		int iconsPerRow = 3;
+		int iconPadding = (int)scrollArea.width / 64;
+		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
+		int iconHeight = iconWidth;
+		int scrollAreaHeight = iconPadding;
 		if (selected.Count == 1)
 		{
-			int buttonWidth = (int)canvas.width / 3;
-			int buttonHeight = buttonWidth;
-			int buttonPadding = (int)canvas.width / 64;
+			if (selected[0] is Spawner)
+				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)((Spawner)selected[0]).spawnables.Length / iconsPerRow);
+			else if (selected[0] is Brain)
+				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)((Brain)selected[0]).organs.Length / iconsPerRow);
+		}
+		scrollArea.height = Mathf.Max(scrollArea.height, scrollAreaHeight);
+		actionsPanelScrollPosition = GUI.BeginScrollView(can, actionsPanelScrollPosition, scrollArea);
+		GUI.Box(scrollArea, string.Empty);
+		if (selected.Count == 1)
+		{
 			if (selected[0] is Spawner)
 			{
-				if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 0, canvas.y + buttonPadding + Skin.font.fontSize, buttonWidth - buttonPadding, buttonHeight - buttonPadding), redBloodCellIcon))
+				int i = 0;
+				int j = 0;
+				foreach (var g in ((Spawner)selected[0]).spawnables)
 				{
-					if (OnSpawnRedBloodCellActionButtonPressed != null)
-						OnSpawnRedBloodCellActionButtonPressed();
+					var buttonCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
+					if (GUI.Button(buttonCanvas, GetTextureByPrefabName(g.name)))
+					{
+						switch (i)
+						{
+							case 0:
+								if (OnActionOneButtonPressed != null)
+									OnActionOneButtonPressed();
+								break;
+							case 1:
+								if (OnActionTwoButtonPressed != null)
+									OnActionTwoButtonPressed();
+								break;
+							case 2:
+								if (OnActionThreeButtonPressed != null)
+									OnActionThreeButtonPressed();
+								break;
+							case 3:
+								if (OnActionFourButtonPressed != null)
+									OnActionFourButtonPressed();
+								break;
+							case 4:
+								if (OnActionFiveButtonPressed != null)
+									OnActionFiveButtonPressed();
+								break;
+						}
+					}
+					i++;
+					if (i % iconsPerRow == 0)
+						j++;
 				}
-				if (GUI.Button(new Rect(canvas.x + buttonPadding + buttonWidth * 1, canvas.y + buttonPadding + Skin.font.fontSize, buttonWidth - buttonPadding, buttonHeight - buttonPadding), whiteBloodCellIcon))
+			}
+			else if (selected[0] is Brain)
+			{
+				int i = 0;
+				int j = 0;
+				foreach (var o in ((Brain)selected[0]).organs)
 				{
-					if (OnSpawnWhiteBloodCellActionButtonPressed != null)
-						OnSpawnWhiteBloodCellActionButtonPressed();
+					var buttonCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
+					if (GUI.Button(buttonCanvas, GetTextureByPrefabName(o.GetTypeName())))
+					{
+						switch (i)
+						{
+							case 0:
+								if (OnActionOneButtonPressed != null)
+									OnActionOneButtonPressed();
+								break;
+							case 1:
+								if (OnActionTwoButtonPressed != null)
+									OnActionTwoButtonPressed();
+								break;
+							case 2:
+								if (OnActionThreeButtonPressed != null)
+									OnActionThreeButtonPressed();
+								break;
+							case 3:
+								if (OnActionFourButtonPressed != null)
+									OnActionFourButtonPressed();
+								break;
+							case 4:
+								if (OnActionFiveButtonPressed != null)
+									OnActionFiveButtonPressed();
+								break;
+						}
+					}
+					i++;
+					if (i % iconsPerRow == 0)
+						j++;
 				}
 			}
 		}
+		GUI.EndScrollView();
 	}
 
 	void DrawUnitInfoPanel(Rect canvas)
@@ -267,7 +356,7 @@ public class HUD : MonoBehaviour
 				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)p.Value.Count / iconsPerRow);
 		}
 		scrollArea.height = Mathf.Max(scrollArea.height, scrollAreaHeight);
-		scrollPosition = GUI.BeginScrollView(can, scrollPosition, scrollArea);
+		unitInfoPanelScrollPosition = GUI.BeginScrollView(can, unitInfoPanelScrollPosition, scrollArea);
 		GUI.Box(scrollArea, string.Empty);
 		if (selectedUnits != null)
 		{
@@ -280,28 +369,8 @@ public class HUD : MonoBehaviour
 				{
 					newRow = false;
 					var title = u.GetTypeName();
-					Texture t = null;
+					var t = GetTextureByPrefabName(title);
 					var info = u.GetStatsInfo();
-					if (title == "Brain")
-						t = brainIcon;
-					if (title == "Heart")
-						t = heartIcon;
-					if (title == "Infection")
-						t = infectionIcon;
-					if (title == "Left Kidney" || title == "Right Kidney")
-						t = kidneyIcon;
-					if (title == "Lungs")
-						t = lungsIcon;
-					if (title == "Pathogen")
-						t = pathogenIcon;
-					if (title == "Red Blood Cell")
-						t = redBloodCellIcon;
-					if (title == "Spore")
-						t = sporeIcon;
-					if (title == "Stomach")
-						t = stomachIcon;
-					if (title == "White Blood Cell")
-						t = whiteBloodCellIcon;
 					var unitInfoCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
 					var unitTexture = new Rect(unitInfoCanvas.x + iconPadding / 2, unitInfoCanvas.y + iconPadding / 2 + Skin.font.fontSize, unitInfoCanvas.width / 2 - iconPadding, unitInfoCanvas.height - iconPadding - Skin.font.fontSize);
 					unitTexture.width = unitTexture.height = Mathf.Min(unitTexture.width, unitTexture.height);
@@ -350,9 +419,9 @@ public class HUD : MonoBehaviour
 		GUI.Label(titleCanvases[j], "(" + (++j) + ") Lungs");
 		GUI.DrawTexture(texCanvases[j], stomachIcon);
 		GUI.Label(titleCanvases[j], "(" + (++j) + ") Stomach");
-		GUI.DrawTexture(texCanvases[j], kidneyIcon);
+		GUI.DrawTexture(texCanvases[j], leftKidneyIcon);
 		GUI.Label(titleCanvases[j], "(" + (++j) + ") Left Kidney");
-		GUI.DrawTexture(texCanvases[j], kidneyIcon);
+		GUI.DrawTexture(texCanvases[j], rightKidneyIcon);
 		GUI.Label(titleCanvases[j], "(" + (++j) + ") Right Kidney");
 	}
 
@@ -379,5 +448,48 @@ public class HUD : MonoBehaviour
 		if (u is Virus) return UnitPriority.VirusPriority;
 		if (u is Organ) return UnitPriority.OrganPriority;
 		return UnitPriority.UnknownPriority;
+	}
+
+	Texture GetTextureByPrefabName(string pName)
+	{
+		Texture t = null;
+		switch (pName.Replace(" ", ""))
+		{
+			case "Brain":
+				t = brainIcon;
+				break;
+			case "Heart":
+				t = heartIcon;
+				break;
+			case "Infection":
+				t = infectionIcon;
+				break;
+			case "LeftKidney":
+			case "Kidney":
+				t = leftKidneyIcon;
+				break;
+			case "RightKidney":
+				t = rightKidneyIcon;
+				break;
+			case "Lungs":
+				t = lungsIcon;
+				break;
+			case "Pathogen":
+				t = pathogenIcon;
+				break;
+			case "RedBloodCell":
+				t = redBloodCellIcon;
+				break;
+			case "Spore":
+				t = sporeIcon;
+				break;
+			case "Stomach":
+				t = stomachIcon;
+				break;
+			case "WhiteBloodCell":
+				t = whiteBloodCellIcon;
+				break;
+		}
+		return t;
 	}
 }
