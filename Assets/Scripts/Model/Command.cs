@@ -111,7 +111,7 @@ public abstract class Command
 
         public override bool OnCollision(Unit t)
         {   //we have found our target
-            if(target != null && t.GetInstanceID() == target.GetInstanceID())
+            if(target != null && target != null && t.GetInstanceID() == target.GetInstanceID())
             {
                 if(workerResourceContainer.getResourceStore() != null)
                 {
