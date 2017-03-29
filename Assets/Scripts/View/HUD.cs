@@ -77,6 +77,7 @@ public class HUD : MonoBehaviour
 	Rect cameraWarpPanelCanvasWithPadding;
 
 	// Icons
+	Texture upgradeIcon;
 	Texture brainIcon;
 	Texture heartIcon;
 	Texture infectionIcon;
@@ -94,6 +95,7 @@ public class HUD : MonoBehaviour
 	void Awake()
 	{
 		minimapRenderTexture = Resources.Load(Util.Path.Combine("Textures", "MinimapRenderTexture")) as RenderTexture;
+		upgradeIcon = Resources.Load(Util.Path.Combine("Textures", "GreenButton_UpArrow")) as Texture;
 		brainIcon = Resources.Load(Util.Path.Combine("Textures", "BrainIcon")) as Texture;
 		heartIcon = Resources.Load(Util.Path.Combine("Textures", "HeartIcon")) as Texture;
 		infectionIcon = Resources.Load(Util.Path.Combine("Textures", "InfectionIcon")) as Texture;
@@ -249,17 +251,19 @@ public class HUD : MonoBehaviour
 		int iconWidth = ((int)scrollArea.width - iconPadding) / iconsPerRow;
 		int iconHeight = iconWidth;
 		int scrollAreaHeight = iconPadding;
-		if (selected.Count == 1)
+		if (selected.Count == 1 && selected[0].Affiliation == UnitAffiliation.Ally)
 		{
 			if (selected[0] is Spawner)
 				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)((Spawner)selected[0]).spawnables.Length / iconsPerRow);
 			else if (selected[0] is Brain)
 				scrollAreaHeight += iconHeight * (int)Mathf.Ceil((float)((Brain)selected[0]).organs.Length / iconsPerRow);
+			// Adding an extra row for the level up button
+			scrollAreaHeight += iconHeight;
 		}
 		scrollArea.height = Mathf.Max(scrollArea.height, scrollAreaHeight);
 		actionsPanelScrollPosition = GUI.BeginScrollView(can, actionsPanelScrollPosition, scrollArea);
 		GUI.Box(scrollArea, string.Empty);
-		if (selected.Count == 1)
+		if (selected.Count == 1 && selected[0].Affiliation == UnitAffiliation.Ally)
 		{
 			if (selected[0] is Spawner)
 			{
@@ -268,6 +272,7 @@ public class HUD : MonoBehaviour
 				foreach (var g in ((Spawner)selected[0]).spawnables)
 				{
 					var buttonCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
+					GUI.enabled = ((Spawner)selected[0]).getStoreValue() >= ((Spawner)selected[0]).cost[i];
 					if (GUI.Button(buttonCanvas, GetTextureByPrefabName(g.name)))
 					{
 						switch (i)
@@ -294,6 +299,7 @@ public class HUD : MonoBehaviour
 								break;
 						}
 					}
+					GUI.enabled = true;
 					i++;
 					if (i % iconsPerRow == 0)
 						j++;
@@ -306,6 +312,7 @@ public class HUD : MonoBehaviour
 				foreach (var o in ((Brain)selected[0]).organs)
 				{
 					var buttonCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
+					GUI.enabled = ((Brain)selected[0]).getProteinLevels() >= ((Brain)selected[0]).getBasicUpgradeCost();
 					if (GUI.Button(buttonCanvas, GetTextureByPrefabName(o.GetTypeName())))
 					{
 						switch (i)
@@ -332,11 +339,18 @@ public class HUD : MonoBehaviour
 								break;
 						}
 					}
+					GUI.enabled = true;
 					i++;
 					if (i % iconsPerRow == 0)
 						j++;
 				}
 			}
+			// Upgrade button
+			GUI.enabled = selected[0].canLevelUp();
+			if (GUI.Button(new Rect(scrollArea.width - iconWidth - iconPadding, scrollArea.height - iconHeight - iconPadding, iconWidth - iconPadding, iconHeight - iconPadding), upgradeIcon))
+				if (OnActionZeroButtonPressed != null)
+					OnActionZeroButtonPressed();
+			GUI.enabled = true;
 		}
 		GUI.EndScrollView();
 	}
@@ -377,7 +391,7 @@ public class HUD : MonoBehaviour
 					var unitInfoBox = new Rect(unitTexture.xMax + iconPadding / 2, unitTexture.y, unitInfoCanvas.xMax - unitTexture.xMax - iconPadding, unitTexture.height);
 					GUI.Box(unitInfoCanvas, title);
 					GUI.DrawTexture(unitTexture, t);
-					GUI.TextArea(unitInfoBox, info.ToString());
+					GUI.TextArea(unitInfoBox, info);
 					i++;
 					if (i % iconsPerRow == 0)
 					{

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 	{
 		if (hud)
 		{
+			hud.OnActionZeroButtonPressed += OnZPressed;
 			hud.OnActionOneButtonPressed += OnOnePressed;
 			hud.OnActionTwoButtonPressed += OnTwoPressed;
 			hud.OnActionThreeButtonPressed += OnThreePressed;
@@ -34,6 +35,7 @@ public class GameController : MonoBehaviour
 	{
 		if (hud)
 		{
+			hud.OnActionZeroButtonPressed -= OnZPressed;
 			hud.OnActionOneButtonPressed -= OnOnePressed;
 			hud.OnActionTwoButtonPressed -= OnTwoPressed;
 			hud.OnActionThreeButtonPressed -= OnThreePressed;

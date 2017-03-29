@@ -1,22 +1,19 @@
-﻿using UnityEngine;
-
-public abstract class Organ : Unit
+﻿public abstract class Organ : Unit
 {
 	//All organs have a store of oxygen that when gets to 0, dies.
 	ResourceStore oxygenStore;
 	ResourceStore proteinStore;
 
 	public int consumeCost;
-    public int basicUpgradeCost;
-    int upgradesAvailable;
-    protected override void Awake()
+	public int basicUpgradeCost;
+	int upgradesAvailable;
+	protected override void Awake()
 	{
 		base.Awake();
 		oxygenStore = new ResourceStore(Resource.Oxygen, 10000);
 		proteinStore = new ResourceStore(Resource.Protein);
-        upgradesAvailable = 0;
-
-    }
+		upgradesAvailable = 0;
+	}
 
 	protected void Start()
 	{
@@ -31,14 +28,15 @@ public abstract class Organ : Unit
 		return stats;
 	}
 
-    // Keybind to upgrade
-    public override void OnZPressed() {
-        levelUp();
-    }
-
-    protected void consumeOxygen(int cost)
+	// Keybind to upgrade
+	public override void OnZPressed()
 	{
-        ResourceStore consumed = takeOxygen(consumeCost);
+		levelUp();
+	}
+
+	protected void consumeOxygen(int cost)
+	{
+		ResourceStore consumed = takeOxygen(consumeCost);
 		// If there is not enough oxygen left, consume health
 		if (consumed == null)
 		{
@@ -54,12 +52,11 @@ public abstract class Organ : Unit
 		consumeOxygen(consumeCost);
 	}
 
-    //Get the basic upgrade cost
-    public int getBasicUpgradeCost()
-    {
-        return basicUpgradeCost;
-    }
-
+	//Get the basic upgrade cost
+	public int getBasicUpgradeCost()
+	{
+		return basicUpgradeCost;
+	}
 
 	//Get the OxygenLevels
 	public int getOxygenLevels()
@@ -73,51 +70,50 @@ public abstract class Organ : Unit
 		return proteinStore.getValue();
 	}
 
-    public ResourceStore takeOxygen(int cost)
-    {
-        if (oxygenStore.getValue() >= cost)
-        {
-            return oxygenStore.takeOut(cost);
-        }
-        return null;
-    }
+	public ResourceStore takeOxygen(int cost)
+	{
+		if (oxygenStore.getValue() >= cost)
+		{
+			return oxygenStore.takeOut(cost);
+		}
+		return null;
+	}
 
-    public  ResourceStore takeProtein(int cost)
-    {
-        if(proteinStore.getValue() >= cost)
-        {
-            return proteinStore.takeOut(cost);
-        }
-        return null;
-    }
+	public ResourceStore takeProtein(int cost)
+	{
+		if (proteinStore.getValue() >= cost)
+		{
+			return proteinStore.takeOut(cost);
+		}
+		return null;
+	}
 
-    public void addUpgrade()
-    {
-        upgradesAvailable++;
-    }
+	public void addUpgrade()
+	{
+		upgradesAvailable++;
+	}
 
-    public bool canLevelUp()
-    {
-        return upgradesAvailable > 0;
-    }
+	public override bool canLevelUp()
+	{
+		return upgradesAvailable > 0;
+	}
 
-    public override bool levelUp()
-    {
-        if (canLevelUp() && base.levelUp() && takeProtein(basicUpgradeCost * level) != null)
-        {
-            // Increase the Oxygen consumption cost every second level
-            consumeCost = level % 2 == 0 ? consumeCost : consumeCost + 1;
+	public override bool levelUp()
+	{
+		if (canLevelUp() && base.levelUp() && takeProtein(basicUpgradeCost * level) != null)
+		{
+			// Increase the Oxygen consumption cost every second level
+			consumeCost = level % 2 == 0 ? consumeCost : consumeCost + 1;
 
-            // Consume the upgrade
-            upgradesAvailable--;
-            return true;
-        }
+			// Consume the upgrade
+			upgradesAvailable--;
+			return true;
+		}
+		return false;
+	}
 
-        return false;        
-    }
-
-    //Deliver a resouce to the organ
-    public virtual void deliver(ResourceStore deposit)
+	//Deliver a resouce to the organ
+	public virtual void deliver(ResourceStore deposit)
 	{
 		switch (deposit.getType())
 		{

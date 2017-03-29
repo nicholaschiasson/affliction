@@ -143,6 +143,11 @@ public abstract class Unit : MonoBehaviour
         }
 	}
 
+	public virtual bool canLevelUp()
+	{
+		return false;
+	}
+
 	// Called when the controller registers the unit as selected
 	public virtual void Select()
     {
@@ -169,7 +174,7 @@ public abstract class Unit : MonoBehaviour
 
 	public virtual string GetStatsInfo()
 	{
-		return ("HP: " + Health);
+		return ("Level: " + level + "\nHP: " + Health);
 	}
 
     public int getLevel()
