@@ -136,6 +136,10 @@ public class HUD : MonoBehaviour
 		// Unit info panel
 		GUI.Box(unitInfoPanelCanvas, "Details");
 		DrawUnitInfoPanel(unitInfoPanelCanvasWithPadding);
+
+		if (Input.GetKey(KeyCode.Space))
+		{
+		}
 	}
 
 	// Sets all the dimensions of HUD components
