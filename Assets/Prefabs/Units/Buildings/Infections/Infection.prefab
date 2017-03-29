@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1538978896821600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.032583, y: 0.5, z: 2.737505}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4668600625142734}
@@ -164,6 +164,7 @@ MonoBehaviour:
   Affiliation: 2
   Health: 1000
   consumeCost: 0
+  basicUpgradeCost: 0
   spawnables:
   - {fileID: 1491029659344476, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}
   cost: 

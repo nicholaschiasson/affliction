@@ -248,6 +248,8 @@ public class HUD : MonoBehaviour
 					var title = u.GetTypeName();
 					Texture t = null;
 					var info = u.GetStatsInfo();
+					if (title == "Brain")
+						t = spawnerIcon;
 					if (title == "Heart")
 						t = spawnerIcon;
 					if (title == "Infection")
@@ -295,9 +297,12 @@ public class HUD : MonoBehaviour
 		selectedUnits[UnitPriority.OrganPriority] = new List<Unit>();
 		foreach (Unit u in selected)
 		{
-			var priority = GetUnitPriority(u);
-			if (selectedUnits.ContainsKey(priority))
-				selectedUnits[priority].Add(u);
+			if (u != null)
+			{
+				var priority = GetUnitPriority(u);
+				if (selectedUnits.ContainsKey(priority))
+					selectedUnits[priority].Add(u);
+			}
 		}
 	}
 

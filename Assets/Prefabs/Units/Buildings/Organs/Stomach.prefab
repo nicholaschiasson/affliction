@@ -51,9 +51,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4885587714630336}
-  - component: {fileID: 65036696100012838}
   - component: {fileID: 114556685940787350}
   - component: {fileID: 54845916342253256}
+  - component: {fileID: 136546400499905010}
   m_Layer: 0
   m_Name: Stomach
   m_TagString: Miner
@@ -155,18 +155,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65036696100012838
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1955369655654742}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114556685940787350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,3 +172,16 @@ MonoBehaviour:
   basicUpgradeCost: 0
   resource: 3
   yield: 50
+--- !u!136 &136546400499905010
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1955369655654742}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.75
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0.05}

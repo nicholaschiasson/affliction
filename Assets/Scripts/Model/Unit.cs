@@ -11,9 +11,6 @@ public enum UnitAffiliation
 public abstract class Unit : MonoBehaviour
 {
 	protected GameController gameController;
-	bool leftMouse;
-	bool rightMouse;
-	bool middleMouse;
     
     protected Rigidbody rb;
 
@@ -28,6 +25,8 @@ public abstract class Unit : MonoBehaviour
     public int Health;
     protected int maxHealth;
     protected int baseHealth;
+
+	MouseButtonEventHandler mouseHandler;
 
 	protected virtual void Awake()
 	{
@@ -47,6 +46,7 @@ public abstract class Unit : MonoBehaviour
 
         // Getting a reference to our controller
 		gameController = Camera.main.GetComponent<GameController>();
+		mouseHandler = new MouseButtonEventHandler();
 
 		selectionCircle = Instantiate(Resources.Load(Util.Path.Combine("Prefabs", "SelectionCircle"))) as GameObject;
 		selectionCircle.transform.parent = transform;
@@ -90,14 +90,34 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    void OnEnable()
+    protected virtual void OnEnable()
 	{
 		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
+		mouseHandler.OnLeftMouseDown += OnLeftMouseDown;
+		mouseHandler.OnRightMouseDown += OnRightMouseDown;
+		mouseHandler.OnMiddleMouseDown += OnMiddleMouseDown;
+		mouseHandler.OnLeftMouseHold += OnLeftMouseHold;
+		mouseHandler.OnRightMouseHold += OnRightMouseHold;
+		mouseHandler.OnMiddleMouseHold += OnMiddleMouseHold;
+		mouseHandler.OnLeftMouseClick += OnLeftMouseClick;
+		mouseHandler.OnRightMouseClick += OnRightMouseClick;
+		mouseHandler.OnMiddleMouseClick += OnMiddleMouseClick;
+		mouseHandler.OnMouseHover += OnMouseHover;
 	}
 
-	void OnDisable()
+	protected virtual void OnDisable()
 	{
 		GameController.OnSelectionBoundsCheck -= SelectionBoundsCheck;
+		mouseHandler.OnLeftMouseDown -= OnLeftMouseDown;
+		mouseHandler.OnRightMouseDown -= OnRightMouseDown;
+		mouseHandler.OnMiddleMouseDown -= OnMiddleMouseDown;
+		mouseHandler.OnLeftMouseHold -= OnLeftMouseHold;
+		mouseHandler.OnRightMouseHold -= OnRightMouseHold;
+		mouseHandler.OnMiddleMouseHold -= OnMiddleMouseHold;
+		mouseHandler.OnLeftMouseClick -= OnLeftMouseClick;
+		mouseHandler.OnRightMouseClick -= OnRightMouseClick;
+		mouseHandler.OnMiddleMouseClick -= OnMiddleMouseClick;
+		mouseHandler.OnMouseHover -= OnMouseHover;
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
@@ -216,62 +236,6 @@ public abstract class Unit : MonoBehaviour
     // Do not override: this method delegates the specific mouse events defined above
     void OnMouseOver()
 	{
-		// Left Mouse Button
-		if (Input.GetMouseButton(0))
-		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				OnLeftMouseDown();
-				leftMouse = true;
-			}
-			else if (leftMouse)
-				OnLeftMouseHold();
-		}
-		else
-		{
-			if (Input.GetMouseButtonUp(0) && leftMouse)
-				OnLeftMouseClick();
-			leftMouse = false;
-		}
-
-		// Right Mouse Button
-		if (Input.GetMouseButton(1))
-		{
-			if (Input.GetMouseButtonDown(1))
-			{
-				OnRightMouseDown();
-				rightMouse = true;
-			}
-			else if (rightMouse)
-				OnRightMouseHold();
-		}
-		else
-		{
-			if (Input.GetMouseButtonUp(1) && rightMouse)
-				OnRightMouseClick();
-			rightMouse = false;
-		}
-
-		// Middle Mouse Button
-		if (Input.GetMouseButton(2))
-		{
-			if (Input.GetMouseButtonDown(2))
-			{
-				OnMiddleMouseDown();
-				middleMouse = true;
-			}
-			else if (middleMouse)
-				OnMiddleMouseHold();
-		}
-		else
-		{
-			if (Input.GetMouseButtonUp(2) && middleMouse)
-				OnMiddleMouseClick();
-			middleMouse = false;
-		}
-
-		// Mouse Hover
-		if (!leftMouse && !rightMouse && !middleMouse)
-			OnMouseHover();
+		mouseHandler.OnMouseOver();
 	}
 }

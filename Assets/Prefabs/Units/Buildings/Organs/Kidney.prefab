@@ -34,9 +34,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4925059704350772}
-  - component: {fileID: 65301407952328766}
   - component: {fileID: 114021141668398906}
   - component: {fileID: 54501126929332282}
+  - component: {fileID: 136982519525918290}
   m_Layer: 0
   m_Name: Kidney
   m_TagString: Miner
@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1650061261049414}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4684357828618630}
   m_RootOrder: 0
@@ -155,18 +155,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65301407952328766
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1083748906027598}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114021141668398906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,3 +172,16 @@ MonoBehaviour:
   basicUpgradeCost: 0
   resource: 1
   yield: 50
+--- !u!136 &136982519525918290
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1083748906027598}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.75
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}

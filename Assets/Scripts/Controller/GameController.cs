@@ -62,8 +62,11 @@ public class GameController : MonoBehaviour
 				u.Deselect();
 			selectedUnits = new HashSet<Unit>();
 		}
-		unit.Select();
-		selectedUnits.Add(unit);
+		if (unit != null)
+		{
+			unit.Select();
+			selectedUnits.Add(unit);
+		}
 		if (single && hud != null)
 			hud.UpdateInfoPanel(selectedUnits);
 	}
@@ -167,7 +170,7 @@ public class GameController : MonoBehaviour
 			if (Input.GetKeyUp("6"))
 				warpTo = "Right Kidney";
 			if (cameraWarpLocations != null && cameraWarpLocations.ContainsKey(warpTo))
-				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z);
+				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z - 10.0f);
 		}
 		else
 		{
