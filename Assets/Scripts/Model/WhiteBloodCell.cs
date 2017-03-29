@@ -25,4 +25,17 @@
             commandQueue.Enqueue(new AttackCommand(unit, damage, true));
         }
     }
+
+    public override bool levelUp()
+    {
+        // Increasing our level
+        if (base.levelUp())
+        {
+            //Increasing our damage
+            damage++;
+            return true;
+        }
+
+        return false;        
+    }
 }

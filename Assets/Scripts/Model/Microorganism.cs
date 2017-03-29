@@ -6,7 +6,7 @@ public abstract class Microorganism : Unit
     public float speed;
     protected Queue<Command> commandQueue;
     ParticleSystem trail;
-    ParticleSystem spawn;
+    ParticleSystem spawn;    
 
     // Use this for initialization
     protected override void Awake()

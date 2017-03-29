@@ -14,7 +14,7 @@ public abstract class Unit : MonoBehaviour
 	bool leftMouse;
 	bool rightMouse;
 	bool middleMouse;
-
+    
     protected Rigidbody rb;
 
 	protected GameObject selectionCircle;
@@ -23,13 +23,16 @@ public abstract class Unit : MonoBehaviour
     ParticleSystem damageExplosion;
 
     public UnitAffiliation Affiliation = UnitAffiliation.None;
-	public int Health;
+
+    protected int level;
+    public int Health;
+    protected int maxHealth;
+    protected int baseHealth;
 
 	protected virtual void Awake()
 	{
         // Getting our particle systems.
         particleSystems = GetComponentsInChildren<ParticleSystem>();
-
         damageExplosion = null;
         foreach(ParticleSystem particle in particleSystems)
         {
@@ -56,6 +59,11 @@ public abstract class Unit : MonoBehaviour
 		else
 			selectionCircle.SendMessage("SetColor", Color.gray);
 		selectionCircle.SetActive(false);
+
+        baseHealth = maxHealth = Health;
+
+        // Starting at level 1
+        level = 1;
 	}
 
     protected virtual void Update()
@@ -144,8 +152,40 @@ public abstract class Unit : MonoBehaviour
 		return ("HP: " + Health);
 	}
 
-	//Mouse Handling
-	protected virtual void OnMouseEnter() { }
+    public int getLevel()
+    {
+        return level;
+    }
+
+    // Attempts to level up the unit, returns true if successful
+    public virtual bool levelUp()
+    {
+        int oldMax = maxHealth;
+
+        // Increasing our new max health by the base health * our level before level up
+        maxHealth += baseHealth / 2 * level;
+
+        // Healing ourselves by the amount of health we gained for the level.
+        Health += maxHealth - oldMax;
+
+        // Increase our level
+        level++;
+
+        return true;
+    }
+
+    // Calls level up n times
+    public void setLevel(int levels)
+    {
+        while(levels > 0)
+        {
+            levelUp();
+            levels--;
+        }
+    }
+
+    //Mouse Handling
+    protected virtual void OnMouseEnter() { }
 	protected virtual void OnMouseExit() { }
 	protected virtual void OnLeftMouseDown() { }
 	protected virtual void OnRightMouseDown() { }
@@ -168,6 +208,10 @@ public abstract class Unit : MonoBehaviour
     // todo remove these when implementing proper User interface
     public virtual void OnOnePressed() { }
     public virtual void OnTwoPressed() { }
+    public virtual void OnThreePressed() { }
+    public virtual void OnFourPressed() { }
+    public virtual void OnFivePressed() { }
+    public virtual void OnZPressed() { }
 
     // Do not override: this method delegates the specific mouse events defined above
     void OnMouseOver()

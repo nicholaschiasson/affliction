@@ -120,8 +120,32 @@ public class GameController : MonoBehaviour
 			u.OnTwoPressed();
 	}
 
-	// Update is called once per frame
-	void Update()
+    public void OnThreePressed()
+    {
+        foreach (Unit u in selectedUnits)
+            u.OnThreePressed();
+    }
+
+    public void OnFourPressed()
+    {
+        foreach (Unit u in selectedUnits)
+            u.OnFourPressed();
+    }
+
+    public void OnFivePressed()
+    {
+        foreach (Unit u in selectedUnits)
+            u.OnFivePressed();
+    }
+
+    public void OnZPressed()
+    {
+        foreach (Unit u in selectedUnits)
+            u.OnZPressed();
+    }
+
+    // Update is called once per frame
+    void Update()
 	{
 		if (Input.GetKeyUp(KeyCode.Escape))
 			Application.Quit();
@@ -153,7 +177,24 @@ public class GameController : MonoBehaviour
 			{
 				OnTwoPressed();
 			}
-		}
+            else if (Input.GetKeyUp("3"))
+            {
+                OnThreePressed();
+            }
+            else if (Input.GetKeyUp("4"))
+            {
+                OnFourPressed();
+            }
+            else if (Input.GetKeyUp("5"))
+            {
+                OnFivePressed();
+            }
+
+            else if (Input.GetKeyUp("z"))
+            {
+                OnZPressed();
+            }
+        }
     }
 
 	// Update called once per frame after every update
