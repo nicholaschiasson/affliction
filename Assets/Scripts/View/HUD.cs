@@ -61,6 +61,12 @@ public class HUD : MonoBehaviour
 	Vector2 scrollPosition = Vector2.zero;
 	SortedList<UnitPriority, List<Unit>> selectedUnits;
 
+	// Camera warp panel dimensions
+	int cameraWarpPanelWidth;
+	int cameraWarpPanelHeight;
+	Rect cameraWarpPanelCanvas;
+	Rect cameraWarpPanelCanvasWithPadding;
+
 	// Icons
 	Texture brainIcon;
 	Texture heartIcon;
@@ -104,7 +110,8 @@ public class HUD : MonoBehaviour
 			resourceIndicatorsCanvas.Contains(mousePos) ||
 			minimapCanvas.Contains(mousePos) ||
 			actionsPanelCanvas.Contains(mousePos) ||
-			unitInfoPanelCanvas.Contains(mousePos))
+			unitInfoPanelCanvas.Contains(mousePos) ||
+		    cameraWarpPanelCanvas.Contains(mousePos))
 			OnMouseOverGUI();
 		else
 			OnMouseOutsideGUI();
@@ -137,8 +144,11 @@ public class HUD : MonoBehaviour
 		GUI.Box(unitInfoPanelCanvas, "Details");
 		DrawUnitInfoPanel(unitInfoPanelCanvasWithPadding);
 
+		// Camera warp panel
 		if (Input.GetKey(KeyCode.Space))
 		{
+			GUI.Box(cameraWarpPanelCanvas, "Go To");
+			DrawCameraWarpPanel(cameraWarpPanelCanvasWithPadding);
 		}
 	}
 
@@ -182,6 +192,12 @@ public class HUD : MonoBehaviour
 		unitInfoPanelHeight = (int)(minimapHeight * 0.865f);
 		unitInfoPanelCanvas = new Rect(minimapWidth, screenHeight - unitInfoPanelHeight, unitInfoPanelWidth, unitInfoPanelHeight);
 		unitInfoPanelCanvasWithPadding = ApplyPadding(unitInfoPanelCanvas, panelPadding);
+
+		// Camera warp panel dimensions
+		cameraWarpPanelWidth = screenWidth / 5;
+		cameraWarpPanelHeight = (int)(cameraWarpPanelWidth * 1.5f);
+		cameraWarpPanelCanvas = new Rect(screenWidth / 2 - cameraWarpPanelWidth / 2, screenHeight / 2 - cameraWarpPanelHeight * 0.75f, cameraWarpPanelWidth, cameraWarpPanelHeight);
+		cameraWarpPanelCanvasWithPadding = ApplyPadding(cameraWarpPanelCanvas, panelPadding);
 	}
 
 	Rect ApplyPadding(Rect canvas, int padding)
@@ -305,6 +321,39 @@ public class HUD : MonoBehaviour
 			}
 		}
 		GUI.EndScrollView();
+	}
+
+	void DrawCameraWarpPanel(Rect canvas)
+	{
+		int buttonWidth = (int)canvas.width;
+		int buttonPadding = (int)canvas.height / 64;
+		int buttonHeight = (int)canvas.height / 6 - buttonPadding;
+		int yPos = (int)canvas.y + Skin.font.fontSize;
+		int numLocations = 6;
+		Rect[] rects = new Rect[numLocations];
+		Rect[] texCanvases = new Rect[numLocations];
+		Rect[] titleCanvases = new Rect[numLocations];
+		for (int i = 0; i < numLocations; i++)
+		{
+			rects[i] = new Rect(canvas.x, yPos + (buttonHeight + buttonPadding) * i, buttonWidth, buttonHeight);
+			texCanvases[i] = new Rect(rects[i].x + buttonPadding / 2, rects[i].y + buttonPadding / 2, rects[i].width / 2 - buttonPadding, rects[i].height - buttonPadding);
+			texCanvases[i].width = texCanvases[i].height = Mathf.Min(texCanvases[i].width, texCanvases[i].height);
+			titleCanvases[i] = new Rect(texCanvases[i].xMax + buttonPadding / 2, texCanvases[i].y, rects[i].xMax - texCanvases[i].xMax - buttonPadding, texCanvases[i].height);
+			GUI.Box(rects[i], "");
+		}
+		int j = 0;
+		GUI.DrawTexture(texCanvases[j], heartIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Heart");
+		GUI.DrawTexture(texCanvases[j], brainIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Brain");
+		GUI.DrawTexture(texCanvases[j], lungsIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Lungs");
+		GUI.DrawTexture(texCanvases[j], stomachIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Stomach");
+		GUI.DrawTexture(texCanvases[j], kidneyIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Left Kidney");
+		GUI.DrawTexture(texCanvases[j], kidneyIcon);
+		GUI.Label(titleCanvases[j], "(" + (++j) + ") Right Kidney");
 	}
 
 	public void UpdateInfoPanel(HashSet<Unit> selected)
