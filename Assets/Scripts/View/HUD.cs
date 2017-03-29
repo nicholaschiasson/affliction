@@ -62,25 +62,39 @@ public class HUD : MonoBehaviour
 	SortedList<UnitPriority, List<Unit>> selectedUnits;
 
 	// Icons
+	Texture brainIcon;
+	Texture heartIcon;
 	Texture infectionIcon;
+	Texture kidneyIcon;
+	Texture lungsIcon;
 	Texture minerIcon;
 	Texture pathogenIcon;
 	Texture redBloodCellIcon;
 	Texture spawnerIcon;
 	Texture sporeIcon;
+	Texture stomachIcon;
 	Texture whiteBloodCellIcon;
 
-	void OnEnable()
+	void Awake()
 	{
-		RetrieveGUIDimensions();
 		minimapRenderTexture = Resources.Load(Util.Path.Combine("Textures", "MinimapRenderTexture")) as RenderTexture;
+		brainIcon = Resources.Load(Util.Path.Combine("Textures", "BrainIcon")) as Texture;
+		heartIcon = Resources.Load(Util.Path.Combine("Textures", "HeartIcon")) as Texture;
 		infectionIcon = Resources.Load(Util.Path.Combine("Textures", "InfectionIcon")) as Texture;
+		kidneyIcon = Resources.Load(Util.Path.Combine("Textures", "KidneyIcon")) as Texture;
+		lungsIcon = Resources.Load(Util.Path.Combine("Textures", "LungsIcon")) as Texture;
 		minerIcon = Resources.Load(Util.Path.Combine("Textures", "MinerIcon")) as Texture;
 		pathogenIcon = Resources.Load(Util.Path.Combine("Textures", "PathogenIcon")) as Texture;
 		redBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "RedBloodCellIcon")) as Texture;
 		spawnerIcon = Resources.Load(Util.Path.Combine("Textures", "SpawnerIcon")) as Texture;
 		sporeIcon = Resources.Load(Util.Path.Combine("Textures", "SporeIcon")) as Texture;
+		stomachIcon = Resources.Load(Util.Path.Combine("Textures", "StomachIcon")) as Texture;
 		whiteBloodCellIcon = Resources.Load(Util.Path.Combine("Textures", "WhiteBloodCellIcon")) as Texture;
+	}
+
+	void OnEnable()
+	{
+		RetrieveGUIDimensions();
 	}
 
 	void Update()
@@ -249,15 +263,15 @@ public class HUD : MonoBehaviour
 					Texture t = null;
 					var info = u.GetStatsInfo();
 					if (title == "Brain")
-						t = spawnerIcon;
+						t = brainIcon;
 					if (title == "Heart")
-						t = spawnerIcon;
+						t = heartIcon;
 					if (title == "Infection")
 						t = infectionIcon;
 					if (title == "Left Kidney" || title == "Right Kidney")
-						t = minerIcon;
+						t = kidneyIcon;
 					if (title == "Lungs")
-						t = minerIcon;
+						t = lungsIcon;
 					if (title == "Pathogen")
 						t = pathogenIcon;
 					if (title == "Red Blood Cell")
@@ -265,7 +279,7 @@ public class HUD : MonoBehaviour
 					if (title == "Spore")
 						t = sporeIcon;
 					if (title == "Stomach")
-						t = minerIcon;
+						t = stomachIcon;
 					if (title == "White Blood Cell")
 						t = whiteBloodCellIcon;
 					var unitInfoCanvas = new Rect(iconPadding + iconWidth * (i % iconsPerRow), iconPadding + iconHeight * j, iconWidth - iconPadding, iconHeight - iconPadding);
