@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		camera = this.GetComponent<Camera>();
+		camera = GetComponent<Camera>();
 		selectedUnits = new HashSet<Unit>();
 
         //Ingoring All Colliisons with objects of the same layer.
@@ -157,12 +157,14 @@ public class GameController : MonoBehaviour
 			if (Input.GetKeyUp("1"))
 				warpTo = "Heart";
 			if (Input.GetKeyUp("2"))
-				warpTo = "Lungs";
+				warpTo = "Brain";
 			if (Input.GetKeyUp("3"))
-				warpTo = "Stomach";
+				warpTo = "Lungs";
 			if (Input.GetKeyUp("4"))
-				warpTo = "Left Kidney";
+				warpTo = "Stomach";
 			if (Input.GetKeyUp("5"))
+				warpTo = "Left Kidney";
+			if (Input.GetKeyUp("6"))
 				warpTo = "Right Kidney";
 			if (cameraWarpLocations != null && cameraWarpLocations.ContainsKey(warpTo))
 				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z);
