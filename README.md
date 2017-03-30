@@ -6,22 +6,24 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 - [Luke Harper](https://github.com/Lharp5)
 
 ## Controls
-| Key          | Action                                      |
-| ------------ | ------------------------------------------- |
-| w            | Move camera up/forward                      |
-| a            | Move camera left                            |
-| s            | Move camera down/backward                   |
-| d            | Move camera right                           |
-| ESC          | Quit game (ignored in unity editor)         |
-| LEFT MOUSE   | Select unit (drag to multi-select)          |
-| RIGHT MOUSE  | Selected unit do action at mouse location   |
-| 1            | If spawner selected, spawn red blood cell   |
-| 2            | If spawner selected, spawn white blood cell |
-| SPACE + 1    | Jump camera to heart                        |
-| SPACE + 2    | Jump camera to lungs                        |
-| SPACE + 3    | Jump camera to stomache                     |
-| SPACE + 4    | Jump camera to left kindey                  |
-| SPACE + 5    | Jump camera to right kindey                 |
+| Key          | Action                                                                           |
+| ------------ | -------------------------------------------------------------------------------- |
+| w            | Move camera up/forward                                                           |
+| a            | Move camera left                                                                 |
+| s            | Move camera down/backward                                                        |
+| d            | Move camera right                                                                |
+| ESC          | Quit game (ignored in unity editor)                                              |
+| LEFT MOUSE   | Select unit (drag to multi-select)<br/>Deslects units if click/drag over terrain |
+| RIGHT MOUSE  | Selected unit do action at mouse location                                        |
+| 1            | If spawner selected, spawn red blood cell                                        |
+| 2            | If spawner selected, spawn white blood cell                                      |
+| SPACE        | Hold to view camera quick go to menu                                             |
+| SPACE + 1    | Jump camera to heart                                                             |
+| SPACE + 2    | Jump camera to brain                                                             |
+| SPACE + 3    | Jump camera to lungs                                                             |
+| SPACE + 4    | Jump camera to stomache                                                          |
+| SPACE + 5    | Jump camera to left kindey                                                       |
+| SPACE + 6    | Jump camera to right kindey                                                      |
 
 
 ## Mechanics
@@ -90,7 +92,6 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
 -   UI is incomplete, so the following functionality is all it contributes to:
     -   The "Menu" button in the top left of the game window simply exits the game, as does the ESCAPE key (this is all ignored in the editor)
     -   More UI elements are still to be added in the future
--   Currently, to deselect any unit(s) it is necessary to **drag** select an empty space or terrain
 -   Currently spawning animation plays on first launch
 -   Oxygen consumption overtime is disabled for playtesting
 -   Infections will not move because their mass is too large for a single cell to push
