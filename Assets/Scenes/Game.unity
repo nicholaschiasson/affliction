@@ -100,7 +100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 278460446}
   - component: {fileID: 278460445}
-  - component: {fileID: 278460444}
   - component: {fileID: 278460443}
   m_Layer: 8
   m_Name: CameraMinimapViewport
@@ -140,20 +139,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &278460444
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278460442}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &278460445
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -306,35 +291,6 @@ Prefab:
     - target: {fileID: 4480971711417454, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 198154278728857576, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198154278728857576, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: randomSeed
-      value: -1167643701
-      objectReference: {fileID: 0}
-    - target: {fileID: 198154278728857576, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 198154278728857576, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 198154278728857576, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006713523534088, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}
@@ -858,6 +814,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1083748906027598, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
+      propertyPath: m_Name
+      value: Right Kidney
+      objectReference: {fileID: 0}
     - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
       propertyPath: m_LocalScale.x
       value: 5
@@ -869,10 +829,6 @@ Prefab:
     - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
       propertyPath: m_LocalScale.z
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083748906027598, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_Name
-      value: Right Kidney
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
