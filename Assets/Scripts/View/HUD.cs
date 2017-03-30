@@ -124,7 +124,7 @@ public class HUD : MonoBehaviour
 			minimapCanvas.Contains(mousePos) ||
 			actionsPanelCanvas.Contains(mousePos) ||
 			unitInfoPanelCanvas.Contains(mousePos) ||
-		    cameraWarpPanelCanvas.Contains(mousePos))
+		    (Input.GetKey(KeyCode.Space) && cameraWarpPanelCanvas.Contains(mousePos)))
 			OnMouseOverGUI();
 		else
 			OnMouseOutsideGUI();
