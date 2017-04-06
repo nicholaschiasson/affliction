@@ -44,7 +44,10 @@ public class Spawner : Organ
         Vector3 newPos = new Vector3(this.transform.position.x + 2 * this.transform.localScale.x,
                                             this.transform.position.y,
                                             this.transform.position.z + 2 * this.transform.localScale.z);
-        Instantiate(spawnables[index], newPos, this.transform.rotation);
+
+        // Spawning the game object and setting the level to our level
+        GameObject spawned = Instantiate(spawnables[index], newPos, this.transform.rotation);
+        spawned.GetComponent<Unit>().setLevel(level);
     }
 
     //return the value of eryth stored.

@@ -202,10 +202,12 @@ public abstract class Unit : MonoBehaviour
     // Calls level up n times
     public void setLevel(int levels)
     {
-        while(levels > 0)
+        // Calculating how many more level ups are needed to level up 
+        int levelUpsNeeded = levels - level;
+        while(levelUpsNeeded > 0)
         {
             levelUp();
-            levels--;
+            levelUpsNeeded--;
         }
     }
 
