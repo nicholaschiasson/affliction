@@ -20,7 +20,7 @@ public class Spawner : Organ
 	}
 
     //Spawns the gameObject at the index 
-    void spawn(int index)
+    public void spawn(int index)
     {
         if (spawnables.Length != cost.Length){
             Debug.LogError("spawnables or cost array inproperly formatted");

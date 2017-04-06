@@ -1,3 +1,7 @@
-﻿public class Pathogen : Virus
+﻿public class Pathogen : WhiteBloodCell
 {
+    public override string GetTypeName()
+    {
+        return "Pathogen";
+    }
 }

@@ -99,7 +99,7 @@ public abstract class Microorganism : Unit
                 commandQueue.Dequeue();
             }
         }
-        else if (trail.isPlaying) // Trail should not be playing as no action is being performed
+        else if (trail != null && trail.isPlaying) // Trail should not be playing as no action is being performed
         {
             trail.Stop();
         }

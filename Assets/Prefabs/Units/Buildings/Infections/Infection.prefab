@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51df2efb079b0234988b8967c25f8bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!114 &114716655274331760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,14 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d124a356fe8c09a408a8026c1a4a4151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 0
+  Affiliation: 2
   level: 0
   Health: 1000
   consumeCost: 0
   basicUpgradeCost: 0
   spawnables:
   - {fileID: 1491029659344476, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}
-  cost: 
+  - {fileID: 1225768333834562, guid: 17c811bb204fe402a8474775f851ac8c, type: 2}
+  cost: 0000000000000000
 --- !u!135 &135441480714414812
 SphereCollider:
   m_ObjectHideFlags: 1

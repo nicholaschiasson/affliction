@@ -34,7 +34,7 @@
 		levelUp();
 	}
 
-	protected void consumeOxygen(int cost)
+	protected virtual void consumeOxygen(int cost)
 	{
 		ResourceStore consumed = takeOxygen(consumeCost);
 		// If there is not enough oxygen left, consume health

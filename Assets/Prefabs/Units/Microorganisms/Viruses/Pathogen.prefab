@@ -443,7 +443,7 @@ MonoBehaviour:
   level: 1
   Health: 100
   speed: 0
-  damage: 0
+  damage: 1
 --- !u!114 &114935152169997834
 MonoBehaviour:
   m_ObjectHideFlags: 1

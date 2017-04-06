@@ -7,4 +7,10 @@ public class Infection : Spawner {
     {
         base.Awake();
     }
+
+    // Overriding consume Oxygen to do nothing
+    protected override void consumeOxygen(int cost)
+    {
+        return;
+    }
 }
