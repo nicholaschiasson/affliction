@@ -7,10 +7,11 @@ public class InfectionBehaviour : MonoBehaviour {
     Spawner infection;
     int oldHealth;
 
-    public enum InfectionState {Dormant, Idle, Spread, Attack, Defend}
-    public InfectionState currentState;
+    enum InfectionState {Dormant, Idle, Spread, Attack, Defend}
+    InfectionState currentState;
     float timer;
     float state_timer;
+    float cooldown;
 
     public int numUnitsAvail;
     int numUnitSpawned;
@@ -19,6 +20,7 @@ public class InfectionBehaviour : MonoBehaviour {
 
     bool hasLeveledUp;
 
+    const float DEFAULT_COOLDOWN = 5.0f;
     const float BASE_PREPARE_TIME = 2.0f;
     const float MATURE_TIME = 30.0f;
     const float STATE_SWITCH_TIME = 5.0f;
@@ -42,6 +44,17 @@ public class InfectionBehaviour : MonoBehaviour {
         timer += Time.deltaTime;
         state_timer += Time.deltaTime;
         currentLevel = infection.getLevel();
+
+        if (cooldown > 0.0f)
+        {
+            cooldown -= Time.deltaTime;
+        }
+
+        //Updating Health
+        if(infection.Health != oldHealth && cooldown <= 0.0f)
+        {
+            setState(InfectionState.Defend);
+        }
 
         switch (currentState)
         {
@@ -140,10 +153,12 @@ public class InfectionBehaviour : MonoBehaviour {
 
     void handleDefend()
     {
-        float unitsAllowed = 5.0f * currentLevel;
+        float unitsAllowed = 2.0f * currentLevel;
         // Aditional to standard checks: only defend if our level is high enough
         if (currentLevel < 1 || numUnitSpawned >= unitsAllowed || numUnitsAvail == 0) 
-        {
+        {            
+            // Setting the cooldown to defend
+            cooldown = DEFAULT_COOLDOWN;
             setState(InfectionState.Idle);
         }
         else if (state_timer > BASE_PREPARE_TIME)
