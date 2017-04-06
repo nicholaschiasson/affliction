@@ -51,11 +51,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4267987123553852}
-  - component: {fileID: 114628925136612664}
-  - component: {fileID: 114893344290173136}
   - component: {fileID: 54456036009666980}
   - component: {fileID: 135441480714414812}
   - component: {fileID: 114417241694051698}
+  - component: {fileID: 114716655274331760}
   m_Layer: 0
   m_Name: Infection
   m_TagString: Untagged
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51df2efb079b0234988b8967c25f8bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114628925136612664
+--- !u!114 &114716655274331760
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -207,21 +206,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1538978896821600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e00b18d406aae3408c76564296ea0b9, type: 3}
+  m_Script: {fileID: 11500000, guid: d124a356fe8c09a408a8026c1a4a4151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114893344290173136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1538978896821600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84bb277f30793e749bd272c911a7c40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Affiliation: 2
+  Affiliation: 0
   Health: 1000
   consumeCost: 0
   basicUpgradeCost: 0
