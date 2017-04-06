@@ -99,7 +99,11 @@ public abstract class Microorganism : Unit
                 commandQueue.Dequeue();
             }
         }
-	}
+        else if (trail.isPlaying) // Trail should not be playing as no action is being performed
+        {
+            trail.Stop();
+        }
+    }
 
     //Called on CollisionEnter
     protected override void OnCollisionEnter(Collision collision)
