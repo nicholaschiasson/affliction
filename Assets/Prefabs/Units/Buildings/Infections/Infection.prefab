@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51df2efb079b0234988b8967c25f8bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  numUnitsAvail: 0
 --- !u!114 &114716655274331760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -462,7 +462,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 0.25
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:

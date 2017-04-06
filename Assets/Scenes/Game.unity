@@ -198,33 +198,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 198884962909893598, guid: 3711ea22a106fc448a5035693271dca6,
+        type: 2}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198884962909893598, guid: 3711ea22a106fc448a5035693271dca6,
+        type: 2}
+      propertyPath: randomSeed
+      value: 33888793
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114893344290173136, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &344190809 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1538978896821600, guid: 3711ea22a106fc448a5035693271dca6,
-    type: 2}
-  m_PrefabInternal: {fileID: 312244078}
---- !u!114 &344190810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 344190809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d124a356fe8c09a408a8026c1a4a4151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Affiliation: 0
-  Health: 1000
-  consumeCost: 0
-  basicUpgradeCost: 0
-  spawnables:
-  - {fileID: 1491029659344476, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}
-  cost: 
 --- !u!1001 &363808973
 Prefab:
   m_ObjectHideFlags: 0

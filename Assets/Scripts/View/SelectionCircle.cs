@@ -2,7 +2,7 @@
 
 public class SelectionCircle : MonoBehaviour
 {
-	Renderer modelRenderer = null;
+	Renderer modelRenderer;
 
 	void Awake()
 	{
@@ -11,6 +11,6 @@ public class SelectionCircle : MonoBehaviour
 
 	public void SetColor(Color color)
 	{
-		modelRenderer.material.color = color;
+		modelRenderer.material.color = new Color(color.r, color.g, color.b, modelRenderer.material.color.a);
 	}
 }
