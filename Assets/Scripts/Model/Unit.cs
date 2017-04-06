@@ -21,7 +21,7 @@ public abstract class Unit : MonoBehaviour
 
     public UnitAffiliation Affiliation = UnitAffiliation.None;
 
-    protected int level;
+    public int level;
     public int Health;
     protected int maxHealth;
     protected int baseHealth;
@@ -61,9 +61,6 @@ public abstract class Unit : MonoBehaviour
 		selectionCircle.SetActive(false);
 
         baseHealth = maxHealth = Health;
-
-        // Starting at level 1
-        level = 1;
 	}
 
     protected virtual void Update()

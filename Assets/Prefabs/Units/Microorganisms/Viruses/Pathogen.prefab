@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 2
+  level: 1
   Health: 100
   speed: 0
   damage: 0

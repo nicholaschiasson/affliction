@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 1
+  level: 1
   Health: 100
   speed: 0.4
   damage: 1

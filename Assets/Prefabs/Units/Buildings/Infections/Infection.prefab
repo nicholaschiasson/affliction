@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Affiliation: 0
+  level: 0
   Health: 1000
   consumeCost: 0
   basicUpgradeCost: 0
