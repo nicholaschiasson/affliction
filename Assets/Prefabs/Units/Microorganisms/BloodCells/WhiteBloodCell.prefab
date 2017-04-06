@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4856332511359300}
   - component: {fileID: 198467986078272060}
   - component: {fileID: 199153814059834676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: trail
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4764411795597326}
   - component: {fileID: 33758479938276640}
   - component: {fileID: 23678462769271008}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WhiteBloodCellModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4988397538911366}
   - component: {fileID: 33899802576773754}
   - component: {fileID: 23980088266163338}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4006713523534088}
   - component: {fileID: 198154278728857576}
   - component: {fileID: 199670400651732676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawn
   m_TagString: Spawn
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 135505363281953666}
   - component: {fileID: 54805227467787374}
   - component: {fileID: 95666787192747348}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WhiteBloodCell
   m_TagString: WhiteBloodCell
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581605045193478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1900975, y: 0.5, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4764411795597326}
