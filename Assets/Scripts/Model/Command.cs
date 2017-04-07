@@ -130,6 +130,28 @@ public abstract class Command
 		}
 	}
 
+    public class ColonizeAction: Action
+    {
+        public ColonizeAction(Spawner s): base(s)
+        {
+        }
+
+        public ColonizeAction(Vector3 t): base(t)
+        {
+        }
+
+        public override bool OnCollision(Unit t)
+        {
+            if (target != null && target != null && t.GetInstanceID() == target.GetInstanceID())
+            {
+                ((Spawner)target).addUpgrade();
+                complete = true;
+                return true;
+            }
+            return false;
+        }
+    }
+
 	//todo attack action
 	public class AttackAction : Action
 	{
@@ -210,9 +232,15 @@ public abstract class Command
 	public virtual void onCollision(Unit t)
 	{
 		bool keepGoing;
-		// todo fix this. work around. 1 collision event happens when objects collide but multiple consecutive actions might depend on collision
-		// we keep going until an action is not listening for this collision, that way we don't accidently trigger a collison for an action later
-		foreach (Action action in actions.ToList())
+
+        if (t == null)
+        {
+            return;
+        }
+
+        // todo fix this. work around. 1 collision event happens when objects collide but multiple consecutive actions might depend on collision
+        // we keep going until an action is not listening for this collision, that way we don't accidently trigger a collison for an action later
+        foreach (Action action in actions.ToList())
 		{
 			keepGoing = action.OnCollision(t);
 			// Check our Queue
@@ -344,4 +372,18 @@ public class AttackCommand : Command
 	{
 		return base.isComplete() || target.Health <= 0;
 	}
+}
+
+public class ColonizeCommand : Command
+{
+    public ColonizeCommand(Spawner t): base(false)
+    {
+        actions.Enqueue(new MoveAction(t));
+        actions.Enqueue(new ColonizeAction(t));
+    }
+
+    public ColonizeCommand(Vector3 t) : base(false)
+    {
+
+    }
 }
