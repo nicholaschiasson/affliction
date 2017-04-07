@@ -136,7 +136,7 @@ public abstract class Command
 		public override bool OnCollision(Unit t)
 		{
 			// If this is not our target, we do not want to do anything
-			if (target != null || t != null || target.GetInstanceID() != t.GetInstanceID())
+			if (target == null || t == null || target.GetInstanceID() != t.GetInstanceID())
 				return false;
 
 			//If this is our target attack.
