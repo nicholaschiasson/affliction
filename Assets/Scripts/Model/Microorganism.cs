@@ -34,13 +34,6 @@ public abstract class Microorganism : Unit
             }
         }        
     }
-    
-    Vector3 MovingTo(Command command, Vector3 currentPos)
-    {
-        Vector3 target = command.moveToLocation(currentPos);
-        float dist = Vector3.Distance(target, currentPos);
-        return dist > Command.MARGIN_OF_ERROR ? target : currentPos;
-    }
 
     //for movement and physics, called on timer instead of per frame
     protected override void FixedUpdate()
@@ -51,12 +44,12 @@ public abstract class Microorganism : Unit
         {
             Vector3 currentPos = transform.position;
             Command command = commandQueue.Peek();
-            Vector3 target = MovingTo(command, currentPos);
-            if(target != currentPos)
+            Vector3 target = command.moveToLocation(currentPos);
+            if (target != currentPos)
             {
 				//todo move using addForce???
 				//rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
-				if (navAgent != null)
+				if (navAgent != null && target != navAgent.destination)
 					navAgent.destination = target;
             }
             //else // stopped moving
@@ -81,12 +74,14 @@ public abstract class Microorganism : Unit
             if (trail)
             {
                 Vector3 currentPos = transform.position;
-                Vector3 target = MovingTo(command, currentPos);
+                
+                // Check to determine if object is needing to move to a location
+                Vector3 target = command.moveToLocation(currentPos);
+
                 if (target != currentPos)
                 {
                     Transform trailTransform = trail.GetComponentInParent<Transform>();
                     trailTransform.LookAt(2 * transform.position - target);
-
                     if (!trail.isPlaying)
                     {
                         trail.Clear();

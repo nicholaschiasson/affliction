@@ -57,15 +57,21 @@ public abstract class Command
 		}
 
 		public override Vector3 moveToLocation(Vector3 currentLocation)
-		{
-			Vector3 goalPosition = targetLocation;
-			if (target != null)
+		{            
+            Vector3 goalPosition = targetLocation;
+
+            if (target != null)
 			{
 				goalPosition = target.transform.position;
 			}
 
-			complete = Vector3.Distance(goalPosition, currentLocation) < MARGIN_OF_ERROR;
-			return goalPosition;
+            // Removing Y Positions since our game has no vertical element
+            complete = Vector3.Distance(new Vector3(targetLocation.x, 0, targetLocation.z), new Vector3(currentLocation.x, 0, currentLocation.z)) < MARGIN_OF_ERROR;
+            if (complete)
+            {
+                goalPosition =  currentLocation;
+            }
+            return goalPosition;		
 		}
 
 		public override bool OnCollision(Unit t)
