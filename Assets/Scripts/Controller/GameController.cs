@@ -224,7 +224,9 @@ public class GameController : MonoBehaviour
 		float xAxisValue = Input.GetAxis("Horizontal");
 		float zAxisValue = Input.GetAxis("Vertical");
 		camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
-		//Debug.Log("Camera Coords: " + camera.transform.position.ToString());
+		camera.transform.position = new Vector3(Mathf.Clamp(camera.transform.position.x, -130.0f, 130.0f),
+		                                        camera.transform.position.y,
+												Mathf.Clamp(camera.transform.position.z, -144.0f, 124.0f));
 	}
 
 	public void RegisterCameraWarpLocation(string locationName, Vector3 location)
