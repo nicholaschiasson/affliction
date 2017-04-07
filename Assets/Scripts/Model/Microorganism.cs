@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Microorganism : Unit
 {
-    public float speed;
+    //public float speed;
     protected Queue<Command> commandQueue;
     ParticleSystem trail;
-    ParticleSystem spawn;    
+    ParticleSystem spawn;
+	NavMeshAgent navAgent;
 
     // Use this for initialization
     protected override void Awake()
@@ -16,6 +18,7 @@ public abstract class Microorganism : Unit
 
         trail = null;
         spawn = null;
+		navAgent = GetComponent<NavMeshAgent>();
 
         foreach(ParticleSystem particle in particleSystems)
         {
@@ -51,8 +54,9 @@ public abstract class Microorganism : Unit
             Vector3 target = MovingTo(command, currentPos);
             if(target != currentPos)
             {
-                //todo move using addForce???
-                rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
+				//todo move using addForce???
+				//rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
+				navAgent.destination = target;
             }
             else // stopped moving
             {
