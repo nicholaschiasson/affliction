@@ -417,7 +417,6 @@ MonoBehaviour:
   Affiliation: 1
   level: 1
   Health: 100
-  speed: 0.6
 --- !u!135 &135147323180389184
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -56,14 +56,15 @@ public abstract class Microorganism : Unit
             {
 				//todo move using addForce???
 				//rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
-				navAgent.destination = target;
+				if (navAgent != null)
+					navAgent.destination = target;
             }
-            else // stopped moving
-            {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                rb.ResetInertiaTensor();           
-            }
+            //else // stopped moving
+            //{
+            //    rb.velocity = Vector3.zero;
+            //    rb.angularVelocity = Vector3.zero;
+            //    rb.ResetInertiaTensor();           
+            //}
         }
     }
 
