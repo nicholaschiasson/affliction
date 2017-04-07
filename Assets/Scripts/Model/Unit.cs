@@ -90,31 +90,37 @@ public abstract class Unit : MonoBehaviour
     protected virtual void OnEnable()
 	{
 		GameController.OnSelectionBoundsCheck += SelectionBoundsCheck;
-		mouseHandler.OnLeftMouseDown += OnLeftMouseDown;
-		mouseHandler.OnRightMouseDown += OnRightMouseDown;
-		mouseHandler.OnMiddleMouseDown += OnMiddleMouseDown;
-		mouseHandler.OnLeftMouseHold += OnLeftMouseHold;
-		mouseHandler.OnRightMouseHold += OnRightMouseHold;
-		mouseHandler.OnMiddleMouseHold += OnMiddleMouseHold;
-		mouseHandler.OnLeftMouseClick += OnLeftMouseClick;
-		mouseHandler.OnRightMouseClick += OnRightMouseClick;
-		mouseHandler.OnMiddleMouseClick += OnMiddleMouseClick;
-		mouseHandler.OnMouseHover += OnMouseHover;
+		if (mouseHandler != null)
+		{
+			mouseHandler.OnLeftMouseDown += OnLeftMouseDown;
+			mouseHandler.OnRightMouseDown += OnRightMouseDown;
+			mouseHandler.OnMiddleMouseDown += OnMiddleMouseDown;
+			mouseHandler.OnLeftMouseHold += OnLeftMouseHold;
+			mouseHandler.OnRightMouseHold += OnRightMouseHold;
+			mouseHandler.OnMiddleMouseHold += OnMiddleMouseHold;
+			mouseHandler.OnLeftMouseClick += OnLeftMouseClick;
+			mouseHandler.OnRightMouseClick += OnRightMouseClick;
+			mouseHandler.OnMiddleMouseClick += OnMiddleMouseClick;
+			mouseHandler.OnMouseHover += OnMouseHover;
+		}
 	}
 
 	protected virtual void OnDisable()
 	{
 		GameController.OnSelectionBoundsCheck -= SelectionBoundsCheck;
-		mouseHandler.OnLeftMouseDown -= OnLeftMouseDown;
-		mouseHandler.OnRightMouseDown -= OnRightMouseDown;
-		mouseHandler.OnMiddleMouseDown -= OnMiddleMouseDown;
-		mouseHandler.OnLeftMouseHold -= OnLeftMouseHold;
-		mouseHandler.OnRightMouseHold -= OnRightMouseHold;
-		mouseHandler.OnMiddleMouseHold -= OnMiddleMouseHold;
-		mouseHandler.OnLeftMouseClick -= OnLeftMouseClick;
-		mouseHandler.OnRightMouseClick -= OnRightMouseClick;
-		mouseHandler.OnMiddleMouseClick -= OnMiddleMouseClick;
-		mouseHandler.OnMouseHover -= OnMouseHover;
+		if (mouseHandler != null)
+		{
+			mouseHandler.OnLeftMouseDown -= OnLeftMouseDown;
+			mouseHandler.OnRightMouseDown -= OnRightMouseDown;
+			mouseHandler.OnMiddleMouseDown -= OnMiddleMouseDown;
+			mouseHandler.OnLeftMouseHold -= OnLeftMouseHold;
+			mouseHandler.OnRightMouseHold -= OnRightMouseHold;
+			mouseHandler.OnMiddleMouseHold -= OnMiddleMouseHold;
+			mouseHandler.OnLeftMouseClick -= OnLeftMouseClick;
+			mouseHandler.OnRightMouseClick -= OnRightMouseClick;
+			mouseHandler.OnMiddleMouseClick -= OnMiddleMouseClick;
+			mouseHandler.OnMouseHover -= OnMouseHover;
+		}
 	}
 
 	// Override this in the implementation, the Game calls this when an action is requested at a specific location
@@ -240,6 +246,7 @@ public abstract class Unit : MonoBehaviour
     // Do not override: this method delegates the specific mouse events defined above
     void OnMouseOver()
 	{
-		mouseHandler.OnMouseOver();
+		if (mouseHandler != null)
+			mouseHandler.OnMouseOver();
 	}
 }
