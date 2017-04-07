@@ -18,9 +18,18 @@ public class GameController : MonoBehaviour
 
 	public HUD hud;
 
+	Transform cameraMinimapViewport;
+	float initialCameraSize = 10.0f;
+	Vector3 initialMinimapViewportScale = Vector3.one;
+
 	void Awake()
 	{
 		cameraWarpLocations = new Dictionary<string, Vector3>();
+		camera = GetComponent<Camera>();
+		initialCameraSize = camera.orthographicSize;
+		cameraMinimapViewport = transform.FindChild("CameraMinimapViewport");
+		if (cameraMinimapViewport != null)
+			initialMinimapViewportScale = cameraMinimapViewport.localScale;
 	}
 
 	void OnEnable()
@@ -52,7 +61,6 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		camera = GetComponent<Camera>();
 		selectedUnits = new HashSet<Unit>();
 
         //Ingoring All Colliisons with objects of the same layer.
@@ -231,7 +239,8 @@ public class GameController : MonoBehaviour
 		float zAxisValue = Input.GetAxis("Vertical");
 		camera.orthographicSize -= Time.deltaTime * zoomValue * cameraZoomSpeed;
 		camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, cameraMinSize, cameraMaxSize);
-		float cameraSizeByTwo = camera.orthographicSize / 2.0f;
+		if (cameraMinimapViewport != null)
+			cameraMinimapViewport.localScale = initialMinimapViewportScale / (initialCameraSize / camera.orthographicSize);
 		camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
 		camera.transform.position = new Vector3(Mathf.Clamp(camera.transform.position.x, -130.0f, 130.0f),
 		                                        camera.transform.position.y,
