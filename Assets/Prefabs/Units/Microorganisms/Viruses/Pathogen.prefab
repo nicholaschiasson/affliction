@@ -465,7 +465,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137412671186845006
 SkinnedMeshRenderer:
@@ -526,7 +526,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 0
   m_Acceleration: 64
-  avoidancePriority: 50
+  avoidancePriority: 99
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
