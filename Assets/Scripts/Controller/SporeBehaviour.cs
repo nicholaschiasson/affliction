@@ -11,13 +11,14 @@ public class SporeBehaviour : MonoBehaviour {
     public SporeState currentState;
 
     const float BASE_CREATION_TIME = 5.0f;
-
+    float timer;
     public float range;
 
     void Awake()
     {
         spore = GetComponent<Spore>();
         currentState = SporeState.Dormant;
+        timer = 0.0f;
     }
     // Use this for initialization
     void Start () {
@@ -75,23 +76,32 @@ public class SporeBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Is the spore needing orders
+        
+        if (timer > BASE_CREATION_TIME && currentState == SporeState.Dormant)
+        {
+            currentState = SporeState.Wander;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+        
         if (!spore.hasOrders())
         {
             if (currentState != SporeState.Colonize)
             {
                 float percent = Random.Range(0.0f, 1.0f);
                 bool infectionSpawned = false;
-                if(percent < 0.0005)
+                Debug.Log(percent);
+                if(percent < 0.2 && currentState == SporeState.Wander)
                 {
                     currentState = SporeState.Colonize;
                     infectionSpawned = spawnInfection();
                 }
                 if (!infectionSpawned)
                 {
-                    currentState = SporeState.Wander;
                     spore.doAction(newWanderLocation());
-                }
-                
+                }                
             }
             else
             {
