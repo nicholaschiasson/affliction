@@ -42,8 +42,7 @@ public class Spawner : Organ
         //Consume the resources to spawn
         erythStore.takeOut(cost[index]);
 
-		Vector3 randomPosition = Random.insideUnitSphere * transform.localScale.magnitude * 0.1f;
-		randomPosition += randomPosition.normalized * transform.localScale.magnitude * 1.1f + transform.position;
+		Vector3 randomPosition = Random.insideUnitSphere * transform.localScale.magnitude * 1.2f + transform.position;
 		NavMeshHit hit;
 		Vector3 newPos = new Vector3(transform.position.x,
 									 transform.position.y,
