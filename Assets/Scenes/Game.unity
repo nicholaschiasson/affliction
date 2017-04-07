@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 278460446}
   - component: {fileID: 278460445}
   - component: {fileID: 278460443}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CameraMinimapViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,9 +152,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 278460442}
-  m_LocalRotation: {x: 0.34202024, y: -0, z: -0, w: 0.9396926}
-  m_LocalPosition: {x: 0, y: 32.149727, z: -18.712435}
-  m_LocalScale: {x: 36, y: 26, z: 1}
+  m_LocalRotation: {x: 0.3420203, y: -0, z: -0, w: 0.9396926}
+  m_LocalPosition: {x: 0, y: 96.48712, z: 15.691933}
+  m_LocalScale: {x: 35, y: 26.500015, z: 1}
   m_Children: []
   m_Father: {fileID: 1746764449}
   m_RootOrder: 0
@@ -933,7 +933,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1746764444}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 15, z: -5}
+  m_LocalPosition: {x: 0, y: 100, z: -84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 278460446}
@@ -1190,7 +1190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2001453864}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

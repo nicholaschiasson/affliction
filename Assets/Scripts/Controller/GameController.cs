@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+	const float cameraZoomSpeed = 10.0f;
+	const float cameraMinSize = 7.5f;
+	const float cameraMaxSize = 25.0f;
+	const float cameraZOffset = 84.0f;
+	
 	public delegate void SelectionBoundsCheckAction(Bounds bounds, List<Unit> boundedUnits);
 	public static event SelectionBoundsCheckAction OnSelectionBoundsCheck;
 
@@ -186,7 +191,7 @@ public class GameController : MonoBehaviour
 			if (Input.GetKeyDown("6"))
 				warpTo = "Right Kidney";
 			if (cameraWarpLocations != null && cameraWarpLocations.ContainsKey(warpTo))
-				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z - 10.0f);
+				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z - cameraZOffset);
 		}
 		else
 		{
@@ -221,12 +226,16 @@ public class GameController : MonoBehaviour
 	// Update called once per frame after every update
 	void LateUpdate()
 	{
+		float zoomValue = Input.GetAxis("Mouse ScrollWheel");
 		float xAxisValue = Input.GetAxis("Horizontal");
 		float zAxisValue = Input.GetAxis("Vertical");
+		camera.orthographicSize -= Time.deltaTime * zoomValue * cameraZoomSpeed;
+		camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, cameraMinSize, cameraMaxSize);
+		float cameraSizeByTwo = camera.orthographicSize / 2.0f;
 		camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
 		camera.transform.position = new Vector3(Mathf.Clamp(camera.transform.position.x, -130.0f, 130.0f),
 		                                        camera.transform.position.y,
-												Mathf.Clamp(camera.transform.position.z, -144.0f, 124.0f));
+		                                        Mathf.Clamp(camera.transform.position.z, -130.0f - cameraZOffset, 136.0f - cameraZOffset));
 	}
 
 	public void RegisterCameraWarpLocation(string locationName, Vector3 location)
