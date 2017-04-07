@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 54860051493115000}
   - component: {fileID: 114935152169997834}
   - component: {fileID: 195344753424542976}
-  - component: {fileID: 114970378905228678}
   m_Layer: 13
   m_Name: Pathogen
   m_TagString: Untagged
@@ -446,17 +445,6 @@ MonoBehaviour:
   Health: 100
   damage: 1
 --- !u!114 &114935152169997834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1225768333834562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a350a8f8ad9df444fb4da9dfb238994c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114970378905228678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
