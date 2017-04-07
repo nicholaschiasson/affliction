@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114417241694051698}
   - component: {fileID: 114716655274331760}
   - component: {fileID: 136191879074997204}
+  - component: {fileID: 195014164190991668}
   m_Layer: 0
   m_Name: Infection
   m_TagString: Untagged
@@ -232,6 +233,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &195014164190991668
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538978896821600}
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Speed: 0
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!198 &198884962909893598
 ParticleSystem:
   m_ObjectHideFlags: 1
