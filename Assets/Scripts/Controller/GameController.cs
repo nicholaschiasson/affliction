@@ -109,50 +109,58 @@ public class GameController : MonoBehaviour
 	public void doAction(Vector3 loc)
 	{
 		foreach (Unit u in selectedUnits)
-			u.doAction(loc);
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.doAction(loc);
 	}
 
 	// Sending the action command to the selected lists and the location to which the action needs to be executed
 	public void doAction(Unit unit)
 	{
 		foreach (Unit u in selectedUnits)
-			u.doAction(unit);
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.doAction(unit);
 	}
 
 	public void OnOnePressed()
 	{
 		foreach (Unit u in selectedUnits)
-			u.OnOnePressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnOnePressed();
 	}
 
 	public void OnTwoPressed()
 	{
 		foreach (Unit u in selectedUnits)
-			u.OnTwoPressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnTwoPressed();
 	}
 
     public void OnThreePressed()
     {
         foreach (Unit u in selectedUnits)
-            u.OnThreePressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnThreePressed();
     }
 
     public void OnFourPressed()
     {
         foreach (Unit u in selectedUnits)
-            u.OnFourPressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnFourPressed();
     }
 
     public void OnFivePressed()
     {
         foreach (Unit u in selectedUnits)
-            u.OnFivePressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnFivePressed();
     }
 
     public void OnZPressed()
     {
         foreach (Unit u in selectedUnits)
-            u.OnZPressed();
+            if (u.Affiliation == UnitAffiliation.Ally)
+                u.OnZPressed();
     }
 
     // Update is called once per frame

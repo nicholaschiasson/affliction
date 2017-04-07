@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 95421207356984754}
   - component: {fileID: 114005205162049316}
   - component: {fileID: 195375169998405068}
+  - component: {fileID: 114011438648403046}
   m_Layer: 12
   m_Name: Spore
   m_TagString: Spore
@@ -207,6 +208,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114005205162049316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491029659344476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff87549eb1dd8a408afb6b4018d5bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114011438648403046
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
