@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 114423979657794974}
   - component: {fileID: 54428684658913038}
   - component: {fileID: 136017978957662800}
+  - component: {fileID: 136342257670524888}
   m_Layer: 0
   m_Name: LeftKidney
   m_TagString: Miner
@@ -284,3 +285,16 @@ CapsuleCollider:
   m_Height: 1.75
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136342257670524888
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768774452540968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.75
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.5, z: 0}

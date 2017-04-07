@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 4166517641551542}
   - component: {fileID: 114262816915572598}
   - component: {fileID: 54759123196359448}
-  - component: {fileID: 135331350396524378}
+  - component: {fileID: 136070193537083424}
   m_Layer: 0
   m_Name: Lungs
   m_TagString: Miner
@@ -721,8 +721,8 @@ MonoBehaviour:
   basicUpgradeCost: 0
   resource: 2
   yield: 1000
---- !u!135 &135331350396524378
-SphereCollider:
+--- !u!136 &136070193537083424
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -730,6 +730,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: -0.1}
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.15}
