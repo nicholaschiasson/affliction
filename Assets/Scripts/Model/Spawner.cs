@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawner : Organ
 {
@@ -41,9 +42,14 @@ public class Spawner : Organ
         //Consume the resources to spawn
         erythStore.takeOut(cost[index]);
 
-        Vector3 newPos = new Vector3(this.transform.position.x + 2 * this.transform.localScale.x,
-                                            this.transform.position.y,
-                                            this.transform.position.z + 2 * this.transform.localScale.z);
+		Vector3 randomPosition = Random.insideUnitSphere * transform.localScale.magnitude * 0.1f;
+		randomPosition += randomPosition.normalized * transform.localScale.magnitude * 1.1f + transform.position;
+		NavMeshHit hit;
+		Vector3 newPos = new Vector3(transform.position.x,
+									 transform.position.y,
+									 transform.position.z - transform.localScale.z);
+		if (NavMesh.SamplePosition(randomPosition, out hit, transform.localScale.magnitude * 1.2f, 1))
+			newPos = hit.position;
 
         // Spawning the game object and setting the level to our level
         GameObject spawned = Instantiate(spawnables[index], newPos, this.transform.rotation);
