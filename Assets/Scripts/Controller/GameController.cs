@@ -165,17 +165,17 @@ public class GameController : MonoBehaviour
 		if (Input.GetKey(KeyCode.Space))
 		{
 			string warpTo = "";
-			if (Input.GetKeyUp("1"))
+			if (Input.GetKeyDown("1"))
 				warpTo = "Heart";
-			if (Input.GetKeyUp("2"))
+			if (Input.GetKeyDown("2"))
 				warpTo = "Brain";
-			if (Input.GetKeyUp("3"))
+			if (Input.GetKeyDown("3"))
 				warpTo = "Lungs";
-			if (Input.GetKeyUp("4"))
+			if (Input.GetKeyDown("4"))
 				warpTo = "Stomach";
-			if (Input.GetKeyUp("5"))
+			if (Input.GetKeyDown("5"))
 				warpTo = "Left Kidney";
-			if (Input.GetKeyUp("6"))
+			if (Input.GetKeyDown("6"))
 				warpTo = "Right Kidney";
 			if (cameraWarpLocations != null && cameraWarpLocations.ContainsKey(warpTo))
 				transform.position = new Vector3(cameraWarpLocations[warpTo].x, transform.position.y, cameraWarpLocations[warpTo].z - 10.0f);

@@ -377,6 +377,10 @@ public class HUD : MonoBehaviour
 			int j = 0;
 			foreach (var p in selectedUnits)
 			{
+				// Remove dead units
+				for (int k = p.Value.Count - 1; k >= 0; k--)
+					if (p.Value[k].Health <= 0)
+						p.Value.RemoveAt(k);
 				int i = 0;
 				bool newRow = false;
 				foreach (Unit u in p.Value)
@@ -391,7 +395,9 @@ public class HUD : MonoBehaviour
 					var unitInfoBox = new Rect(unitTexture.xMax + iconPadding / 2, unitTexture.y, unitInfoCanvas.xMax - unitTexture.xMax - iconPadding, unitTexture.height);
 					GUI.Box(unitInfoCanvas, title);
 					GUI.DrawTexture(unitTexture, t);
+					GUI.enabled = false;
 					GUI.TextArea(unitInfoBox, info);
+					GUI.enabled = true;
 					i++;
 					if (i % iconsPerRow == 0)
 					{
