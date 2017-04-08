@@ -12,12 +12,17 @@ public class SporeBehaviour : MonoBehaviour {
 
     const float BASE_CREATION_TIME = 5.0f;
     float timer;
+    Bounds referenceBound;
+    public GameObject spawnable;
 
     void Awake()
     {
         spore = GetComponent<Spore>();
         currentState = SporeState.Dormant;
         timer = 0.0f;
+
+        GameObject infectionReference = GameObject.FindGameObjectWithTag("InfectionReference");
+        Bounds referenceBound = infectionReference.GetComponentInChildren<Renderer>().bounds;
     }
     // Use this for initialization
     void Start () {
@@ -67,9 +72,22 @@ public class SporeBehaviour : MonoBehaviour {
         }        
     }
 
-    bool spawnInfection()
+    bool canSpawn()
     {
-        return false;
+        Collider[] hitCollider = Physics.OverlapSphere(transform.position, referenceBound.extents.x +1);
+
+        bool organHit = false;
+        foreach (Collider collider in hitCollider)
+        {
+            Organ organ= collider.GetComponent<Organ>();
+
+            if(organ != null)
+            {                
+                organHit = true;
+            }
+        }
+                
+        return !organHit;
     }
 
 	// Update is called once per frame
@@ -90,13 +108,18 @@ public class SporeBehaviour : MonoBehaviour {
             if (currentState != SporeState.Colonize)
             {
                 float percent = Random.Range(0.0f, 1.0f);
-                bool infectionSpawned = false;
-                if(percent < 0.2 && currentState == SporeState.Wander)
-                {
-                    currentState = SporeState.Colonize;
-                    infectionSpawned = spawnInfection();
+                bool spawnAvail = false;
+                if (percent < 0.2 && currentState == SporeState.Wander)
+                {                    
+                    spawnAvail = canSpawn();
+                    if (spawnAvail)
+                    {
+                        currentState = SporeState.Colonize;
+                        Instantiate(spawnable, this.transform.position, this.transform.rotation);
+                    } 
+                    
                 }
-                if (!infectionSpawned)
+                if (!spawnAvail)
                 {
                     spore.doAction(newWanderLocation());
                 }                

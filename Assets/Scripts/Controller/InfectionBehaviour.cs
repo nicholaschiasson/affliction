@@ -22,7 +22,7 @@ public class InfectionBehaviour : MonoBehaviour {
 
     const float DEFAULT_COOLDOWN = 5.0f;
     const float BASE_PREPARE_TIME = 2.0f;
-    const float MATURE_TIME = 30.0f;
+    const float MATURE_TIME = 15.0f;
     const float STATE_SWITCH_TIME = 5.0f;
 
     private void Awake()
