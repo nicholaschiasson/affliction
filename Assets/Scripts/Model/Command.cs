@@ -28,6 +28,10 @@ public abstract class Command
 
 		public bool isComplete()
 		{
+            if (target != null && target.Health <= 0)
+            {
+                complete = true;
+            } 
 			return complete;
 		}
 

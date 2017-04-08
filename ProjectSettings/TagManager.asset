@@ -15,6 +15,7 @@ TagManager:
   - trail
   - DamageExplosion
   - Spawn
+  - InfectionReference
   layers:
   - Default
   - TransparentFX
