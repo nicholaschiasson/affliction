@@ -49,7 +49,7 @@ public abstract class Microorganism : Unit
             {
 				//todo move using addForce???
 				//rb.MovePosition(Vector3.MoveTowards(transform.position, target, speed));
-				if (navAgent != null && target != navAgent.destination)
+				if (navAgent != null && new Vector3(target.x, 0, target.z) != new Vector3(navAgent.destination.x, 0, navAgent.destination.z))
 					navAgent.destination = target;
             }
             //else // stopped moving
@@ -136,7 +136,14 @@ public abstract class Microorganism : Unit
     protected void MoveTo(Vector3 pos)
     {
         commandQueue.Clear();
-        commandQueue.Enqueue(new MoveCommand(new Vector3(pos.x, transform.position.y, pos.z)));
-        return;
+        if(pos != transform.position)
+        {
+            commandQueue.Enqueue(new MoveCommand(new Vector3(pos.x, transform.position.y, pos.z)));
+        }        
+    }
+
+    public bool hasOrders()
+    {
+        return commandQueue.Count > 0;
     }
 }

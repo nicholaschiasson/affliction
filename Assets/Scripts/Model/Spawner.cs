@@ -84,5 +84,5 @@ public class Spawner : Organ
         {
             erythStore += deposit;
         }
-    }
+    }    
 }
