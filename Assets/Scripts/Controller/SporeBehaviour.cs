@@ -12,7 +12,6 @@ public class SporeBehaviour : MonoBehaviour {
 
     const float BASE_CREATION_TIME = 5.0f;
     float timer;
-    public float range;
 
     void Awake()
     {
@@ -27,13 +26,13 @@ public class SporeBehaviour : MonoBehaviour {
 
     Vector3 newWanderLocation()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * range;
+        Vector3 randomDirection = Random.insideUnitSphere * spore.visionRange;
         NavMeshHit navHit;
 
 
         randomDirection += transform.position;
         // If we do not find a position return the current position
-        if (!NavMesh.SamplePosition(randomDirection, out navHit, range * 2, NavMesh.GetAreaFromName("Wawlkable")))
+        if (!NavMesh.SamplePosition(randomDirection, out navHit, spore.visionRange * 2, NavMesh.GetAreaFromName("Wawlkable")))
         {
             return transform.position;
         }
@@ -45,7 +44,7 @@ public class SporeBehaviour : MonoBehaviour {
     {
         if (currentState == SporeState.Wander)
         {
-            float radius = range / 2;
+            float radius = spore.visionRange/ 2;
             float percent = Random.Range(0.0f, 1.0f);
             
             if(percent < 0.02)
@@ -60,8 +59,8 @@ public class SporeBehaviour : MonoBehaviour {
                     // Find an infection and then potentially go it
                     if (spawner != null && spawner.Affiliation == spore.Affiliation)
                     {
-                        //spore.doAction(spawner);
-                        //currentState = SporeState.Colonize;
+                        spore.doAction(spawner);
+                        currentState = SporeState.Colonize;
                     }
                 }
             }            
@@ -92,7 +91,6 @@ public class SporeBehaviour : MonoBehaviour {
             {
                 float percent = Random.Range(0.0f, 1.0f);
                 bool infectionSpawned = false;
-                Debug.Log(percent);
                 if(percent < 0.2 && currentState == SporeState.Wander)
                 {
                     currentState = SporeState.Colonize;
