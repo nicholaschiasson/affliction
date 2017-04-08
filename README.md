@@ -55,12 +55,12 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
 #### Spore
 -   Blue model identical to white blood cell model
 -   Enemy affiliation
--   Builds [infections](#infection) (NOT IMPLEMENTED)
+-   Builds [infections](#infection)
 
 #### Pathogen
 -   Skeletal animated model 
 -   Enemy affiliation
--   Attacks allied units (NOT IMPLEMENTED)
+-   Attacks allied units
 
 ### Miners
 #### Lungs
