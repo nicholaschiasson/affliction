@@ -68,7 +68,7 @@ public abstract class Unit : MonoBehaviour
         if (Health <= 0)
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

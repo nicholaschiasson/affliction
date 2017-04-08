@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
 	float initialCameraSize = 10.0f;
 	Vector3 initialMinimapViewportScale = Vector3.one;
 
+	bool isMouseOverGUI;
+
 	void Awake()
 	{
 		cameraWarpLocations = new Dictionary<string, Vector3>();
@@ -42,6 +44,8 @@ public class GameController : MonoBehaviour
 			hud.OnActionThreeButtonPressed += OnThreePressed;
 			hud.OnActionFourButtonPressed += OnFourPressed;
 			hud.OnActionFiveButtonPressed += OnFivePressed;
+			hud.OnMouseOverGUI += OnMouseOverGUI;
+			hud.OnMouseOutsideGUI += OnMouseOutsideGUI;
 		}
 	}
 
@@ -55,6 +59,8 @@ public class GameController : MonoBehaviour
 			hud.OnActionThreeButtonPressed -= OnThreePressed;
 			hud.OnActionFourButtonPressed -= OnFourPressed;
 			hud.OnActionFiveButtonPressed -= OnFivePressed;
+			hud.OnMouseOverGUI -= OnMouseOverGUI;
+			hud.OnMouseOutsideGUI -= OnMouseOutsideGUI;
 		}
 	}
 
@@ -237,8 +243,11 @@ public class GameController : MonoBehaviour
 		float zoomValue = Input.GetAxis("Mouse ScrollWheel");
 		float xAxisValue = Input.GetAxis("Horizontal");
 		float zAxisValue = Input.GetAxis("Vertical");
-		camera.orthographicSize -= Time.deltaTime * zoomValue * cameraZoomSpeed;
-		camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, cameraMinSize, cameraMaxSize);
+		if (!isMouseOverGUI)
+		{
+			camera.orthographicSize -= Time.deltaTime * zoomValue * cameraZoomSpeed;
+			camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, cameraMinSize, cameraMaxSize);
+		}
 		if (cameraMinimapViewport != null)
 			cameraMinimapViewport.localScale = initialMinimapViewportScale / (initialCameraSize / camera.orthographicSize);
 		camera.transform.Translate(new Vector3(xAxisValue, 0.0f, zAxisValue), Space.World);
@@ -251,5 +260,15 @@ public class GameController : MonoBehaviour
 	{
 		if (cameraWarpLocations != null)
 			cameraWarpLocations[locationName] = location;
+	}
+
+	void OnMouseOverGUI()
+	{
+		isMouseOverGUI = true;
+	}
+
+	void OnMouseOutsideGUI()
+	{
+		isMouseOverGUI = false;
 	}
 }
