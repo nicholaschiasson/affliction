@@ -104,3 +104,12 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
 - Added combat from player units to enemies
 - Added Kidney, Stomache, Lungs
 - UI Improvements
+- Added brain and research functionality for organ upgrading
+- Updated minimap to show entire map
+- Added camera zoom and camera boundaries
+- Added unity terrain
+- Added Unity pathfinding using NavMesh system
+- Added white blood cell AI, which in turn is responsible for pathogen AI
+- Added spore AI
+- Added infection AI
+- Placed level components in a more suitable startup configuration
