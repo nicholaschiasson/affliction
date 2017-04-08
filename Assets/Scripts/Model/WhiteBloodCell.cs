@@ -58,4 +58,11 @@ public class WhiteBloodCell : BloodCell {
 
         return false;        
     }
+
+	public override void takeDamage(int damage)
+	{
+		base.takeDamage(damage);
+		navAgent.velocity = Vector3.zero;
+		commandQueue.Clear();
+	}
 }

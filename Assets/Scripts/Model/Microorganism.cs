@@ -8,7 +8,7 @@ public abstract class Microorganism : Unit
     protected Queue<Command> commandQueue;
     ParticleSystem trail;
     ParticleSystem spawn;
-	NavMeshAgent navAgent;
+	protected NavMeshAgent navAgent;
     public float visionRange;
 
     // Use this for initialization
