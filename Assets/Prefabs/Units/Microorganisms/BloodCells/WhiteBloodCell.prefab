@@ -290,6 +290,7 @@ MonoBehaviour:
   Affiliation: 1
   level: 1
   Health: 100
+  visionRange: 50
   damage: 1
 --- !u!135 &135505363281953666
 SphereCollider:
