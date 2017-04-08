@@ -9,6 +9,7 @@ public abstract class Microorganism : Unit
     ParticleSystem trail;
     ParticleSystem spawn;
 	NavMeshAgent navAgent;
+    public float visionRange;
 
     // Use this for initialization
     protected override void Awake()

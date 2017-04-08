@@ -443,6 +443,7 @@ MonoBehaviour:
   Affiliation: 2
   level: 1
   Health: 100
+  visionRange: 50
   damage: 1
 --- !u!114 &114935152169997834
 MonoBehaviour:
@@ -455,6 +456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a350a8f8ad9df444fb4da9dfb238994c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  range: 0
 --- !u!135 &135781739232385958
 SphereCollider:
   m_ObjectHideFlags: 1
