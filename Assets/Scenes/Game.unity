@@ -82,7 +82,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 1
-    agentSlope: 25
+    agentSlope: 10
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
@@ -90,7 +90,7 @@ NavMeshSettings:
     manualCellSize: 0
     cellSize: 0.16666667
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: 7b7ef46bec29c40859206c8a6e86cb2f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 11c70003e8f4d43b8b44aeba8ccc07ae, type: 2}
 --- !u!1 &278460442
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,8 +282,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d76830bbaf18a74b97358c284ded961, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &501355473 stripped
@@ -330,11 +329,6 @@ Prefab:
     - target: {fileID: 4480971711417454, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 195228476612363528, guid: 00c9cb2da97594acab8219a3ca9718ee,
-        type: 2}
-      propertyPath: m_BaseOffset
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}
@@ -420,18 +414,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166517641551542, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1590643970492768, guid: 7cc4ef45cf7423941bf1997c0a096340, type: 2}
       propertyPath: m_IsActive
       value: 1
@@ -483,18 +465,6 @@ Prefab:
     - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885587714630336, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1508788710005574, guid: a40b34ad5bc1f4f38997aa6570d0aa5d, type: 2}
       propertyPath: m_IsActive
@@ -582,18 +552,6 @@ Prefab:
     - target: {fileID: 1768774452540968, guid: ab4799fc34b0e4b9bbb6dea70fadb8a1, type: 2}
       propertyPath: m_Name
       value: Left Kidney
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766183866564246, guid: ab4799fc34b0e4b9bbb6dea70fadb8a1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766183866564246, guid: ab4799fc34b0e4b9bbb6dea70fadb8a1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766183866564246, guid: ab4799fc34b0e4b9bbb6dea70fadb8a1, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1229521547541860, guid: ab4799fc34b0e4b9bbb6dea70fadb8a1, type: 2}
       propertyPath: m_IsActive
@@ -775,18 +733,6 @@ Prefab:
     - target: {fileID: 1083748906027598, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
       propertyPath: m_Name
       value: Right Kidney
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925059704350772, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1876983009377118, guid: 6f40b2471e57c4e7ebb86a9e6557d039, type: 2}
       propertyPath: m_IsActive
@@ -1128,22 +1074,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660349693971778, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215975226092930, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1137341574921994, guid: e6b4943bc1ef254478c7fde891eb39f3, type: 2}
       propertyPath: m_IsActive
       value: 1
@@ -1294,18 +1224,6 @@ Prefab:
       propertyPath: organs.Array.data[4]
       value: 
       objectReference: {fileID: 1964451433}
-    - target: {fileID: 4931133052635972, guid: 94865eb8b5d4112428094ed6e0a9fa76, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4931133052635972, guid: 94865eb8b5d4112428094ed6e0a9fa76, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4931133052635972, guid: 94865eb8b5d4112428094ed6e0a9fa76, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1555273777924332, guid: 94865eb8b5d4112428094ed6e0a9fa76, type: 2}
       propertyPath: m_IsActive
       value: 1
