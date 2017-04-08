@@ -109,7 +109,7 @@ public class SporeBehaviour : MonoBehaviour {
             {
                 float percent = Random.Range(0.0f, 1.0f);
                 bool spawnAvail = false;
-                if (percent < 0.2 && currentState == SporeState.Wander)
+                if (percent < 0.15 && currentState == SporeState.Wander)
                 {                    
                     spawnAvail = canSpawn();
                     if (spawnAvail)

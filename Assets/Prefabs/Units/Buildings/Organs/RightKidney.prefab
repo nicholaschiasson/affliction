@@ -270,7 +270,7 @@ MonoBehaviour:
   level: 1
   Health: 10000
   consumeCost: 1
-  basicUpgradeCost: 0
+  basicUpgradeCost: 500
   resource: 1
   yield: 50
 --- !u!136 &136133822139437688

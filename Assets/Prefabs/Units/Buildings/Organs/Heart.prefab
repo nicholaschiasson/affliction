@@ -269,7 +269,7 @@ MonoBehaviour:
   level: 1
   Health: 10000
   consumeCost: 2
-  basicUpgradeCost: 0
+  basicUpgradeCost: 500
   spawnables:
   - {fileID: 1569579906175206, guid: 3019b6492194f48f1a95b8bc45bea71c, type: 2}
   - {fileID: 1581605045193478, guid: 00c9cb2da97594acab8219a3ca9718ee, type: 2}

@@ -20,7 +20,7 @@ public class WhiteBloodCell : BloodCell {
     {
         base.FixedUpdate();
         float radius = visionRange / 5;
-        Collider[] hitCollider = Physics.OverlapSphere(transform.position, radius);
+        /*Collider[] hitCollider = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider collider in hitCollider)
         {
@@ -31,7 +31,7 @@ public class WhiteBloodCell : BloodCell {
             {
                 this.doAction(unit);
             }
-        }
+        }*/
     }
 
     public override void doAction(Unit unit)

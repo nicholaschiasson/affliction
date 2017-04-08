@@ -7,8 +7,8 @@ public class InfectionBehaviour : MonoBehaviour {
     Spawner infection;
     int oldHealth;
 
-    enum InfectionState {Dormant, Idle, Spread, Attack, Defend}
-    InfectionState currentState;
+    public enum InfectionState {Dormant, Idle, Spread, Attack, Defend}
+    public InfectionState currentState;
     float timer;
     float state_timer;
     float cooldown;
@@ -51,9 +51,13 @@ public class InfectionBehaviour : MonoBehaviour {
         }
 
         //Updating Health
-        if(infection.Health != oldHealth && cooldown <= 0.0f)
+        if(infection.Health < oldHealth && cooldown <= 0.0f)
         {
             setState(InfectionState.Defend);
+        }
+        else if (infection.Health > oldHealth)
+        {
+            oldHealth = infection.Health;
         }
 
         switch (currentState)

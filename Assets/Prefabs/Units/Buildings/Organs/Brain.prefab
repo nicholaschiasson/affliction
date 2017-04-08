@@ -300,7 +300,7 @@ MonoBehaviour:
   level: 1
   Health: 10000
   consumeCost: 1
-  basicUpgradeCost: 0
+  basicUpgradeCost: 500
   organs:
   - {fileID: 0}
   - {fileID: 0}
