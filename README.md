@@ -15,6 +15,7 @@ COMP4501 Term Project - An immune system real-time strategy game made with Unity
 | ESC          | Quit game (ignored in unity editor)                                              |
 | LEFT MOUSE   | Select unit (drag to multi-select)<br/>Deslects units if click/drag over terrain |
 | RIGHT MOUSE  | Selected unit do action at mouse location                                        |
+| SCROLL WHEEL | Zoom camera in/out                                                               |
 | 1            | If spawner selected, spawn red blood cell                                        |
 | 2            | If spawner selected, spawn white blood cell                                      |
 | SPACE        | Hold to view camera quick go to menu                                             |
@@ -86,15 +87,13 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
 #### Infection
 -   Black cube
 -   Enemy affiliation
--   Spawns spores and pathogens (NOT IMPLEMENTED)
+-   Spawns spores and pathogens
 
 ## Notes
 -   UI is incomplete, so the following functionality is all it contributes to:
     -   The "Menu" button in the top left of the game window simply exits the game, as does the ESCAPE key (this is all ignored in the editor)
     -   More UI elements are still to be added in the future
 -   Currently spawning animation plays on first launch
--   Oxygen consumption overtime is disabled for playtesting
--   Infections will not move because their mass is too large for a single cell to push
 -   A bug exists when a unit is attacking another unit but not moving, the moving trail still is emitting and if the unit dies, the allied unit stops by the trail keeps emitting
 
 ## ChangeLog
