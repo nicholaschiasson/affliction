@@ -115,7 +115,8 @@ public class SporeBehaviour : MonoBehaviour {
                     if (spawnAvail)
                     {
                         currentState = SporeState.Colonize;
-                        Instantiate(spawnable, this.transform.position, this.transform.rotation);
+                        var spwnbl = Instantiate(spawnable, this.transform.position, this.transform.rotation);
+						spwnbl.name = spawnable.name;
                     } 
                     
                 }

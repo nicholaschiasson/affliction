@@ -200,7 +200,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1538978896821600, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
       propertyPath: m_Name
-      value: InfectionLeft
+      value: Infection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
@@ -498,7 +498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1538978896821600, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
       propertyPath: m_Name
-      value: InfectionRight
+      value: Infection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3711ea22a106fc448a5035693271dca6, type: 2}
@@ -683,7 +683,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1569579906175206, guid: 3019b6492194f48f1a95b8bc45bea71c, type: 2}
       propertyPath: m_Name
-      value: RedBloodCell (1)
+      value: RedBloodCell
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3019b6492194f48f1a95b8bc45bea71c, type: 2}

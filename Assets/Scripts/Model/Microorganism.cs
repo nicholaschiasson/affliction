@@ -82,7 +82,8 @@ public abstract class Microorganism : Unit
                 if (target != currentPos)
                 {
                     Transform trailTransform = trail.GetComponentInParent<Transform>();
-                    trailTransform.LookAt(2 * transform.position - target);
+					if (trailTransform != null)
+                    	trailTransform.LookAt(2 * transform.position - target);
                     if (!trail.isPlaying)
                     {
                         trail.Clear();
