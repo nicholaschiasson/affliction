@@ -32,6 +32,16 @@
               if (releaseWin64Button) {
                 releaseWin64Button.setAttribute("href", data.assets[i].browser_download_url);
               }
+            } else if (data.assets[i].name === "affliction-" + data.tag_name + "-macosx.zip") {
+              releaseMacButton = document.getElementById("mac-release");
+              if (releaseMacButton) {
+                releaseMacButton.setAttribute("href", data.assets[i].browser_download_url);
+              }
+            } else if (data.assets[i].name === "affliction-" + data.tag_name + "-linux.zip") {
+              releaseLinButton = document.getElementById("lin-release");
+              if (releaseLinButton) {
+                releaseLinButton.setAttribute("href", data.assets[i].browser_download_url);
+              }
             } else {
               console.error("Found unexpected asset: " + data.assets[i]);
             }
@@ -294,6 +304,14 @@
           <a id="win64-release" href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
             <small>Latest Release</small>
             windows <small>64-bit</small>
+          </a>
+          <a id="mac-release" href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
+            <small>Latest Release</small>
+            macosx
+          </a>
+          <a id="lin-release" href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
+            <small>Latest Release</small>
+            linux
           </a>
           <a href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
             <small>Latest Release</small>
