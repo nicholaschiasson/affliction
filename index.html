@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      var request = new XMLHttpRequest();
+
+      request.open('GET', 'https://api.github.com/repos/nicholaschiasson/affliction/releases/latest', true);
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+          // Success!
+          var data = JSON.parse(request.responseText);
+          for (var i = 0; i < data.assets.length; i++) {
+            if (data.assets[i].name === "affliction-" + data.tag_name + "-windows-x86.zip") {
+              releaseWin32Button = document.getElementById("win32-release");
+              if (releaseWin32Button) {
+                releaseWin32Button.setAttribute("href", data.assets[i].browser_download_url);
+              }
+            } else if (data.assets[i].name === "affliction-" + data.tag_name + "-windows-x86.zip") {
+              releaseWin64Button = document.getElementById("win64-release");
+              if (releaseWin64Button) {
+                releaseWin64Button.setAttribute("href", data.assets[i].browser_download_url);
+              }
+            } else {
+              console.error("Found unexpected asset: " + data.assets[i]);
+            }
+          }
+        } else {
+          // We reached our target server, but it returned an error
+          console.error(request);
+        }
+      };
+
+      request.send();
+    </script>
+
+    <title>affliction by nicholaschiasson</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Kill The Snowman</h1>
+        <h2>Ludum Dare 31 entry</h2>
+        <a href="https://github.com/nicholaschiasson/KillTheSnowman" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="affliction" class="anchor" href="#affliction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>affliction</h1>
+
+<p>COMP4501 Term Project - An immune system real-time strategy game made with Unity.</p>
+
+<h2>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h2>
+
+<ul>
+<li><a href="https://github.com/nicholaschiasson">Nicholas Chiasson</a></li>
+<li><a href="https://github.com/Lharp5">Luke Harper</a></li>
+</ul>
+
+<h2>
+<a id="controls" class="anchor" href="#controls" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controls</h2>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w</td>
+<td>Move camera up/forward</td>
+</tr>
+<tr>
+<td>a</td>
+<td>Move camera left</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Move camera down/backward</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Move camera right</td>
+</tr>
+<tr>
+<td>ESC</td>
+<td>Quit game (ignored in unity editor)</td>
+</tr>
+<tr>
+<td>LEFT MOUSE</td>
+<td>Select unit (drag to multi-select)<br>Deslects units if click/drag over terrain</td>
+</tr>
+<tr>
+<td>RIGHT MOUSE</td>
+<td>Selected unit do action at mouse location</td>
+</tr>
+<tr>
+<td>SCROLL WHEEL</td>
+<td>Zoom camera in/out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>If spawner selected, spawn red blood cell</td>
+</tr>
+<tr>
+<td>2</td>
+<td>If spawner selected, spawn white blood cell</td>
+</tr>
+<tr>
+<td>SPACE</td>
+<td>Hold to view camera quick go to menu</td>
+</tr>
+<tr>
+<td>SPACE + 1</td>
+<td>Jump camera to heart</td>
+</tr>
+<tr>
+<td>SPACE + 2</td>
+<td>Jump camera to brain</td>
+</tr>
+<tr>
+<td>SPACE + 3</td>
+<td>Jump camera to lungs</td>
+</tr>
+<tr>
+<td>SPACE + 4</td>
+<td>Jump camera to stomache</td>
+</tr>
+<tr>
+<td>SPACE + 5</td>
+<td>Jump camera to left kindey</td>
+</tr>
+<tr>
+<td>SPACE + 6</td>
+<td>Jump camera to right kindey</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="mechanics" class="anchor" href="#mechanics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mechanics</h2>
+
+<h3>
+<a id="movement" class="anchor" href="#movement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Movement</h3>
+
+<p>Allied microorganisms (red/white blood cells) can be moved by selecting them and then right clicking somewhere on the terrain. A trail particle effect will appear behind the unit as they move.</p>
+
+<h3>
+<a id="spawning" class="anchor" href="#spawning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spawning</h3>
+
+<p>Allied microorganisms can be spawned by first selecting the <a href="#spawners">spawner</a> then pressing 1 or the icon in the bottom right UI panel to spawn a red blood cell, or pressing 2 or the icon in the bottom right UI panel to spawn a white blood cell. A spawning animation particle effect will appear.</p>
+
+<h3>
+<a id="mining-resources" class="anchor" href="#mining-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mining resources</h3>
+
+<p>To mine resources to be transferred to the spawner, first select a <a href="#red-blood-cell">red blood cell</a>, then right click a <a href="#miners">miner organ</a>, and then right click a spawner organ. The red blood cell will continuously travel back and forth from the miner to the spawner, bringing resources.</p>
+
+<h3>
+<a id="attacking-enemies" class="anchor" href="#attacking-enemies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Attacking enemies</h3>
+
+<p>To Attack an enemy select a <a href="#white-blood-cell">white blood cell</a>, then right click on an enemy <a href="#pathogen">pathogen</a> or <a href="#spore">spore</a> or enemy Infection. When two units collide, the units use RigidBody physics to push the enemy units while dealing damage. A damage particle effect will sparkle around the enemy unit. When a unit dies it is removed from the game.</p>
+
+<h2>
+<a id="identification" class="anchor" href="#identification" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Identification</h2>
+
+<h3>
+<a id="microorganisms" class="anchor" href="#microorganisms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Microorganisms</h3>
+
+<h4>
+<a id="red-blood-cell" class="anchor" href="#red-blood-cell" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Red blood cell</h4>
+
+<ul>
+<li>Red blood cell model</li>
+<li>Ally affiliation</li>
+<li>Collects resources from a miner and delivers to a spawner</li>
+</ul>
+
+<h4>
+<a id="white-blood-cell" class="anchor" href="#white-blood-cell" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>White blood cell</h4>
+
+<ul>
+<li>White blood cell model</li>
+<li>Ally affiliation</li>
+<li>Attacks enemy units</li>
+</ul>
+
+<h4>
+<a id="spore" class="anchor" href="#spore" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spore</h4>
+
+<ul>
+<li>Blue model identical to white blood cell model</li>
+<li>Enemy affiliation</li>
+<li>Builds <a href="#infection">infections</a></li>
+</ul>
+
+<h4>
+<a id="pathogen" class="anchor" href="#pathogen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pathogen</h4>
+
+<ul>
+<li>Skeletal animated model</li>
+<li>Enemy affiliation</li>
+<li>Attacks allied units</li>
+</ul>
+
+<h3>
+<a id="miners" class="anchor" href="#miners" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Miners</h3>
+
+<h4>
+<a id="lungs" class="anchor" href="#lungs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lungs</h4>
+
+<ul>
+<li>Lungs model</li>
+<li>Ally affiliation</li>
+<li>Produces oxygen</li>
+</ul>
+
+<h4>
+<a id="stomach" class="anchor" href="#stomach" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stomach</h4>
+
+<ul>
+<li>Stomach (actually liver) model</li>
+<li>Ally affiliation</li>
+<li>Produces protein</li>
+</ul>
+
+<h4>
+<a id="kidney" class="anchor" href="#kidney" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Kidney</h4>
+
+<ul>
+<li>Kidney model</li>
+<li>Ally affiliation</li>
+<li>Produces erythropoietin</li>
+</ul>
+
+<h3>
+<a id="spawners" class="anchor" href="#spawners" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spawners</h3>
+
+<h4>
+<a id="heart" class="anchor" href="#heart" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Heart</h4>
+
+<ul>
+<li>Heart model</li>
+<li>Ally affiliation</li>
+<li>Spawns red and white blood cells</li>
+</ul>
+
+<h4>
+<a id="infection" class="anchor" href="#infection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Infection</h4>
+
+<ul>
+<li>Large dark purple bubbly model</li>
+<li>Enemy affiliation</li>
+<li>Spawns spores and pathogens</li>
+</ul>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h2>
+
+<ul>
+<li>UI is incomplete, so the following functionality is all it contributes to:
+<ul>
+<li>The "Menu" button in the top left of the game window simply exits the game, as does the ESCAPE key (this is all ignored in the editor)</li>
+<li>More UI elements are still to be added in the future</li>
+</ul>
+</li>
+<li>Currently spawning animation plays on first launch</li>
+<li>A bug exists when a unit is attacking another unit but not moving, the moving trail still is emitting and if the unit dies, the allied unit stops by the trail keeps emitting</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a id="win32-release" href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
+            <small>Latest Release</small>
+            windows 32-bit
+          </a>
+          <a id="win64-release" href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
+            <small>Latest Release</small>
+            windows 64-bit
+          </a>
+          <a href="https://github.com/nicholaschiasson/affliction/releases/latest" class="button">
+            <small>Latest Release</small>
+            notes
+          </a>
+          <a href="https://github.com/nicholaschiasson/KillTheSnowman/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/nicholaschiasson/KillTheSnowman/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/nicholaschiasson/KillTheSnowman"></a> is maintained by <a href="https://github.com/nicholaschiasson">nicholaschiasson</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+
+  </body>
+</html>
