@@ -85,7 +85,7 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
 -   Spawns red and white blood cells
 
 #### Infection
--   Black cube
+-   Large dark purple bubbly model
 -   Enemy affiliation
 -   Spawns spores and pathogens
 
@@ -95,21 +95,3 @@ To Attack an enemy select a [white blood cell](#white-blood-cell), then right cl
     -   More UI elements are still to be added in the future
 -   Currently spawning animation plays on first launch
 -   A bug exists when a unit is attacking another unit but not moving, the moving trail still is emitting and if the unit dies, the allied unit stops by the trail keeps emitting
-
-## ChangeLog
-- Added models to all units
-- Added skeletal animation to Pathogen
-- Added particle effects
-- Removed collision to same type of units
-- Added combat from player units to enemies
-- Added Kidney, Stomache, Lungs
-- UI Improvements
-- Added brain and research functionality for organ upgrading
-- Updated minimap to show entire map
-- Added camera zoom and camera boundaries
-- Added unity terrain
-- Added Unity pathfinding using NavMesh system
-- Added white blood cell AI, which in turn is responsible for pathogen AI
-- Added spore AI
-- Added infection AI
-- Placed level components in a more suitable startup configuration
